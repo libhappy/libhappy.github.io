@@ -61,7 +61,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'always'
+    sidebar: 'post'
   };
 </script>
 
@@ -213,8 +213,8 @@
             
             
               
-                <a class="post-title-link" href="/2015/10/python-usage-super/" itemprop="url">
-                  Python中的super使用
+                <a class="post-title-link" href="/2015/08/python-class-re-order/" itemprop="url">
+                  Python 类的多重继承
                 </a>
               
             
@@ -224,8 +224,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-10-19T09:46:43+08:00" content="2015-10-19">
-              2015-10-19
+            <time itemprop="dateCreated" datetime="2015-08-16T16:14:10+08:00" content="2015-08-16">
+              2015-08-16
             </time>
           </span>
 
@@ -264,10 +264,206 @@
 
       
         
-          <p>在Python类的方法（method）中，要调用父类的某个方法，在python2.2之前通常的写法如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure></p>
-<p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。<br>
+          <span itemprop="articleBody">
+            
+            Python 的类分为经典类与新式类。经典类是python2.2之前的东西，一直兼容到2.7，但在3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用。
+经典类与新式类的区别
+经典类是默认没有派生自某个基类的，而新式类默认派生自object基类：
+ 1234567# old
+            ...
+          </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/python-usage-super/#more" rel="contents">
+            <a class="btn" href="/2015/08/python-class-re-order/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2015/08/python-usage-super/" itemprop="url">
+                  Python中的super使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-08-16T09:46:43+08:00" content="2015-08-16">
+              2015-08-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            在Python类的方法（method）中，要调用父类的某个方法，在python2.2之前通常的写法如下：12345678910class A():    def __inti__(self):        print "enter A"        print "leave A"class B(
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/python-usage-super/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2015/07/pyqt4-tutorial-01/" itemprop="url">
+                  编写第一个PyQt4程序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-07-07T17:30:17+08:00" content="2015-07-07">
+              2015-07-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PyQt4/" itemprop="url" rel="index">
+                    <span itemprop="name">PyQt4</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            简单示例第一个程序显示一个简单的窗口。以下是原始代码：123456789101112131415161718192021222324#!/usr/bin/python# -*- coding: utf-8 -*-"""Created on Sat Jul 04 21:23:31 2015@autho
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/pyqt4-tutorial-01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -325,21 +521,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -367,6 +563,12 @@
               <span class="links-of-author-item">
                 <a href="http://github.com/libhappy" target="_blank">
                   <i class="fa fa-github"></i> Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gitcafe.com/libhappy" target="_blank">
+                  <i class="fa fa-gitcafe"></i> Gitcafe
                 </a>
               </span>
             
