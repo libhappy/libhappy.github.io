@@ -61,7 +61,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: 'always'
   };
 </script>
 
@@ -248,6 +248,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/python-class-re-order/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/python-class-re-order/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -266,17 +273,55 @@
         
           <span itemprop="articleBody">
             
-            Python 的类分为经典类与新式类。经典类是python2.2之前的东西，一直兼容到2.7，但在3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用。
-经典类与新式类的区别
-经典类是默认没有派生自某个基类的，而新式类默认派生自object基类：
- 1234567# old
-            ...
+              <p>Python 的类分为经典类与新式类。经典类是python2.2之前的东西，一直兼容到2.7，但在3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用。</p>
+<h1 id="经典类与新式类的区别">经典类与新式类的区别</h1><ol>
+<li><p>经典类是默认没有派生自某个基类的，而新式类默认派生自<code>object</code>基类：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># old style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># new style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>经典类在类多重继承的时候是采用的从左至右深度优先的匹配方法，而新式类采用C3算法（不同于广度优先）进行匹配的。</p>
+</li>
+<li><p>经典类没有<code>__MRO__</code>和<code>instance.mro()</code>调用，而新式类有。</p>
+</li>
+</ol>
+<h1 id="经典类中的继承问题">经典类中的继承问题</h1><p>经典类中采用<strong>深度优先</strong>的匹配方法，可能导致在查询继承树中绕过后面的父类：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
+<p>其输出为：class D。<br>新式类采用<strong>C3算法</strong>（区别于<strong>广度优先</strong>的原则）进行搜索，若使用新式类：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
+<p>输出为：class C<br>搜索的顺序如下图所示：<br><img src="/images/1508/python_old_26new_class.jpg" alt="resolution order" title="resolution order"></p>
+<h1 id="C3算法">C3算法</h1><p><strong>C3算法</strong>最早被提出是用于Lisp的，应用在Python中是为了解决原来基于深度优先搜索算法不满足本地优先级，和单调性的问题。</p>
+<ul>
+<li><strong>本地优先级</strong>：指声明时父类的顺序，比如C(A,B)，如果访问C类对象属性时，应该根据声明顺序，优先查找A类，然后再查找B类。</li>
+<li><strong>单调性</strong>：如果在C的解析顺序中，A排在B的前面，那么在C的所有子类里，也必须满足这个顺序。</li>
+</ul>
+<p><strong>深度优先搜索</strong>用栈（stack）来实现，整个过程可以想象成一个倒立的树形：</p>
+<ol>
+<li>把根节点压入栈中。</li>
+<li>每次从栈中弹出一个元素，搜索所有在它下一级的元素，把这些元素压入栈中。并把这个元素记为它下一级元素的前驱。</li>
+<li>找到所要找的元素时结束程序。</li>
+<li>如果遍历整个树还没有找到，结束程序。</li>
+</ol>
+<p><strong>广度优先搜索</strong>使用队列（queue）来实现，整个过程也可以看做一个倒立的树形：</p>
+<ol>
+<li>把根节点放到队列的末尾。</li>
+<li>每次从队列的头部取出一个元素，查看这个元素所有的下一级元素，把它们放到队列的末尾。并把这个元素记为它下一级元素的前驱。</li>
+<li>找到所要找的元素时结束程序。</li>
+<li>如果遍历整个树还没有找到，结束程序。</li>
+</ol>
+<p>对于同一段程序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"A"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"B"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"C"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"D"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"E"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span><span class="params">(C, E)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"F"</span></span><br><span class="line"></span><br><span class="line">f = F()</span><br><span class="line">f.foo1()</span><br></pre></td></tr></table></figure></p>
+<p>当使用深度优先搜索，广度优先搜索及C3算法的不同搜索顺序如下：<br><strong>深度优先搜索</strong>(FCBAED)<br><img src="/images/1508/resolution_order-deep-first-search.jpg" alt="DFS深度优先搜索" title="DFS深度优先搜索"></p>
+<p><strong>广度优先搜索</strong>(FCEBDA)<br><img src="/images/1508/resolution_order-broad-first-search.jpg" alt="BFS广度优先搜索" title="BFS广度优先搜索"></p>
+<p><strong>C3算法</strong>(FCBEDA)<br><img src="/images/1508/resolution_order-C3-search.jpg" alt="C3算法" title="C3算法"></p>
+<p>对于新式类，可以用<code>instance.__mro__</code>或<code>instance.mro()</code>来查看其MRO（Method Resolution Order 方法解析顺序）列表。对于上文代码中的类<code>F</code>的MRO如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print F.mro()</span><br><span class="line">(&lt;class '__main__.F'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.E'&gt;, &lt;class '__main__.D'&gt;, &lt;class '__main__.A'&gt;, &lt;type 'object'&gt;)</span><br></pre></td></tr></table></figure></p>
+<p>即C3算法的解析结果。<br>同时为了解决多重继承中的调用父类问题，python2.2之后引入了<code>super</code>。</p>
+<hr>
+<p>参考资料：</p>
+<ol>
+<li><a href="http://python-history.blogspot.com/2010/06/method-resolution-order.html" title="Method Resolution Order" target="_blank" rel="external">Method Resolution Order</a></li>
+<li><a href="http://www.jb51.net/article/57263.htm" title="Python类的多重继承问题深入分析" target="_blank" rel="external">Python类的多重继承问题深入分析</a></li>
+<li><a href="http://blog.csdn.net/imzoer/article/details/8737642" title="python类学习以及mro--多继承属性查找机制 " target="_blank" rel="external">python类学习以及mro–多继承属性查找机制 </a></li>
+<li><a href="http://demo.netfoucs.com/icode0410/article/details/39400233" title="Python 类继承，__bases__, __mro__, super " target="_blank" rel="external">Python 类继承，__bases__, __mro__, super </a></li>
+</ol>
+
+            
           </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/python-class-re-order/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -346,6 +391,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/python-usage-super/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/python-usage-super/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -364,14 +416,42 @@
         
           <span itemprop="articleBody">
             
-            在Python类的方法（method）中，要调用父类的某个方法，在python2.2之前通常的写法如下：12345678910class A():    def __inti__(self):        print "enter A"        print "leave A"class B(
-            ...
+              <p>在Python类的方法（method）中，要调用父类的某个方法，在python2.2之前通常的写法如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure></p>
+<p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
+<p>自python2.2开始，python添加了一个关键字<strong>super</strong>来解决这个问题。官方说明如下：</p>
+<blockquote>
+<p>super(type[, object-or-type])</p>
+<p>Return the superclass of type. If the second argument is omitted the super object returned is unbound. If the second argument is an object,  isinstance(obj, type) must be true. If the second argument is a type, issubclass(type2, type) must be true. super() only works for new-style classes.</p>
+<p>A typical use for calling a cooperative superclass method is:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">meth</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        super(C, self).meth(arg)</span><br></pre></td></tr></table></figure>
+<p>New in version 2.2.</p>
+</blockquote>
+<p>因此改写后的类B代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span>    <span class="comment"># A must be new-style class</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(C)</span>:</span>     <span class="comment"># A --&gt; C</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        super(B, self).__init__()</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure></p>
+<p>其运行结果与第一种方法一致。</p>
+<hr>
+<p>super的引入同时也解决了涉及多继承情况时父类的多次调用问题，考虑如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">"Enter A"</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">"Leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave B"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter C"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter D"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span><span class="params">(B, C, D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter E"</span></span><br><span class="line">        B.__init__(self)</span><br><span class="line">        C.__init__(self)</span><br><span class="line">        D.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave E"</span></span><br><span class="line"></span><br><span class="line">e = E()</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Enter E</span><br><span class="line">Enter B</span><br><span class="line">Enter A</span><br><span class="line">Leave A</span><br><span class="line">Leave B</span><br><span class="line">Enter C</span><br><span class="line">Enter A</span><br><span class="line">Leave A</span><br><span class="line">Leave C</span><br><span class="line">Enter D</span><br><span class="line">Enter A</span><br><span class="line">Leave A</span><br><span class="line">Leave D</span><br><span class="line">Leave E</span><br></pre></td></tr></table></figure></p>
+<p>其中公共父类A被执行了多次。<br>将其中的类名引用换为super:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">"Enter A"</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">"Leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter B"</span></span><br><span class="line">        super(B, self)__init__()</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave B"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter C"</span></span><br><span class="line">        super(C, self)__init__()</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter D"</span></span><br><span class="line">        super(D, self)__init__()</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span><span class="params">(B, C, D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Enter E"</span></span><br><span class="line">        super(E, self)__init__()</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Leave E"</span></span><br><span class="line"></span><br><span class="line">e = E()</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Enter E</span><br><span class="line">Enter B</span><br><span class="line">Enter C</span><br><span class="line">Enter D</span><br><span class="line">Enter A</span><br><span class="line">Leave A</span><br><span class="line">Leave D</span><br><span class="line">Leave C</span><br><span class="line">Leave B</span><br><span class="line">Leave E</span><br></pre></td></tr></table></figure></p>
+<p>在super机制中能够保证公共父类仅被执行一次，且执行的顺序按照MRO进行（E.__mro__）。</p>
+<hr>
+<p>super在使用中有下列需要注意的地方：</p>
+<ol>
+<li>super并不是一个函数，是一个类名，形如super(B, self)事实上调用了super类的初始化函数，产生了一个super对象；</li>
+<li>super类的初始化函数并没有做什么特殊的操作，只是简单记录了类类型和具体实例；</li>
+<li>super(B, self).func的调用并不是用于调用当前类的父类的func函数；</li>
+<li>Python的多继承类是通过mro的方式来保证各个父类的函数被逐一调用，而且保证每个父类函数只调用一次（如果每个类都使用super）；</li>
+<li>混用super类和非绑定的函数是一个危险行为，这可能导致应该调用的父类函数没有调用或者一个父类函数被调用多次。</li>
+</ol>
+<hr>
+<p>参考资料：</p>
+<ol>
+<li><a href="http://www.jb51.net/article/66912.htm" title="Python 中的super用法详解" target="_blank" rel="external">Python 中的super用法详解</a></li>
+<li><a href="http://www.cnblogs.com/dkblog/archive/2011/02/24/1980654.html" title="关于Python的super用法研究" target="_blank" rel="external">关于Python的super用法研究</a></li>
+</ol>
+
+            
           </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/python-usage-super/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -441,6 +521,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/pyqt4-tutorial-01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/pyqt4-tutorial-01/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -459,14 +546,44 @@
         
           <span itemprop="articleBody">
             
-            简单示例第一个程序显示一个简单的窗口。以下是原始代码：123456789101112131415161718192021222324#!/usr/bin/python# -*- coding: utf-8 -*-"""Created on Sat Jul 04 21:23:31 2015@autho
-            ...
+              <h1 id="简单示例">简单示例</h1><p>第一个程序显示一个简单的窗口。<br>以下是原始代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:23:31 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">an example for PyQt4 gui program.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui    <span class="comment"># 导入必要的模块</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)   <span class="comment"># 创建一个应用对象，sys.argv为命令行传入的参数</span></span><br><span class="line"></span><br><span class="line">    window = QtGui.QWidget() <span class="comment"># QtGui.Qwidget 是所有界面对象的基础类，没有父类的部件称为窗口</span></span><br><span class="line">    window.resize(<span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 调整部件大小，250px宽150px高</span></span><br><span class="line">    window.move(<span class="number">300</span>, <span class="number">300</span>)  <span class="comment"># 移动部件的位置到屏幕 (x = 300, y = 300)处</span></span><br><span class="line">    window.setWindowTitle(<span class="string">'Simple'</span>) <span class="comment"># 设置窗口标题栏显示的标题</span></span><br><span class="line">    window.show() <span class="comment"># 在内存中创建组件并显示在屏幕上</span></span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_()) <span class="comment"># sys.exit()保证程序完全的退出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>显示窗口如下：</p>
+<center><br><img src="/images/1507/1_first_1.png" alt="简单的窗口" title="简单的窗口"><br></center>
+
+<h1 id="添加应用图标(Application_icon)">添加应用图标(Application icon)</h1><p>添加在标题栏左上角显示的应用图标，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:54:19 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">A gui program with application icon.</span><br><span class="line">use OOP(Object Oriented Programming)</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Example, self).__init__() <span class="comment"># super() method 返回对象'Example'的父类</span></span><br><span class="line"></span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.setGeometry(<span class="number">300</span>, <span class="number">300</span>, <span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 设置窗口的坐标及大小(x, y, 宽, 高)</span></span><br><span class="line">        self.setWindowTitle(<span class="string">'Icon'</span>)</span><br><span class="line">        self.setWindowIcon(QtGui.QIcon(<span class="string">'web.png'</span>)) <span class="comment"># 设置窗口应用图标</span></span><br><span class="line"></span><br><span class="line">        self.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>该程序以面向对象的风格书写，面向对象编程中最重要的是类(class)，数据(data)和方法(method)。显示的窗口如下：</p>
+<center><br><img src="/images/1507/2_icon_1.png" alt="在标题栏显示程序图标" title="在标题栏显示程序图标"><br></center>
+
+<hr>
+<h1 id="显示提示信息">显示提示信息</h1><p>显示部件的气球帮助提示。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sun Jul 05 11:40:30 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">show a tooltip</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Example, self).__init__()</span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        QtGui.QToolTip.setFont(QtGui.QFont(<span class="string">'SansSerif'</span>, <span class="number">10</span>)) <span class="comment"># 设置提示的字形及字体大小</span></span><br><span class="line">        self.setToolTip(<span class="string">'This is a &lt;b&gt;QWidget&lt;/b&gt; widget'</span>)</span><br><span class="line"></span><br><span class="line">        btn = QtGui.QPushButton(<span class="string">'Button'</span>, self)</span><br><span class="line">        btn.setToolTip(<span class="string">'This is a &lt;b&gt;QPushButton&lt;/b&gt; widget'</span>)</span><br><span class="line">        btn.resize(btn.sizeHint())  <span class="comment"># szieHint() 返回按钮推荐的大小</span></span><br><span class="line">        btn.move(<span class="number">50</span>, <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">        self.setGeometry(<span class="number">300</span>, <span class="number">300</span>, <span class="number">250</span>, <span class="number">150</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Tooltips'</span>)</span><br><span class="line">        self.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>显示的窗口如下：</p>
+<center><br><img src="/images/1507/3_tooltip_2.png" alt="创建有气泡提示的按钮" title="创建有气泡提示的按钮"><br></center>
+
+<hr>
+<h1 id="关闭窗口">关闭窗口</h1><p>以上的例子中都是通过点击窗口右上角的<code>X</code>来关闭窗口，下面的例子演示了通过程序内的方法关闭窗口。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sun Jul 05 12:24:44 2015</span><br><span class="line">@author: Arthur</span><br><span class="line">A button with quit</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Example, self).__init__()</span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        qbtn = QtGui.QPushButton(<span class="string">'Quit'</span>, self) <span class="comment"># 参数分别为按钮的标签及按钮的父类</span></span><br><span class="line">        qbtn.clicked.connect(QtCore.QCoreApplication.instance().quit)</span><br><span class="line"></span><br><span class="line">        qbtn.resize(qbtn.sizeHint())</span><br><span class="line">        qbtn.move(<span class="number">50</span>, <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">        self.setGeometry(<span class="number">300</span>, <span class="number">300</span>, <span class="number">250</span>, <span class="number">150</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Tooltips'</span>)</span><br><span class="line">        self.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>该程序创建了<code>QtGui.QPushButton</code>类的一个实例<code>qbtn</code>，在以下的语句中赋予了该按钮关闭程序的功能：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qbtn.clicked.connect(QtCore.QCoreApplication.instance().quit)</span><br></pre></td></tr></table></figure></p>
+<p>PyQt4中的事件处理是由信号（signals）与槽（slots）机制实现的，如果点击按钮，将会发出<code>clicked()</code>的信号。槽可以是PyQt的槽或者是Python可调用的方法。通过使用<code>QtCore.QObject.connect()</code>方法将信号和槽链接起来。<code>QtCore.QCoreApplication</code> 包含了主要的事件循环，它处理和分配所有的事件。<code>instance()</code>方法返回它自己的实例。 应该注意的是<code>QtCore.QCoreApplication</code>同<code>QtGui.QApplication</code>一起被创建。点击信号连接到PyQt中预先定义的<code>quit()</code>槽。至此信号发送方与接收方之间的通信完成，发送方为点击按钮，接收方为程序对象。</p>
+<center><br><img src="/images/1507/4_quit_button_1.png" alt="使程序退出的按钮" title="使程序退出的按钮"><br></center>
+
+<hr>
+<h1 id="消息框">消息框</h1><p>当点击窗口右上角<code>x</code>退出时弹出确认消息框。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sun Jul 05 12:38:58 2015</span><br><span class="line">@author: Arthur</span><br><span class="line">show message box</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Example, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.setGeometry(<span class="number">300</span>, <span class="number">300</span>, <span class="number">250</span>, <span class="number">150</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Message box'</span>)</span><br><span class="line">        self.show()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">closeEvent</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        reply = QtGui.QMessageBox.question(self, <span class="string">'Message'</span>,</span><br><span class="line">        <span class="string">"Are you sure to quit?"</span>, QtGui.QMessageBox.Yes |</span><br><span class="line">        QtGui.QMessageBox.No, QtGui.QMessageBox.No) <span class="comment"># (消息框标题, 显示消息, 选项 | 选项, 默认选项)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> reply == QtGui.QMessageBox.Yes:</span><br><span class="line">            event.accept()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            event.ignore()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<center><br><img src="/images/1507/5_message_box_1.png" alt="点击关闭后弹出确认消息框" title="点击关闭后弹出确认消息框"><br></center>
+
+<p>如果要关闭<code>QWidget</code>，<code>QCloseEvent</code>事件就会产生。要修改<code>QWidget</code>的默认行为，就需要重载父类中的<code>closeEvent()</code>方法。点击关闭按钮后，弹出如下对话框：</p>
+<center><br><img src="/images/1507/5_message_box_2.png" alt="确认关闭消息框" title="确认关闭消息框"><br></center>
+
+<p>点击<code>Yes</code>或<code>No</code>后，对<code>replay</code>值进行比较，如果为<code>Yes</code>则接收事件关闭窗口，相反则忽略事件。</p>
+<hr>
+<h1 id="居中窗口">居中窗口</h1><p>在屏幕中央显示窗口。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sun Jul 05 14:42:27 2015</span><br><span class="line">@author: Arthur</span><br><span class="line">centering window on the screen</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Example, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.resize(<span class="number">250</span>, <span class="number">150</span>)</span><br><span class="line">        self.center()</span><br><span class="line"></span><br><span class="line">        self.setWindowTitle(<span class="string">'Center'</span>)</span><br><span class="line">        self.show()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">center</span><span class="params">(self)</span>:</span></span><br><span class="line">        qr = self.frameGeometry() <span class="comment"># 返回代表窗口框架结构的矩形</span></span><br><span class="line">        cp = QtGui.QDesktopWidget().availableGeometry().center() <span class="comment"># 返回屏幕（可显示区域）的中心点</span></span><br><span class="line">        qr.moveCenter(cp) <span class="comment"># 将与窗口同大的矩形移动到屏幕中央</span></span><br><span class="line">        self.move(qr.topLeft())  <span class="comment"># 将主窗口移动到已定位的矩形处，QWidget的移动以左上角为基准点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>通过<code>frameGeometry()</code>获得代表窗口框架结构的矩形，通过<code>availableGeometry().center()</code>获得屏幕（可显示区域）的中心点，用<code>moveCenter()</code>方法将该框架矩形移动到屏幕中央，再将主窗口移动到已定位的矩形处。<br>由于移动窗口组件时是以组件的右上角为基准点，所以不能用<del><code>self.move(cp)</code></del>移动窗口到中心。<br>也可以在获得屏幕与窗口几何参数后直接移动窗口的左上角到计算出的目的位置：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">screen = QtGui.QDesktopWidget().screenGeometry() <span class="comment"># 获得屏幕形状参数</span></span><br><span class="line">size = self.geometry() <span class="comment"># 获得窗口形状参数</span></span><br><span class="line">self.move((screen.width() - size.width()) / <span class="number">2</span>, (screen.height() - size.height()) / <span class="number">2</span>) <span class="comment"># 计算出窗口左上角移动后的位置，再直接移动窗口</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>参考资料：</p>
+<ol>
+<li>First Program in PyQt4 from <a href="http://zetcode.com/gui/pyqt4/firstprograms/" title="First Program" target="_blank" rel="external">zetcode</a></li>
+</ol>
+
+            
           </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/pyqt4-tutorial-01/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -572,12 +689,6 @@
                 </a>
               </span>
             
-              <span class="links-of-author-item">
-                <a href="http://douban.com" target="_blank">
-                  <i class="fa fa-douban"></i> Douban
-                </a>
-              </span>
-            
           
         </div>
 
@@ -617,11 +728,11 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a> 
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
@@ -640,11 +751,35 @@
   
   
     
-    
 
   
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"libhappy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+     
+  	  <script type="text/javascript">
+  		var duoshuo_user_ID = 13964331
+      var duoshuo_admin_nickname="博主"
+  	  </script>
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
 
+    
   
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -682,27 +817,6 @@
 
   
   
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 
   
   
