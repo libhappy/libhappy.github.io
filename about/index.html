@@ -23,7 +23,7 @@
 
 
   
-    <link href='//fonts.useso.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   
 
 
@@ -47,22 +47,28 @@
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
 
 
-<meta name="description" content="#About Me">
+<meta name="description" content="About Me
+
+最近访客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
 <meta property="og:url" content="http://libhappy.com/about/index.html">
 <meta property="og:site_name" content="LibHappy">
-<meta property="og:description" content="#About Me">
-<meta property="og:updated_time" content="2015-10-19T02:31:30.744Z">
+<meta property="og:description" content="About Me
+
+最近访客">
+<meta property="og:updated_time" content="2015-10-20T09:56:14.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="about">
-<meta name="twitter:description" content="#About Me">
+<meta name="twitter:description" content="About Me
+
+最近访客">
 
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'always'
+    sidebar: 'post'
   };
 </script>
 
@@ -204,7 +210,12 @@
   <div id="posts" class="posts-expand">
     
     
-      <p>#About Me</p>
+      <h1 id="About_Me">About Me</h1><hr>
+<blockquote>
+<p>最近访客</p>
+</blockquote>
+<p><div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div><br><br></p>
+<hr>
 
     
   </div>
@@ -244,9 +255,11 @@
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpg" alt="Arthur" itemprop="image"/>
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Arthur" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Arthur</p>
         </div>
         <p class="site-description motion-element" itemprop="description">Happy Life, Happy Coding.</p>
@@ -353,6 +366,11 @@
   </a>
 </div>
 
+<div class="thanks-to">
+  感谢 <a class="theme-link" href="https://github.com/">Github</a> 及 
+  <a class="theme-link" href="https://gitcafe.com/">Gitcafe</a> 提供储存空间
+</div>
+
 
  </div>
     </footer>
@@ -376,6 +394,7 @@
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
       (document.getElementsByTagName('head')[0]
@@ -385,14 +404,10 @@
     
      
      
-  	  <script type="text/javascript">
-  		var duoshuo_user_ID = 13964331
-      var duoshuo_admin_nickname="博主"
-  	  </script>
-     
   	<script src="/js/ua-parser.min.js"></script>
   	<script src="/js/hook-duoshuo.js"></script>
   
+
 
     
   

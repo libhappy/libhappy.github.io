@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/about/index.html</loc>
+    <lastmod>2015-10-20T09:56:14.125Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/2015/07/pyqt4-tutorial-01/</loc>
     <lastmod>2015-10-19T10:09:06.750Z</lastmod>
   </url>
@@ -14,11 +19,6 @@
   <url>
     <loc>http://libhappy.com/2015/08/python-usage-super/</loc>
     <lastmod>2015-10-19T10:01:09.066Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://libhappy.com/about/index.html</loc>
-    <lastmod>2015-10-19T02:31:30.744Z</lastmod>
   </url>
   
   <url>

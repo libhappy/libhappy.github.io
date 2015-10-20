@@ -23,7 +23,7 @@
 
 
   
-    <link href='//fonts.useso.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   
 
 
@@ -61,7 +61,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'always'
+    sidebar: 'post'
   };
 </script>
 
@@ -258,9 +258,11 @@
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpg" alt="Arthur" itemprop="image"/>
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Arthur" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Arthur</p>
         </div>
         <p class="site-description motion-element" itemprop="description">Happy Life, Happy Coding.</p>
@@ -367,6 +369,11 @@
   </a>
 </div>
 
+<div class="thanks-to">
+  感谢 <a class="theme-link" href="https://github.com/">Github</a> 及 
+  <a class="theme-link" href="https://gitcafe.com/">Gitcafe</a> 提供储存空间
+</div>
+
 
  </div>
     </footer>
@@ -396,6 +403,7 @@
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
       (document.getElementsByTagName('head')[0]
@@ -405,14 +413,10 @@
     
      
      
-  	  <script type="text/javascript">
-  		var duoshuo_user_ID = 13964331
-      var duoshuo_admin_nickname="博主"
-  	  </script>
-     
   	<script src="/js/ua-parser.min.js"></script>
   	<script src="/js/hook-duoshuo.js"></script>
   
+
 
     
   
