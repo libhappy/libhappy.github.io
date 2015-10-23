@@ -53,11 +53,11 @@
 <meta property="og:url" content="http://libhappy.com/2015/08/python-class-re-order/index.html">
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
-<meta property="og:image" content="http://libhappy.com/images/1508/python_old_26new_class.jpg">
-<meta property="og:image" content="http://libhappy.com/images/1508/resolution_order-deep-first-search.jpg">
-<meta property="og:image" content="http://libhappy.com/images/1508/resolution_order-broad-first-search.jpg">
-<meta property="og:image" content="http://libhappy.com/images/1508/resolution_order-C3-search.jpg">
-<meta property="og:updated_time" content="2015-10-21T15:06:29.416Z">
+<meta property="og:image" content="https://farm1.staticflickr.com/678/21780464824_b470a6eab4.jpg">
+<meta property="og:image" content="https://farm1.staticflickr.com/592/21782098993_467910d598.jpg">
+<meta property="og:image" content="https://farm1.staticflickr.com/651/22215216660_42133913bb.jpg">
+<meta property="og:image" content="https://farm1.staticflickr.com/661/22215486608_17a874a876.jpg">
+<meta property="og:updated_time" content="2015-10-23T08:19:31.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 类的多重继承">
 <meta name="twitter:description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
@@ -225,8 +225,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-08-16T16:14:10+08:00" content="2015-08-16">
-              2015-08-16
+            <time itemprop="dateCreated" datetime="2015-08-15T16:14:10+08:00" content="2015-08-15">
+              2015-08-15
             </time>
           </span>
 
@@ -284,7 +284,7 @@
 <h1 id="经典类中的继承问题">经典类中的继承问题</h1><p>经典类中采用<strong>深度优先</strong>的匹配方法，可能导致在查询继承树中绕过后面的父类：<br><!--more--><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
 <p>其输出为：class D。<br>新式类采用<strong>C3算法</strong>（区别于<strong>广度优先</strong>的原则）进行搜索，若使用新式类：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
 <p>输出为：class C<br>搜索的顺序如下图所示：</p>
-<p><img src="/images/1508/python_old_26new_class.jpg" alt="" title="Python中类的方法解析顺序"></p>
+<img src="https://farm1.staticflickr.com/678/21780464824_b470a6eab4.jpg" title="Python中类的方法解析顺序" alt="python_old_26new_class">
 <h1 id="C3算法">C3算法</h1><p><strong>C3算法</strong>最早被提出是用于Lisp的，应用在Python中是为了解决原来基于深度优先搜索算法不满足本地优先级，和单调性的问题。</p>
 <ul>
 <li><strong>本地优先级</strong>：指声明时父类的顺序，比如C(A,B)，如果访问C类对象属性时，应该根据声明顺序，优先查找A类，然后再查找B类。</li>
@@ -305,11 +305,11 @@
 <li>如果遍历整个树还没有找到，结束程序。</li>
 </ol>
 <p>对于同一段程序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"A"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"B"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"C"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"D"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"E"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span><span class="params">(C, E)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"F"</span></span><br><span class="line"></span><br><span class="line">f = F()</span><br><span class="line">f.foo1()</span><br></pre></td></tr></table></figure></p>
-<p>当使用深度优先搜索，广度优先搜索及C3算法的不同搜索顺序如下：<br><strong>深度优先搜索</strong>(FCBAED)<br><img src="/images/1508/resolution_order-deep-first-search.jpg" height="500" title="DFS深度优先搜索"></p>
+<p>当使用深度优先搜索，广度优先搜索及C3算法的不同搜索顺序如下：<br><strong>深度优先搜索</strong>(FCBAED)<br><img src="https://farm1.staticflickr.com/592/21782098993_467910d598.jpg" title="DFS深度优先搜索" alt="resolution_order-deep-first-search"></p>
 <p><strong>广度优先搜索</strong>(FCEBDA)</p>
-<img src="/images/1508/resolution_order-broad-first-search.jpg" height="500" title="BFS广度优先搜索">
+<img src="https://farm1.staticflickr.com/651/22215216660_42133913bb.jpg" title="BFS广度优先搜索" alt="resolution_order-broad-first-search">
 <p><strong>C3算法</strong>(FCBEDA)</p>
-<img src="/images/1508/resolution_order-C3-search.jpg" height="500" title="C3算法">
+<img src="https://farm1.staticflickr.com/661/22215486608_17a874a876.jpg" title="C3算法" alt="resolution_order-C3-search">
 <p>对于新式类，可以用<code>instance.__mro__</code>或<code>instance.mro()</code>来查看其MRO（Method Resolution Order 方法解析顺序）列表。对于上文代码中的类<code>F</code>的MRO如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print F.mro()</span><br><span class="line">(&lt;class '__main__.F'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.E'&gt;, &lt;class '__main__.D'&gt;, &lt;class '__main__.A'&gt;, &lt;type 'object'&gt;)</span><br></pre></td></tr></table></figure></p>
 <p>即C3算法的解析结果。<br>同时为了解决多重继承中的调用父类问题，python2.2之后引入了<code>super</code>。</p>
 <hr>
@@ -341,13 +341,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/python-usage-super/" rel="next" title="Python中的super使用">
-                <i class="fa fa-chevron-left"></i> Python中的super使用
+              <a href="/2015/07/pyqt4-tutorial-01/" rel="next" title="编写第一个PyQt4程序">
+                <i class="fa fa-chevron-left"></i> 编写第一个PyQt4程序
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/python-usage-super/" rel="prev" title="Python中的super使用">
+                Python中的super使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +537,11 @@
 
 <div class="thanks-to">
   感谢 <a class="theme-link" href="https://github.com/">Github</a> 及 
-  <a class="theme-link" href="https://gitcafe.com/">Gitcafe</a> 提供储存空间
+  <a class="theme-link" href="https://gitcafe.com/">Gitcafe</a> 提供静态网页存储
+</div>
+
+<div class="thanks-to">
+  感谢 <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798">Flickr</a> 提供图片存储空间
 </div>
 
 
