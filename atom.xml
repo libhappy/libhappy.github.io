@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://libhappy.com/"/>
-  <updated>2015-10-26T09:28:04.036Z</updated>
+  <updated>2015-10-26T14:13:15.589Z</updated>
   <id>http://libhappy.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[用Hexo搭建静态博客（一）Hexo的搭建]]></title>
+    <title><![CDATA[用Hexo搭建静态博客（一）, Hexo的搭建]]></title>
     <link href="http://libhappy.com/2015/10/bulid-hexo-blog1/"/>
     <id>http://libhappy.com/2015/10/bulid-hexo-blog1/</id>
     <published>2015-10-26T02:38:40.000Z</published>
-    <updated>2015-10-26T09:28:04.036Z</updated>
+    <updated>2015-10-26T14:13:15.589Z</updated>
     <content type="html"><![CDATA[<h1 id="Hexo_介绍">Hexo 介绍</h1><p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。<br><a id="more"></a></p>
 <h1 id="依赖程序的安装">依赖程序的安装</h1><p>Hexo 基于Node.js，其部署通过Git进行，以下程序的安装过程仅以Windows平台为例。</p>
 <h2 id="安装_Node-js">安装 Node.js</h2><p>到<a href="https://nodejs.org/" target="_blank" rel="external">Node.js</a> 官网下载安装包，直接双击安装。</p>
@@ -59,13 +59,13 @@
     
     </summary>
     
+      <category term="NexT" scheme="http://libhappy.com/tags/NexT/"/>
+    
       <category term="blog" scheme="http://libhappy.com/tags/blog/"/>
     
-      <category term="gitcafe" scheme="http://libhappy.com/tags/gitcafe/"/>
-    
-      <category term="github" scheme="http://libhappy.com/tags/github/"/>
-    
       <category term="hexo" scheme="http://libhappy.com/tags/hexo/"/>
+    
+      <category term="静态博客" scheme="http://libhappy.com/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="Hexo" scheme="http://libhappy.com/categories/Hexo/"/>
     
@@ -76,7 +76,7 @@
     <link href="http://libhappy.com/2015/08/python-usage-super/"/>
     <id>http://libhappy.com/2015/08/python-usage-super/</id>
     <published>2015-08-16T01:46:43.000Z</published>
-    <updated>2015-10-23T09:14:32.166Z</updated>
+    <updated>2015-10-26T14:14:40.658Z</updated>
     <content type="html"><![CDATA[<p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure>
 <p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
@@ -125,11 +125,13 @@
     
     </summary>
     
-      <category term="programming" scheme="http://libhappy.com/tags/programming/"/>
-    
       <category term="python" scheme="http://libhappy.com/tags/python/"/>
     
       <category term="super" scheme="http://libhappy.com/tags/super/"/>
+    
+      <category term="编程" scheme="http://libhappy.com/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="调用" scheme="http://libhappy.com/tags/%E8%B0%83%E7%94%A8/"/>
     
       <category term="Python" scheme="http://libhappy.com/categories/Python/"/>
     
@@ -140,7 +142,7 @@
     <link href="http://libhappy.com/2015/08/python-class-re-order/"/>
     <id>http://libhappy.com/2015/08/python-class-re-order/</id>
     <published>2015-08-15T08:14:10.000Z</published>
-    <updated>2015-10-23T08:19:31.005Z</updated>
+    <updated>2015-10-26T14:14:17.002Z</updated>
     <content type="html"><![CDATA[<p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a></p>
 <h1 id="经典类与新式类的区别">经典类与新式类的区别</h1><ol>
 <li><p>经典类是默认没有派生自某个基类的，而新式类默认派生自<code>object</code>基类：</p>
@@ -198,9 +200,11 @@
     
       <category term="class" scheme="http://libhappy.com/tags/class/"/>
     
-      <category term="programming" scheme="http://libhappy.com/tags/programming/"/>
-    
       <category term="python" scheme="http://libhappy.com/tags/python/"/>
+    
+      <category term="继承" scheme="http://libhappy.com/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+      <category term="编程" scheme="http://libhappy.com/tags/%E7%BC%96%E7%A8%8B/"/>
     
       <category term="Python" scheme="http://libhappy.com/categories/Python/"/>
     
@@ -211,7 +215,7 @@
     <link href="http://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
     <id>http://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
     <published>2015-07-07T09:30:17.000Z</published>
-    <updated>2015-10-23T08:47:27.718Z</updated>
+    <updated>2015-10-26T14:15:55.057Z</updated>
     <content type="html"><![CDATA[<p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a></p>
 <h1 id="简单示例">简单示例</h1><p>第一个程序显示一个简单的窗口。<br>以下是原始代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:23:31 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">an example for PyQt4 gui program.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui    <span class="comment"># 导入必要的模块</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)   <span class="comment"># 创建一个应用对象，sys.argv为命令行传入的参数</span></span><br><span class="line"></span><br><span class="line">    window = QtGui.QWidget() <span class="comment"># QtGui.Qwidget 是所有界面对象的基础类，没有父类的部件称为窗口</span></span><br><span class="line">    window.resize(<span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 调整部件大小，250px宽150px高</span></span><br><span class="line">    window.move(<span class="number">300</span>, <span class="number">300</span>)  <span class="comment"># 移动部件的位置到屏幕 (x = 300, y = 300)处</span></span><br><span class="line">    window.setWindowTitle(<span class="string">'Simple'</span>) <span class="comment"># 设置窗口标题栏显示的标题</span></span><br><span class="line">    window.show() <span class="comment"># 在内存中创建组件并显示在屏幕上</span></span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_()) <span class="comment"># sys.exit()保证程序完全的退出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
@@ -258,11 +262,13 @@
     
       <category term="gui" scheme="http://libhappy.com/tags/gui/"/>
     
-      <category term="programming" scheme="http://libhappy.com/tags/programming/"/>
-    
       <category term="pyqt4" scheme="http://libhappy.com/tags/pyqt4/"/>
     
       <category term="python" scheme="http://libhappy.com/tags/python/"/>
+    
+      <category term="zetcode" scheme="http://libhappy.com/tags/zetcode/"/>
+    
+      <category term="编程" scheme="http://libhappy.com/tags/%E7%BC%96%E7%A8%8B/"/>
     
       <category term="PyQt4" scheme="http://libhappy.com/categories/PyQt4/"/>
     

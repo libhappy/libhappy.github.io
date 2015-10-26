@@ -1,8 +1,11 @@
 # robots.txt
-User-agent: Baiduspider
-Disallow: /
-User-agent: Googlebot
-Disallow: 
-User-agent: Bingbot
-Disallow: 
+User-agent: *
+Allow: /
+Allow: /archives/
+
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+
 Sitemap: http://libhappy.com/sitemap.xml
