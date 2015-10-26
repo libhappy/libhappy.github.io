@@ -1,11 +1,10 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
+<html class="theme-next   use-motion ">
 <head>
-  
-
-<meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,7 +17,12 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
 
 
 
@@ -27,12 +31,15 @@
   
 
 
-<link rel="stylesheet" type="text/css" href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" />
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.2"/>
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-    <meta name="description" content="Happy Life, Happy Coding." />
+
+  <meta name="description" content="Happy Life, Happy Coding." />
+
 
 
 
@@ -40,11 +47,18 @@
 
 
 
+
+
   <link rel="alternate" href="/atom.xml" title="LibHappy" type="application/atom+xml" />
 
 
 
+
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
 
 
 <meta name="description" content="PyQt是Qt库的Python版本，该教程是 zetcode PyQt4教程的中文翻译。本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。">
@@ -65,14 +79,14 @@
 <meta name="twitter:description" content="PyQt是Qt库的Python版本，该教程是 zetcode PyQt4教程的中文翻译。本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: 'post',
+    motion: true
   };
 </script>
-
-
 
   <title> 编写第一个PyQt4程序 | LibHappy </title>
 </head>
@@ -139,7 +153,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             首页
           </a>
@@ -149,7 +163,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -159,7 +173,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             标签
           </a>
@@ -169,7 +183,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             归档
           </a>
@@ -179,7 +193,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
             关于
           </a>
@@ -199,7 +213,8 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div id="content" class="content">
+          
 
   <div id="posts" class="posts-expand">
     
@@ -358,23 +373,25 @@
     </div>
   </div>
 
- </div>
+
+        </div>
 
         
-            <!-- 多说热评文章-->
-            <p>热评文章</p>
-            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-        
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
         
-          <div class="comments" id="comments">
-            
-              <div class="ds-thread" data-thread-key="2015/07/pyqt4-tutorial-01/"
-                   data-title="编写第一个PyQt4程序" data-url="http://libhappy.com/2015/07/pyqt4-tutorial-01/">
-              </div>
-            
-          </div>
-        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/pyqt4-tutorial-01/"
+           data-title="编写第一个PyQt4程序" data-url="http://libhappy.com/2015/07/pyqt4-tutorial-01/">
+      </div>
+    
+  </div>
+
+
       </div>
 
       
@@ -413,21 +430,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -448,19 +465,19 @@
             
               <span class="links-of-author-item">
                 <a href="http://libhappy.com" target="_blank">
-                  <i class="fa fa-homepage"></i> Homepage
+                  <i class="fa fa-homepage fa-fw"></i> Homepage
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://github.com/libhappy" target="_blank">
-                  <i class="fa fa-github"></i> Github
+                  <i class="fa fa-github fa-fw"></i> Github
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://gitcafe.com/libhappy" target="_blank">
-                  <i class="fa fa-gitcafe"></i> Gitcafe
+                  <i class="fa fa-gitcafe fa-fw"></i> Gitcafe
                 </a>
               </span>
             
@@ -503,7 +520,8 @@
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2015</span>
@@ -534,7 +552,9 @@
 </div>
 
 
- </div>
+
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
@@ -544,6 +564,7 @@
 
   
   
+
   
     
 
@@ -566,6 +587,11 @@
     
      
      
+  	  <script type="text/javascript">
+  		var duoshuo_user_ID = 13964331
+      var duoshuo_admin_nickname="ROOT"
+  	  </script>
+     
   	<script src="/js/ua-parser.min.js"></script>
   	<script src="/js/hook-duoshuo.js"></script>
   
@@ -573,24 +599,21 @@
 
     
   
+
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
   <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
   <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  
-
   <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.2" id="motion.global"></script>
-
-
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.2"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
   
@@ -742,29 +765,20 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-
-      motionIntegrator.bootstrap();
-    });
-  </script>
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
@@ -772,15 +786,5 @@
   
   
 
-  
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
 </body>
 </html>

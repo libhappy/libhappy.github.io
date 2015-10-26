@@ -1,11 +1,10 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
+<html class="theme-next   use-motion ">
 <head>
-  
-
-<meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,7 +17,12 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
 
 
 
@@ -27,16 +31,21 @@
   
 
 
-<link rel="stylesheet" type="text/css" href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" />
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.2"/>
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-
-    <meta name="description" content="Happy Life, Happy Coding." />
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
 
-  <meta name="keywords" content="Arthur" />
+  <meta name="description" content="Happy Life, Happy Coding." />
+
+
+
+
+  <meta name="keywords" content="Hexo, Arthur" />
+
+
 
 
 
@@ -44,7 +53,12 @@
 
 
 
+
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
 
 
 <meta name="description" content="Happy Life, Happy Coding.">
@@ -58,14 +72,14 @@
 <meta name="twitter:description" content="Happy Life, Happy Coding.">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: 'post',
+    motion: true
   };
 </script>
-
-
 
   <title> LibHappy </title>
 </head>
@@ -134,7 +148,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             首页
           </a>
@@ -144,7 +158,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -154,7 +168,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             标签
           </a>
@@ -164,7 +178,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             归档
           </a>
@@ -174,7 +188,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
             关于
           </a>
@@ -194,8 +208,107 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div id="content" class="content">
+          
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <a class="post-title-link" href="/2015/10/bulid-hexo-blog1/" itemprop="url">
+                  用Hexo搭建静态博客（一）Hexo的搭建
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-10-26T10:38:40+08:00" content="2015-10-26">
+              2015-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/bulid-hexo-blog1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/bulid-hexo-blog1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="Hexo_介绍">Hexo 介绍</h1><p><a href="https://hexo.io/">Hexo</a> 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过<a href="https://hexo.io/">Hexo</a>可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/bulid-hexo-blog1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -276,7 +389,7 @@
 <p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
 <p>自python2.2开始，python添加了一个关键字<strong>super</strong>来解决这个问题。官方说明如下：<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/python-usage-super/" rel="contents">
+            <a class="btn" href="/2015/08/python-usage-super/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -374,7 +487,7 @@
         
           <p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/python-class-re-order/" rel="contents">
+            <a class="btn" href="/2015/08/python-class-re-order/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -472,7 +585,7 @@
         
           <p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/pyqt4-tutorial-01/" rel="contents">
+            <a class="btn" href="/2015/07/pyqt4-tutorial-01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -498,11 +611,14 @@
 
   
 
- </div>
+
+        </div>
 
         
 
+
         
+
       </div>
 
       
@@ -532,21 +648,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -567,19 +683,19 @@
             
               <span class="links-of-author-item">
                 <a href="http://libhappy.com" target="_blank">
-                  <i class="fa fa-homepage"></i> Homepage
+                  <i class="fa fa-homepage fa-fw"></i> Homepage
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://github.com/libhappy" target="_blank">
-                  <i class="fa fa-github"></i> Github
+                  <i class="fa fa-github fa-fw"></i> Github
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://gitcafe.com/libhappy" target="_blank">
-                  <i class="fa fa-gitcafe"></i> Gitcafe
+                  <i class="fa fa-gitcafe fa-fw"></i> Gitcafe
                 </a>
               </span>
             
@@ -611,7 +727,8 @@
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2015</span>
@@ -642,7 +759,9 @@
 </div>
 
 
- </div>
+
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
@@ -652,6 +771,7 @@
 
   
   
+
   
     
 
@@ -674,6 +794,11 @@
     
      
      
+  	  <script type="text/javascript">
+  		var duoshuo_user_ID = 13964331
+      var duoshuo_admin_nickname="ROOT"
+  	  </script>
+     
   	<script src="/js/ua-parser.min.js"></script>
   	<script src="/js/hook-duoshuo.js"></script>
   
@@ -681,39 +806,25 @@
 
     
   
+
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
   <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
   <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  
-
   <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.2" id="motion.global"></script>
-
-
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.2"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-
-      motionIntegrator.bootstrap();
-    });
-  </script>
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
@@ -721,15 +832,5 @@
   
   
 
-  
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
 </body>
 </html>

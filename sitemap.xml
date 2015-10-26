@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/2015/10/bulid-hexo-blog1/</loc>
+    <lastmod>2015-10-26T09:28:04.036Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/about/index.html</loc>
     <lastmod>2015-10-23T09:16:25.028Z</lastmod>
   </url>
