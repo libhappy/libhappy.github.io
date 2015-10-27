@@ -1,0 +1,799 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+  <meta name="description" content="Happy Life, Happy Coding." />
+
+
+
+
+
+  <meta name="keywords" content="gitcafe,github,hexo,ssh,博客,多账户," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LibHappy" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="在上一篇文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
+<meta property="og:url" content="http://libhappy.com/2015/10/build-hexo-blog2/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="在上一篇文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。">
+<meta property="og:updated_time" content="2015-10-27T14:08:35.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
+<meta name="twitter:description" content="在上一篇文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证 | LibHappy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-68985881-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LibHappy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Happy Life, Happy Coding.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xKFF8yFHuuQLQqpiGZt3','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-10-27T16:31:14+08:00" content="2015-10-27">
+              2015-10-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/build-hexo-blog2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/build-hexo-blog2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>在<a href="/2015/10/bulid-hexo-blog1/">上一篇</a>文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。<br><a id="more"></a></p>
+<h1 id="注册github及gitcafe账号">注册github及gitcafe账号</h1><p>github及gitcafe都支持pages网页托管服务，首先选择要托管的服务注册账号。当然也可以同时将博客发布至github和gitcafe，对于国内及国外不同用户分别访问不同的服务上的博客。</p>
+<h1 id="将博客发布至github">将博客发布至github</h1><p>创建github pages的详细方法可以参考官方<a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="external">帮助页面</a>。</p>
+<h2 id="创建新的代码仓库">创建新的代码仓库</h2><p>新代码仓库(repository)名必须为<code>username.github.io</code>，其中<code>username</code>为注册github的用户名。</p>
+<h2 id="设置用户名及邮箱">设置用户名及邮箱</h2><p>Hexo目录下的<code>.deploy_git</code>文件夹即为需要发布的文件，这是一个git目录。在发布至github之前需要先设置git的用户名及邮箱地址。<br><figure class="highlight stylus"><figcaption><span>D:\hexo\.deploy_git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user<span class="class">.name</span> <span class="string">"your name"</span></span><br><span class="line">git config --global user<span class="class">.eamil</span> <span class="string">"user@email.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>这个命令设置了计算机中全局默认的用户名及邮箱，如果计算机中只有一个git账号的代码，这样设置该账号下的其他仓库时可以不用再进行设置。<br>但计算机中有多个账号的仓库代码要通过git同步时，就应该只设置该目录下git仓库的用户名及邮箱：<br><figure class="highlight stylus"><figcaption><span>D:\hexo\.deploy_git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user<span class="class">.name</span> <span class="string">"your name"</span></span><br><span class="line">git config user<span class="class">.eamil</span> <span class="string">"your@email"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="设置远程仓库地址">设置远程仓库地址</h2><p>将远程仓库地址设置为新建的代码仓库，然后将网页推送至远程仓库：<br><figure class="highlight stylus"><figcaption><span>D:\hexo\.deploy_git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github<span class="class">.com</span>:username<span class="class">.github</span><span class="class">.io</span></span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></p>
+<p>一段时间后，直接访问网址<code>username.github.io</code>就可以看到刚发布的博客了。</p>
+<h2 id="设置Hexo配置文件">设置Hexo配置文件</h2><p>配置Hexo的站点配置文件，加入远程仓库的信息，以后更新博客时只用执行 <code>hexo d</code>就可以将博客发布到远端了。<br><figure class="highlight less"><figcaption><span>D:\hexo\_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:username.github.io #你的GitHub Pages仓库</span><br><span class="line">  <span class="attribute">branch</span>: master #要推送的分支，github pages默认为master</span><br></pre></td></tr></table></figure></p>
+<h1 id="将博客发布至gitcafe">将博客发布至gitcafe</h1><p>由于github 的连接速度并不理想，如果只是面向国内用户，可以将博客发布至gitcafe的pages服务。详细内容可以查看gitcafe的官方<a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9" target="_blank" rel="external">帮助文档</a>，具体操作流程与github大同小异。<br>需要注意的是：gitcafe pages 的默认分支为<code>gitcafe-pages</code>，因此推送时要使用<code>gitcafe-pages</code>作为远端分支：<br><figure class="highlight stylus"><figcaption><span>D:\hexo\.deploy_git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@gitcafe<span class="class">.com</span>:username<span class="class">.gitcafe</span><span class="class">.io</span></span><br><span class="line">git checkout -<span class="tag">b</span> gitcafe-pages</span><br><span class="line">git pull origin gitcafe-pages</span><br></pre></td></tr></table></figure></p>
+<p>同时Hexo配置文件中的<code>branch</code>也要改为<code>gitcafe-pages</code>。<br><figure class="highlight less"><figcaption><span>D:\hexo\_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@gitcafe</span>.<span class="attribute">com</span>:username.gitcafe.io #你的GitCafe Pages仓库</span><br><span class="line">  <span class="attribute">branch</span>: gitcafe-pages #要推送的分支，gitcafe pages默认为gitcafe-pages</span><br></pre></td></tr></table></figure></p>
+<p>发布后稍等片刻，直接访问<code>username.gitcafe.io</code>就可以看到刚发布的博客了。</p>
+<h1 id="同时将博客发布至github与gitcafe">同时将博客发布至github与gitcafe</h1><p>如果同时设置了github及gitcafe，也可以将博客同时发布至两个服务。但是本地仓库的信息相同，因此需要使用相同的邮箱注册两个服务。在设置好远端服务后，如下修改Hexo站点配置文件：<br><figure class="highlight less"><figcaption><span>D:\hexo\_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>:</span><br><span class="line">    <span class="attribute">github</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:username.github.io, master</span><br><span class="line">    <span class="attribute">gitcafe</span>: git<span class="variable">@gitcafe</span>.<span class="attribute">com</span>:username.gitcafe.io, gitcafe-pages</span><br></pre></td></tr></table></figure></p>
+<p>然后<code>hexo d</code>发布博客后，分别打开对应服务的网址就可以看到发布的博客了。</p>
+<h1 id="使用ssh密钥登陆">使用ssh密钥登陆</h1><p>使用ssh密钥登陆github和gitcafe可以跳过密码输入，如果同时拥有两个服务也可以设置不同的密钥登陆，提升安全性。</p>
+<h2 id="生成ssh密钥">生成ssh密钥</h2><p>切换到ssh默认的密匙保存目录<code>C:\Users\username\.ssh</code>，如果不存在则手动创建。<br>用以下命令生成与邮箱<code>user@email.com</code>（即注册github及gitcafe的邮箱）对应的密钥：<br><figure class="highlight mathematica"><figcaption><span>C:\Users\username\.ssh</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"user@email.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>首先会提示输入密钥名称<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Generating <span class="keyword">public</span>/<span class="keyword">private</span> rsa <span class="keyword">key</span> pair.</span><br><span class="line">Enter file <span class="keyword">in</span> which <span class="keyword">to</span> save the <span class="keyword">key</span> (/c/Users/username/.ssh/id_rsa):</span><br></pre></td></tr></table></figure></p>
+<p>如果没有设置过ssh密钥，使用默认的<code>id_rsa</code>即可。同时如果想在github及gitcafe上启用不同的密钥，在生成密钥时应采用不同的名称便于区分。<br>之后会提示输入密钥密码，该密码用来加密密钥，使用此密钥时需要输入该密码，留空则表示不使用密码。<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty <span class="keyword">for</span> <span class="literal">no</span> passphrase):</span><br><span class="line">Enter same passphrase <span class="attribute">again</span>:</span><br></pre></td></tr></table></figure></p>
+<p>然后会提示你成功生成了密钥，假设此时生成的密钥对为<code>github_rsa</code>与<code>github_rsa.pub</code>。相应的也可以为gitcafe网站生成不同的密钥对。</p>
+<h2 id="将公钥上传至github及gitcafe">将公钥上传至github及gitcafe</h2><p>登陆github，打开<code>Settings</code>中的<code>SSH keys</code>点击<code>Add SSH key</code>，输入SSH key的名称，将.pub文件中的内容全部粘贴至<code>Key</code>中，点击<code>Add key</code>保存这个密钥。<br>gitcafe 中的设置完全相同，只是其SSH key管理的设置在<code>账户设置</code>–<code>SSH 公钥管理</code>中，相同的方式添加.pub公钥的信息即可。</p>
+<h2 id="设置ssh用户配置文件">设置ssh用户配置文件</h2><p>在ssh用户配置文件<code>C:\Users\username\.ssh\config</code>中指定对应服务所使用的私钥，如果该配置文件不存在则直接新建一个。<br><figure class="highlight stylus"><figcaption><span>C:\Users\username\.ssh\config</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#github</span></span><br><span class="line">Host github<span class="class">.com</span>  #昵称</span><br><span class="line">    HostName github<span class="class">.com</span> #指代的网址</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_rsa #认证私钥路径</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line"><span class="id">#gitcafe</span></span><br><span class="line">Host gitcafe<span class="class">.com</span></span><br><span class="line">    HostName gitcafe<span class="class">.com</span></span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/gitcafe_rsa</span><br><span class="line">    PreferredAuthentications publickey</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>其中昵称是对应条目的代号，可以随便设置，在git中如果地址中出现该代号将被替换为对应的<code>HostName</code>并用指定的私钥进行认证。因此若计算机中有两个github账户需要用不同的ssh key进行认证，可以如下设置：<br><figure class="highlight crmsh"><figcaption><span>C:\Users\username\.ssh\config</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#github 01</span></span><br><span class="line">Host github01  <span class="comment">#昵称</span></span><br><span class="line">    HostName github.com <span class="comment">#指代的网址</span></span><br><span class="line">    <span class="keyword">User</span> <span class="title">git</span></span><br><span class="line">    IdentityFile ~/.ssh/<span class="number">01</span>_rsa <span class="comment">#认证私钥路径</span></span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line"><span class="comment">#github 02</span></span><br><span class="line">Host github02  <span class="comment">#昵称</span></span><br><span class="line">    HostName github.com <span class="comment">#指代的网址</span></span><br><span class="line">    <span class="keyword">User</span> <span class="title">git</span></span><br><span class="line">    IdentityFile ~/.ssh/<span class="number">02</span>_rsa <span class="comment">#认证私钥路径</span></span><br><span class="line">    PreferredAuthentications publickey</span><br></pre></td></tr></table></figure></p>
+<p>在设置git远端地址或登陆时，用对应的昵称代替地址中的<code>github.com</code>，比如：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github01:username<span class="class">.github</span><span class="class">.io</span></span><br><span class="line">git remote add origin git@github02:username<span class="class">.github</span><span class="class">.io</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="测试_ssh_配置是否正确">测试 ssh 配置是否正确</h2><p>经过以上设置后应该可以用ssh登陆github及gitcafe，用以下命令可以测试配置是否正确。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试github</span></span><br><span class="line"><span class="title">ssh</span> -T git<span class="variable">@github</span>.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试gitcafe</span></span><br><span class="line">ssh -T git<span class="variable">@gitcafe</span>.com</span><br></pre></td></tr></table></figure></p>
+<p>如果连接成功，会提示以下信息：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># github</span></span><br><span class="line">Hi USERNAME! Yo<span class="string">u've successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line"></span><br><span class="line"># gitcafe</span><br><span class="line">Hi USERNAME! You'</span>ve successfully authenticated, but GitCafe does <span class="keyword">not</span> provide shell access.</span><br></pre></td></tr></table></figure></p>
+<p>测试通过后，就可以使用ssh key来发布博客及提交代码而无需输入密码了。</p>
+<p>本文主要介绍了如何将Hexo博客发布至github及gitcafe，以及配置多对ssh公私钥进行git认证。下一篇文章中将介绍如何购买域名及为托管在github及gitcafe上的博客设置自定义域名。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gitcafe/" rel="tag">#gitcafe</a>
+          
+            <a href="/tags/github/" rel="tag">#github</a>
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/ssh/" rel="tag">#ssh</a>
+          
+            <a href="/tags/博客/" rel="tag">#博客</a>
+          
+            <a href="/tags/多账户/" rel="tag">#多账户</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/bulid-hexo-blog1/" rel="next" title="用Hexo搭建静态博客（一）, Hexo的搭建">
+                <i class="fa fa-chevron-left"></i> 用Hexo搭建静态博客（一）, Hexo的搭建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/10/build-hexo-blog2/"
+           data-title="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证" data-url="http://libhappy.com/2015/10/build-hexo-blog2/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Arthur" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Arthur</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Happy Life, Happy Coding.</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://libhappy.com" target="_blank" rel="external nofollow">
+                  <i class="fa fa-homepage fa-fw"></i> Homepage
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/libhappy" target="_blank" rel="external nofollow">
+                  <i class="fa fa-github fa-fw"></i> Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gitcafe.com/libhappy" target="_blank" rel="external nofollow">
+                  <i class="fa fa-gitcafe fa-fw"></i> Gitcafe
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册github及gitcafe账号"><span class="nav-number">1.</span> <span class="nav-text">注册github及gitcafe账号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将博客发布至github"><span class="nav-number">2.</span> <span class="nav-text">将博客发布至github</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新的代码仓库"><span class="nav-number">2.1.</span> <span class="nav-text">创建新的代码仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置用户名及邮箱"><span class="nav-number">2.2.</span> <span class="nav-text">设置用户名及邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置远程仓库地址"><span class="nav-number">2.3.</span> <span class="nav-text">设置远程仓库地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置Hexo配置文件"><span class="nav-number">2.4.</span> <span class="nav-text">设置Hexo配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将博客发布至gitcafe"><span class="nav-number">3.</span> <span class="nav-text">将博客发布至gitcafe</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同时将博客发布至github与gitcafe"><span class="nav-number">4.</span> <span class="nav-text">同时将博客发布至github与gitcafe</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ssh密钥登陆"><span class="nav-number">5.</span> <span class="nav-text">使用ssh密钥登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成ssh密钥"><span class="nav-number">5.1.</span> <span class="nav-text">生成ssh密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将公钥上传至github及gitcafe"><span class="nav-number">5.2.</span> <span class="nav-text">将公钥上传至github及gitcafe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置ssh用户配置文件"><span class="nav-number">5.3.</span> <span class="nav-text">设置ssh用户配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试_ssh_配置是否正确"><span class="nav-number">5.4.</span> <span class="nav-text">测试 ssh 配置是否正确</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arthur</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="thanks-to">
+  感谢 <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a> 及 
+  <a class="theme-link" href="https://gitcafe.com/" rel="external nofollow">Gitcafe</a> 提供静态网页存储
+</div>
+
+<div class="thanks-to">
+  感谢 <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a> 提供图片存储空间
+</div>
+
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"libhappy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+     
+  	  <script type="text/javascript">
+  		var duoshuo_user_ID = 13964331
+      var duoshuo_admin_nickname="ROOT"
+  	  </script>
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

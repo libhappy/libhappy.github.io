@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/2015/10/build-hexo-blog2/</loc>
+    <lastmod>2015-10-27T14:08:35.160Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/2015/07/pyqt4-tutorial-01/</loc>
     <lastmod>2015-10-26T14:15:55.057Z</lastmod>
   </url>
