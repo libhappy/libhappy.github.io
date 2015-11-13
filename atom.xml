@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://libhappy.com/"/>
-  <updated>2015-10-27T14:08:35.160Z</updated>
+  <updated>2015-11-13T16:02:02.017Z</updated>
   <id>http://libhappy.com/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[用Hexo搭建静态博客（三）, 设置自定义域名]]></title>
+    <link href="http://libhappy.com/2015/10/build-hexo-blog3/"/>
+    <id>http://libhappy.com/2015/10/build-hexo-blog3/</id>
+    <published>2015-10-30T14:32:02.000Z</published>
+    <updated>2015-11-13T16:02:02.017Z</updated>
+    <content type="html"><![CDATA[<p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a></p>
+<h1 id="购买域名">购买域名</h1><p>首先要购买一个域名，推荐国外的<a href="https://www.godaddy.com/" target="_blank" rel="external">GoDaddy</a>, 当然国内的域名提供商也是可以的。</p>
+<h1 id="设置域名解析服务">设置域名解析服务</h1><p>购买到心仪的域名后进入域名设置页面设置域名解析服务。由于godaddy的域名解析服务位于国外，速度稍有影响，因此可以使用国内的免费域名解析服务<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>，同时DNSPod还支持根据不同线路解析到不同地址，因此可以利用此功能针对不同地区的访问者分别解析到github及gitcafe以提高访问速度。</p>
+<p>使用DNSPod来进行域名解析首先要将域名解析服务商(nameserver)地址更换为DNSPod提供的地址:<br><figure class="highlight stylus"><figcaption><span>nameserver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F1G1NS1<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br><span class="line">F1G1NS2<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br></pre></td></tr></table></figure></p>
+<p>GoDaddy的具体设置可以查看DNSPod上的<a href="https://support.dnspod.cn/Kb/showarticle/?qtype=%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B&amp;tsid=42" target="_blank" rel="external">帮助教程</a>。</p>
+<h1 id="设置CNAME">设置CNAME</h1><h2 id="github设置CNAME">github设置CNAME</h2><p>github的CNAME设置需要在github pages 的根目录下创建CNAME文件并在其中写入自定义域名，但是直接在github pages中创建，下次通过git push提交博客后会被删除。因此需要在Hexo的source目录下的创建CNAME文件，并在其中写入自定义域名。之后每次提交博客时会随之提交CNAME文件。</p>
+<h2 id="gitcafe设置CNAME">gitcafe设置CNAME</h2><p>gitcafe的CNAME更为方便，登陆gitcafe后在<code>项目管理</code>–<code>域名管理</code>下的<code>自定义域名</code>中添加自定义域名即可。</p>
+<h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：<br><img src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" title="DNSPod域名解析记录设置" alt="dnspod-setting"><br>这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
+<p>等待域名解析生效（一般需要几分钟到一天不等）后，就可以用自定义的域名直接访问博客了。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br>]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://libhappy.com/tags/hexo/"/>
+    
+      <category term="博客" scheme="http://libhappy.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="域名" scheme="http://libhappy.com/tags/%E5%9F%9F%E5%90%8D/"/>
+    
+      <category term="Hexo" scheme="http://libhappy.com/categories/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证]]></title>

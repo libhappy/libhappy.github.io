@@ -44,7 +44,7 @@
 
 
 
-  <meta name="keywords" content="class,python,继承,编程," />
+  <meta name="keywords" content="hexo,博客,域名," />
 
 
 
@@ -62,20 +62,17 @@
 
 
 
-<meta name="description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
+<meta name="description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 类的多重继承">
-<meta property="og:url" content="http://libhappy.com/2015/08/python-class-re-order/index.html">
+<meta property="og:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
+<meta property="og:url" content="http://libhappy.com/2015/10/build-hexo-blog3/index.html">
 <meta property="og:site_name" content="LibHappy">
-<meta property="og:description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
-<meta property="og:image" content="https://farm1.staticflickr.com/678/21780464824_b470a6eab4.jpg">
-<meta property="og:image" content="https://farm1.staticflickr.com/592/21782098993_467910d598.jpg">
-<meta property="og:image" content="https://farm1.staticflickr.com/651/22215216660_42133913bb.jpg">
-<meta property="og:image" content="https://farm1.staticflickr.com/661/22215486608_17a874a876.jpg">
-<meta property="og:updated_time" content="2015-10-26T14:14:17.002Z">
+<meta property="og:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
+<meta property="og:image" content="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg">
+<meta property="og:updated_time" content="2015-11-13T16:02:02.017Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 类的多重继承">
-<meta name="twitter:description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
+<meta name="twitter:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
+<meta name="twitter:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> Python 类的多重继承 | LibHappy </title>
+  <title> 用Hexo搭建静态博客（三）, 设置自定义域名 | LibHappy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +229,7 @@
             
             
               
-                Python 类的多重继承
+                用Hexo搭建静态博客（三）, 设置自定义域名
               
             
           </h1>
@@ -241,8 +238,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-08-15T16:14:10+08:00" content="2015-08-15">
-              2015-08-15
+            <time itemprop="dateCreated" datetime="2015-10-30T22:32:02+08:00" content="2015-10-30">
+              2015-10-30
             </time>
           </span>
 
@@ -251,8 +248,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
                   </a>
                 </span>
 
@@ -267,8 +264,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/python-class-re-order/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/python-class-re-order/" itemprop="commentsCount"></span>
+                <a href="/2015/10/build-hexo-blog3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/build-hexo-blog3/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -287,55 +284,15 @@
       
 
       
-        <span itemprop="articleBody"><p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a></p>
-<h1 id="经典类与新式类的区别">经典类与新式类的区别</h1><ol>
-<li><p>经典类是默认没有派生自某个基类的，而新式类默认派生自<code>object</code>基类：</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># old style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># new style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>经典类在类多重继承的时候是采用的从左至右深度优先的匹配方法，而新式类采用C3算法（不同于广度优先）进行匹配的。</p>
-</li>
-<li><p>经典类没有<code>__MRO__</code>和<code>instance.mro()</code>调用，而新式类有。</p>
-</li>
-</ol>
-<h1 id="经典类中的继承问题">经典类中的继承问题</h1><p>经典类中采用<strong>深度优先</strong>的匹配方法，可能导致在查询继承树中绕过后面的父类：<br><!--more--><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
-<p>其输出为：class D。<br>新式类采用<strong>C3算法</strong>（区别于<strong>广度优先</strong>的原则）进行搜索，若使用新式类：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class D"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"class C"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(B, C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">f = A()</span><br><span class="line">f.foo()</span><br></pre></td></tr></table></figure></p>
-<p>输出为：class C<br>搜索的顺序如下图所示：</p>
-<img src="https://farm1.staticflickr.com/678/21780464824_b470a6eab4.jpg" title="Python中类的方法解析顺序" alt="python_old_26new_class">
-<h1 id="C3算法">C3算法</h1><p><strong>C3算法</strong>最早被提出是用于Lisp的，应用在Python中是为了解决原来基于深度优先搜索算法不满足本地优先级，和单调性的问题。</p>
-<ul>
-<li><strong>本地优先级</strong>：指声明时父类的顺序，比如C(A,B)，如果访问C类对象属性时，应该根据声明顺序，优先查找A类，然后再查找B类。</li>
-<li><strong>单调性</strong>：如果在C的解析顺序中，A排在B的前面，那么在C的所有子类里，也必须满足这个顺序。</li>
-</ul>
-<p><strong>深度优先搜索</strong>用栈（stack）来实现，整个过程可以想象成一个倒立的树形：</p>
-<ol>
-<li>把根节点压入栈中。</li>
-<li>每次从栈中弹出一个元素，搜索所有在它下一级的元素，把这些元素压入栈中。并把这个元素记为它下一级元素的前驱。</li>
-<li>找到所要找的元素时结束程序。</li>
-<li>如果遍历整个树还没有找到，结束程序。</li>
-</ol>
-<p><strong>广度优先搜索</strong>使用队列（queue）来实现，整个过程也可以看做一个倒立的树形：</p>
-<ol>
-<li>把根节点放到队列的末尾。</li>
-<li>每次从队列的头部取出一个元素，查看这个元素所有的下一级元素，把它们放到队列的末尾。并把这个元素记为它下一级元素的前驱。</li>
-<li>找到所要找的元素时结束程序。</li>
-<li>如果遍历整个树还没有找到，结束程序。</li>
-</ol>
-<p>对于同一段程序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"A"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"B"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"C"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"D"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span><span class="params">(D)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"E"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span><span class="params">(C, E)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"F"</span></span><br><span class="line"></span><br><span class="line">f = F()</span><br><span class="line">f.foo1()</span><br></pre></td></tr></table></figure></p>
-<p>当使用深度优先搜索，广度优先搜索及C3算法的不同搜索顺序如下：<br><strong>深度优先搜索</strong>(FCBAED)<br><img src="https://farm1.staticflickr.com/592/21782098993_467910d598.jpg" title="DFS深度优先搜索" alt="resolution_order-deep-first-search"></p>
-<p><strong>广度优先搜索</strong>(FCEBDA)</p>
-<img src="https://farm1.staticflickr.com/651/22215216660_42133913bb.jpg" title="BFS广度优先搜索" alt="resolution_order-broad-first-search">
-<p><strong>C3算法</strong>(FCBEDA)</p>
-<img src="https://farm1.staticflickr.com/661/22215486608_17a874a876.jpg" title="C3算法" alt="resolution_order-C3-search">
-<p>对于新式类，可以用<code>instance.__mro__</code>或<code>instance.mro()</code>来查看其MRO（Method Resolution Order 方法解析顺序）列表。对于上文代码中的类<code>F</code>的MRO如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print F.mro()</span><br><span class="line">(&lt;class '__main__.F'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.E'&gt;, &lt;class '__main__.D'&gt;, &lt;class '__main__.A'&gt;, &lt;type 'object'&gt;)</span><br></pre></td></tr></table></figure></p>
-<p>即C3算法的解析结果。<br>同时为了解决多重继承中的调用父类问题，python2.2之后引入了<code>super</code>。</p>
-<hr>
-<p>参考资料：</p>
-<ol>
-<li><a href="http://python-history.blogspot.com/2010/06/method-resolution-order.html" title="Method Resolution Order" target="_blank" rel="external">Method Resolution Order</a></li>
-<li><a href="http://www.jb51.net/article/57263.htm" title="Python类的多重继承问题深入分析" target="_blank" rel="external">Python类的多重继承问题深入分析</a></li>
-<li><a href="http://blog.csdn.net/imzoer/article/details/8737642" title="python类学习以及mro--多继承属性查找机制 " target="_blank" rel="external">python类学习以及mro–多继承属性查找机制 </a></li>
-<li><a href="http://demo.netfoucs.com/icode0410/article/details/39400233" title="Python 类继承，__bases__, __mro__, super " target="_blank" rel="external">Python 类继承，__bases__, __mro__, super </a></li>
-</ol>
+        <span itemprop="articleBody"><p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a></p>
+<h1 id="购买域名">购买域名</h1><p>首先要购买一个域名，推荐国外的<a href="https://www.godaddy.com/" target="_blank" rel="external">GoDaddy</a>, 当然国内的域名提供商也是可以的。</p>
+<h1 id="设置域名解析服务">设置域名解析服务</h1><p>购买到心仪的域名后进入域名设置页面设置域名解析服务。由于godaddy的域名解析服务位于国外，速度稍有影响，因此可以使用国内的免费域名解析服务<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>，同时DNSPod还支持根据不同线路解析到不同地址，因此可以利用此功能针对不同地区的访问者分别解析到github及gitcafe以提高访问速度。</p>
+<p>使用DNSPod来进行域名解析首先要将域名解析服务商(nameserver)地址更换为DNSPod提供的地址:<br><figure class="highlight stylus"><figcaption><span>nameserver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F1G1NS1<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br><span class="line">F1G1NS2<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br></pre></td></tr></table></figure></p>
+<p>GoDaddy的具体设置可以查看DNSPod上的<a href="https://support.dnspod.cn/Kb/showarticle/?qtype=%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B&amp;tsid=42" target="_blank" rel="external">帮助教程</a>。</p>
+<h1 id="设置CNAME">设置CNAME</h1><h2 id="github设置CNAME">github设置CNAME</h2><p>github的CNAME设置需要在github pages 的根目录下创建CNAME文件并在其中写入自定义域名，但是直接在github pages中创建，下次通过git push提交博客后会被删除。因此需要在Hexo的source目录下的创建CNAME文件，并在其中写入自定义域名。之后每次提交博客时会随之提交CNAME文件。</p>
+<h2 id="gitcafe设置CNAME">gitcafe设置CNAME</h2><p>gitcafe的CNAME更为方便，登陆gitcafe后在<code>项目管理</code>–<code>域名管理</code>下的<code>自定义域名</code>中添加自定义域名即可。</p>
+<h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：<br><img src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" title="DNSPod域名解析记录设置" alt="dnspod-setting"><br>这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
+<p>等待域名解析生效（一般需要几分钟到一天不等）后，就可以用自定义的域名直接访问博客了。</p>
 </span>
       
     </div>
@@ -344,13 +301,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/class/" rel="tag">#class</a>
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
           
-            <a href="/tags/python/" rel="tag">#python</a>
+            <a href="/tags/博客/" rel="tag">#博客</a>
           
-            <a href="/tags/继承/" rel="tag">#继承</a>
-          
-            <a href="/tags/编程/" rel="tag">#编程</a>
+            <a href="/tags/域名/" rel="tag">#域名</a>
           
         </div>
       
@@ -359,17 +314,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/pyqt4-tutorial-01/" rel="next" title="编写第一个PyQt4程序">
-                <i class="fa fa-chevron-left"></i> 编写第一个PyQt4程序
+              <a href="/2015/10/build-hexo-blog2/" rel="next" title="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
+                <i class="fa fa-chevron-left"></i> 用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/python-usage-super/" rel="prev" title="Python中的super使用">
-                Python中的super使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -399,8 +350,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/python-class-re-order/"
-           data-title="Python 类的多重继承" data-url="http://libhappy.com/2015/08/python-class-re-order/">
+      <div class="ds-thread" data-thread-key="2015/10/build-hexo-blog3/"
+           data-title="用Hexo搭建静态博客（三）, 设置自定义域名" data-url="http://libhappy.com/2015/10/build-hexo-blog3/">
       </div>
     
   </div>
@@ -519,7 +470,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#经典类与新式类的区别"><span class="nav-number">1.</span> <span class="nav-text">经典类与新式类的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经典类中的继承问题"><span class="nav-number">2.</span> <span class="nav-text">经典类中的继承问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C3算法"><span class="nav-number">3.</span> <span class="nav-text">C3算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#购买域名"><span class="nav-number">1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置域名解析服务"><span class="nav-number">2.</span> <span class="nav-text">设置域名解析服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置CNAME"><span class="nav-number">3.</span> <span class="nav-text">设置CNAME</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github设置CNAME"><span class="nav-number">3.1.</span> <span class="nav-text">github设置CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitcafe设置CNAME"><span class="nav-number">3.2.</span> <span class="nav-text">gitcafe设置CNAME</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置DNS解析"><span class="nav-number">4.</span> <span class="nav-text">设置DNS解析</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
