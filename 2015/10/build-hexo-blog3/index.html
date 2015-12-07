@@ -1,68 +1,11 @@
-<!doctype html>
-<html class="theme-next   use-motion ">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
+  <meta charset="utf-8">
   
-    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-  
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
-
-
-
-  <meta name="description" content="Happy Life, Happy Coding." />
-
-
-
-
-
-  <meta name="keywords" content="hexo,博客,域名," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="LibHappy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
-
-
-
-
-
-
-<meta name="description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
+  <title>用Hexo搭建静态博客（三）, 设置自定义域名 | LibHappy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
 <meta property="og:url" content="http://libhappy.com/2015/10/build-hexo-blog3/index.html">
@@ -73,218 +16,160 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
 <meta name="twitter:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
+  
+  
+    <link rel="icon" href="favicon.ico">
+  
+  
+ <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
 
 
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
-  };
+ga('create', 'UA-68985881-1', 'auto');
+ga('send', 'pageview');
+
 </script>
+<!-- End Google Analytics -->
 
-  <title> 用Hexo搭建静态博客（三）, 设置自定义域名 | LibHappy </title>
+
+  
+
+  
 </head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">LibHappy</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/images/avatar.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://libhappy.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://libhappy.com"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/images/avatar.jpg">
+      <h2 id="name">Arthur</h2>
+      <h3 id="title">Happy Life, Happy Coding.</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>China</span>
+      <a id="follow" href="https://github.com/libhappy/">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        6
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        19
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/libhappy" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
+      
+      <section id="main"><article id="post-build-hexo-blog3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用Hexo搭建静态博客（三）, 设置自定义域名
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/build-hexo-blog3/">
+      <time datetime="2015-10-30T14:32:02.000Z" itemprop="datePublished">2015-10-30</time>
     </a>
   </div>
-<![endif]-->
-  
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-68985881-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
-
-
-
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">LibHappy</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
   </div>
-  <p class="site-subtitle">Happy Life, Happy Coding.</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu ">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                用Hexo搭建静态博客（三）, 设置自定义域名
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-10-30T22:32:02+08:00" content="2015-10-30">
-              2015-10-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/build-hexo-blog3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/build-hexo-blog3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
 
         </div>
       </header>
     
-
-
-    <div class="post-body">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        <span itemprop="articleBody"><p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a></p>
+                
+        <p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a></p>
 <h1 id="购买域名">购买域名</h1><p>首先要购买一个域名，推荐国外的<a href="https://www.godaddy.com/" target="_blank" rel="external">GoDaddy</a>, 当然国内的域名提供商也是可以的。</p>
 <h1 id="设置域名解析服务">设置域名解析服务</h1><p>购买到心仪的域名后进入域名设置页面设置域名解析服务。由于godaddy的域名解析服务位于国外，速度稍有影响，因此可以使用国内的免费域名解析服务<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>，同时DNSPod还支持根据不同线路解析到不同地址，因此可以利用此功能针对不同地区的访问者分别解析到github及gitcafe以提高访问速度。</p>
 <p>使用DNSPod来进行域名解析首先要将域名解析服务商(nameserver)地址更换为DNSPod提供的地址:<br><figure class="highlight stylus"><figcaption><span>nameserver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F1G1NS1<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br><span class="line">F1G1NS2<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br></pre></td></tr></table></figure></p>
@@ -293,463 +178,204 @@
 <h2 id="gitcafe设置CNAME">gitcafe设置CNAME</h2><p>gitcafe的CNAME更为方便，登陆gitcafe后在<code>项目管理</code>–<code>域名管理</code>下的<code>自定义域名</code>中添加自定义域名即可。</p>
 <h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：<br><img src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" title="DNSPod域名解析记录设置" alt="dnspod-setting"><br>这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
 <p>等待域名解析生效（一般需要几分钟到一天不等）后，就可以用自定义的域名直接访问博客了。</p>
-</span>
+
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://libhappy.com/2015/10/build-hexo-blog3/" data-id="cihvzanki0019b0o3pl2qze0t" class="article-share-link">分享到</a>
+      
+        <a href="http://libhappy.com/2015/10/build-hexo-blog3/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/域名/">域名</a></li></ul>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
-          
-            <a href="/tags/博客/" rel="tag">#博客</a>
-          
-            <a href="/tags/域名/" rel="tag">#域名</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/10/build-hexo-blog2/" rel="next" title="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
-                <i class="fa fa-chevron-left"></i> 用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
     </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
-
-
-        </div>
-
-        
-
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
-
-        
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2015/10/build-hexo-blog3/"
-           data-title="用Hexo搭建静态博客（三）, 设置自定义域名" data-url="http://libhappy.com/2015/10/build-hexo-blog3/">
-      </div>
-    
-  </div>
-
-
-      </div>
-
-      
-        
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/build-hexo-blog2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证</div>
+    </a>
+  
+</nav>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
 
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://libhappy.com/2015/10/build-hexo-blog3/" data-title="用Hexo搭建静态博客（三）, 设置自定义域名" data-url="http://libhappy.com/2015/10/build-hexo-blog3/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
       
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/10/build-hexo-blog3/" class="thumbnail">
+  
+    <span style="background-image:url(https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg
+)" alt="用Hexo搭建静态博客（三）, 设置自定义域名" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+              <p class="item-title"><a href="/2015/10/build-hexo-blog3/" class="title">用Hexo搭建静态博客（三）, 设置自定义域名</a></p>
+              <p class="item-date"><time datetime="2015-10-30T14:32:02.000Z" itemprop="datePublished">2015-10-30</time></p>
+            </div>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="Arthur" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">Arthur</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description">Happy Life, Happy Coding.</p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">19</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
-
-        </nav>
-
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+          <li>
             
-              <span class="links-of-author-item">
-                <a href="http://libhappy.com" target="_blank" rel="external nofollow">
-                  <i class="fa fa-homepage fa-fw"></i> Homepage
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://github.com/libhappy" target="_blank" rel="external nofollow">
-                  <i class="fa fa-github fa-fw"></i> Github
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://gitcafe.com/libhappy" target="_blank" rel="external nofollow">
-                  <i class="fa fa-gitcafe fa-fw"></i> Gitcafe
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
-          <div class="post-toc">
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#购买域名"><span class="nav-number">1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置域名解析服务"><span class="nav-number">2.</span> <span class="nav-text">设置域名解析服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置CNAME"><span class="nav-number">3.</span> <span class="nav-text">设置CNAME</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github设置CNAME"><span class="nav-number">3.1.</span> <span class="nav-text">github设置CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitcafe设置CNAME"><span class="nav-number">3.2.</span> <span class="nav-text">gitcafe设置CNAME</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置DNS解析"><span class="nav-number">4.</span> <span class="nav-text">设置DNS解析</span></a></li></ol></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-      
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
+            <div class="item-thumbnail">
+              <a href="/2015/10/build-hexo-blog2/" class="thumbnail">
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
-  <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Arthur</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
-    NexT.Mist
-  </a>
-</div>
-
-<div class="thanks-to">
-  感谢 <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a> 及 
-  <a class="theme-link" href="https://gitcafe.com/" rel="external nofollow">Gitcafe</a> 提供静态网页存储
-</div>
-
-<div class="thanks-to">
-  感谢 <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a> 提供图片存储空间
-</div>
-
-
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top"></div>
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+              <p class="item-title"><a href="/2015/10/build-hexo-blog2/" class="title">用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证</a></p>
+              <p class="item-date"><time datetime="2015-10-27T08:31:14.000Z" itemprop="datePublished">2015-10-27</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/10/bulid-hexo-blog1/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+              <p class="item-title"><a href="/2015/10/bulid-hexo-blog1/" class="title">用Hexo搭建静态博客（一）, Hexo的搭建</a></p>
+              <p class="item-date"><time datetime="2015-10-26T02:38:40.000Z" itemprop="datePublished">2015-10-26</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/08/python-usage-super/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a></p>
+              <p class="item-title"><a href="/2015/08/python-usage-super/" class="title">Python中的super使用</a></p>
+              <p class="item-date"><time datetime="2015-08-16T01:46:43.000Z" itemprop="datePublished">2015-08-16</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/08/python-class-re-order/" class="thumbnail">
+  
+    <span style="background-image:url(https://farm1.staticflickr.com/678/21780464824_b470a6eab4.jpg
+)" alt="Python 类的多重继承" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a></p>
+              <p class="item-title"><a href="/2015/08/python-class-re-order/" class="title">Python 类的多重继承</a></p>
+              <p class="item-date"><time datetime="2015-08-15T08:14:10.000Z" itemprop="datePublished">2015-08-15</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
   
-  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NexT/" style="font-size: 10px;">NexT</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/gitcafe/" style="font-size: 10px;">gitcafe</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/pyqt4/" style="font-size: 10px;">pyqt4</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/super/" style="font-size: 10px;">super</a> <a href="/tags/zetcode/" style="font-size: 10px;">zetcode</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/域名/" style="font-size: 10px;">域名</a> <a href="/tags/多账户/" style="font-size: 10px;">多账户</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/编程/" style="font-size: 20px;">编程</a> <a href="/tags/调用/" style="font-size: 10px;">调用</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
+    </div>
+  </div>
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PyQt4/">PyQt4</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
 
   
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Arthur<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
+      静态网页存储于 <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a> 及 <a class="theme-link" href="https://gitcafe.com/" rel="external nofollow">Gitcafe</a>
+      , 图片存储于<a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </div>
+  </div>
+</footer>
     
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"libhappy"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-     
-  	  <script type="text/javascript">
-  		var duoshuo_user_ID = 13964331
-      var duoshuo_admin_nickname="ROOT"
-  	  </script>
-     
-  	<script src="/js/ua-parser.min.js"></script>
-  	<script src="/js/hook-duoshuo.js"></script>
-  
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    };
-  });
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"libhappy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
 </script>
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-  
-  
 
-  
-  
 
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
 </body>
 </html>
