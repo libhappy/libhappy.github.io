@@ -1964,7 +1964,6 @@ pre .javascript .function {
 #recent-post li .item-inner a,
 #recent-post li .item-inner .item-category {
   font-size: 13px;
-  text-transform: uppercase;
 }
 #recent-post li .item-inner a a,
 #recent-post li .item-inner .item-category a {
@@ -1993,7 +1992,6 @@ pre .javascript .function {
 #recent-post li .item-inner .item-date {
   color: #aaa;
   font-size: 13px;
-  text-transform: uppercase;
 }
 #recent-post li:hover .item-thumbnail {
   opacity: 0.8;
