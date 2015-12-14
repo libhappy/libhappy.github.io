@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://farm1.staticflickr.com/592/21782098993_467910d598.jpg">
 <meta property="og:image" content="https://farm1.staticflickr.com/651/22215216660_42133913bb.jpg">
 <meta property="og:image" content="https://farm1.staticflickr.com/661/22215486608_17a874a876.jpg">
-<meta property="og:updated_time" content="2015-10-26T14:14:17.002Z">
+<meta property="og:updated_time" content="2015-12-14T09:07:27.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 类的多重继承">
 <meta name="twitter:description" content="Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。">
@@ -110,6 +110,18 @@
             <li class="sidebar-button">
                 
                     <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
                          href="/all-archives"
                         
                     >
@@ -143,6 +155,18 @@
                 </a>
         </li>
         
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
     </ul>
     
         <ul class="sidebar-buttons">
@@ -153,22 +177,6 @@
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github-square"></i>
                     <span class="sidebar-button-desc">GitHub</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
-                    <span class="sidebar-button-desc">RSS</span>
                 </a>
         </li>
         
@@ -209,7 +217,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a></p>
+            <p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#经典类与新式类的区别"><span class="toc-text">经典类与新式类的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典类中的继承问题"><span class="toc-text">经典类中的继承问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C3算法"><span class="toc-text">C3算法</span></a></li></ol></p>
 <h1 id="经典类与新式类的区别">经典类与新式类的区别</h1><ol>
 <li><p>经典类是默认没有派生自某个基类的，而新式类默认派生自<code>object</code>基类：</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># old style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># new style</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
@@ -360,7 +368,7 @@
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
         Copyrights &copy; 2015 Arthur. All Rights Reserved.<br>
-        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a> & <a class="theme-link" href="https://gitcafe.com/" rel="external nofollow">Gitcafe</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
     </span>
 </footer>
 

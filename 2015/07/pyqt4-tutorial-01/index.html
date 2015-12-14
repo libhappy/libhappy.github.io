@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://farm1.staticflickr.com/565/22377226956_789c1b572a_m.jpg">
 <meta property="og:image" content="https://farm6.staticflickr.com/5678/22216388499_4a2df52106_m.jpg">
 <meta property="og:image" content="https://farm6.staticflickr.com/5815/22377228426_c71f00748e_m.jpg">
-<meta property="og:updated_time" content="2015-10-26T14:15:55.057Z">
+<meta property="og:updated_time" content="2015-12-14T09:07:16.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编写第一个PyQt4程序">
 <meta name="twitter:description" content="PyQt是Qt库的Python版本，该教程是 zetcode PyQt4教程的中文翻译。本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。">
@@ -112,6 +112,18 @@
             <li class="sidebar-button">
                 
                     <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
                          href="/all-archives"
                         
                     >
@@ -145,6 +157,18 @@
                 </a>
         </li>
         
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
     </ul>
     
         <ul class="sidebar-buttons">
@@ -155,22 +179,6 @@
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github-square"></i>
                     <span class="sidebar-button-desc">GitHub</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
-                    <span class="sidebar-button-desc">RSS</span>
                 </a>
         </li>
         
@@ -211,7 +219,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a></p>
+            <p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单示例"><span class="toc-text">简单示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加应用图标(Application_icon)"><span class="toc-text">添加应用图标(Application icon)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#显示提示信息"><span class="toc-text">显示提示信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关闭窗口"><span class="toc-text">关闭窗口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息框"><span class="toc-text">消息框</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#居中窗口"><span class="toc-text">居中窗口</span></a></li></ol></p>
 <h1 id="简单示例">简单示例</h1><p>第一个程序显示一个简单的窗口。<br>以下是原始代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:23:31 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">an example for PyQt4 gui program.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui    <span class="comment"># 导入必要的模块</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)   <span class="comment"># 创建一个应用对象，sys.argv为命令行传入的参数</span></span><br><span class="line"></span><br><span class="line">    window = QtGui.QWidget() <span class="comment"># QtGui.Qwidget 是所有界面对象的基础类，没有父类的部件称为窗口</span></span><br><span class="line">    window.resize(<span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 调整部件大小，250px宽150px高</span></span><br><span class="line">    window.move(<span class="number">300</span>, <span class="number">300</span>)  <span class="comment"># 移动部件的位置到屏幕 (x = 300, y = 300)处</span></span><br><span class="line">    window.setWindowTitle(<span class="string">'Simple'</span>) <span class="comment"># 设置窗口标题栏显示的标题</span></span><br><span class="line">    window.show() <span class="comment"># 在内存中创建组件并显示在屏幕上</span></span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_()) <span class="comment"># sys.exit()保证程序完全的退出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>显示窗口如下：</p>
@@ -351,7 +359,7 @@
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
         Copyrights &copy; 2015 Arthur. All Rights Reserved.<br>
-        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a> & <a class="theme-link" href="https://gitcafe.com/" rel="external nofollow">Gitcafe</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
     </span>
 </footer>
 
