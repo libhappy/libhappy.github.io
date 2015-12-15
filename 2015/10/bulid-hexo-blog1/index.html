@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://libhappy.com/2015/10/bulid-hexo-blog1/index.html">
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="Hexo 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过Hexo可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。">
-<meta property="og:updated_time" content="2015-12-14T09:06:34.156Z">
+<meta property="og:updated_time" content="2015-12-15T04:23:44.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Hexo搭建静态博客（一）, Hexo的搭建">
 <meta name="twitter:description" content="Hexo 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过Hexo可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。">
@@ -123,7 +123,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -228,7 +228,7 @@
 <h2 id="安装_Hexo_插件">安装 Hexo 插件</h2><p>Hexo 提供了许多插件以提供不同的功能，<a href="https://hexo.io/plugins/" target="_blank" rel="external">插件列表</a>列出了可用的插件。以安装<a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="external">hexo-generator-feed</a>插件为例。<br>该插件可以为博客增加rss订阅支持，在博客目录下打开命令行，输入以下命令即可安装该插件：<br><figure class="highlight sql"><figcaption><span>D:\hexo</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-feed <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure></p>
 <p>安装完成后在主目录的配置文件中可以配置该插件的功能：<br><figure class="highlight crmsh"><figcaption><span>D:\hexo\_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">feed:</span><br><span class="line">  <span class="operator">type</span>: atom</span><br><span class="line">  path: atom.<span class="keyword">xml</span></span><br><span class="line">  <span class="title">limit</span>: <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
 <p>然后在页面添加对atom.xml文件的链接即可。<br>其他插件的功能、安装及配置可以查看<a href="https://hexo.io/plugins/" target="_blank" rel="external">插件列表</a>详细了解。</p>
-<h2 id="安装_Hexo_主题">安装 Hexo 主题</h2><p>通过安装不同的主题，可以方便的使博客拥有不同的外观，官方的<a href="https://hexo.io/themes/" target="_blank" rel="external">主题列表</a>列举一些主题。<br>这个博客正在用的<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a>:<br><iframe src="http://notes.iissnan.com/" width="800" height="600" frameborder="0" allowfullscreen></iframe></p>
+<h2 id="安装_Hexo_主题">安装 Hexo 主题</h2><p>通过安装不同的主题，可以方便的使博客拥有不同的外观，官方的<a href="https://hexo.io/themes/" target="_blank" rel="external">主题列表</a>列举一些主题。<br>一款非常流行的Hexo主题<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a>:<br><iframe src="http://notes.iissnan.com/" width="800" height="600" frameborder="0" allowfullscreen></iframe></p>
 <p>另一款流行的主题<a href="https://github.com/wuchong/jacman" target="_blank" rel="external">Jacman</a>:<br><iframe src="http://wuchong.me/jacman/" width="800" height="600" frameborder="0" allowfullscreen></iframe></p>
 <p>安装Hexo主题十分简单，首先下载主题后解压到主目录下的<code>themes</code>文件夹，建议使用<code>git clone</code>的方式安装主题，便于更新。<br>以安装NexT主题为例，打开命令行，切换到Hexo主目录下：<br><figure class="highlight vim"><figcaption><span>D:\hexo</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/iissnan/hexo-theme-<span class="keyword">next</span> themes/<span class="keyword">next</span></span><br></pre></td></tr></table></figure></p>
 <p>完成后，主题已被下载到了<code>themes\next</code>目录下。<br>当需要更新主题时，执行以下命令即可：<br><figure class="highlight vim"><figcaption><span>D:\hexo</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> themes/<span class="keyword">next</span></span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></p>
@@ -290,36 +290,41 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/10/bulid-hexo-blog1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/bulid-hexo-blog1/">
                 <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+                <i class="fa fa-facebook-official"></i>
             </a>
         </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
+                    <i class="fa fa-chevron-up"></i>
             
-                <i class="fa fa-list"></i>
             </a>
         </li>
     </ul>
 </div>
 
 
-        
         
             <section id="comments">
     <!-- 多说评论框 start -->
@@ -383,29 +388,35 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/10/bulid-hexo-blog1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/bulid-hexo-blog1/">
                 <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/10/bulid-hexo-blog1/">
+                <i class="fa fa-facebook-official"></i>
             </a>
         </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
+                    <i class="fa fa-chevron-up"></i>
             
-                <i class="fa fa-list"></i>
             </a>
         </li>
     </ul>
@@ -417,7 +428,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://libhappy.com/2015/10/bulid-hexo-blog1/">
-                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -445,7 +456,7 @@
         
             <h4 id="about-card-name">Arthur</h4>
         
-            <h5 id="about-card-bio"><p>Happy coding, Happy life</p>
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
 </h5>
         
         

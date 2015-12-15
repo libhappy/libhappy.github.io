@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：
 12345678910class A():    def __inti__(self):        print &quot;enter A&quot;        print &quot;leave A&quot;class B():    def __init__(self):        print &quot;enter B&quot;">
-<meta property="og:updated_time" content="2015-12-14T09:07:40.331Z">
+<meta property="og:updated_time" content="2015-12-14T15:24:20.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python中的super使用">
 <meta name="twitter:description" content="Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：
@@ -126,7 +126,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -219,7 +219,7 @@
             <p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure>
 <p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
-<p>自python2.2开始，python添加了一个关键字<strong>super</strong>来解决这个问题。官方说明如下：<br><a id="more"></a><br><h1 id="table-of-contents">Table of Contents</h1></p>
+<p>自python2.2开始，python添加了一个关键字<strong>super</strong>来解决这个问题。官方说明如下：<br><a id="more"></a></p>
 <blockquote>
 <p>super(type[, object-or-type])</p>
 <p>Return the superclass of type. If the second argument is omitted the super object returned is unbound. If the second argument is an object,  isinstance(obj, type) must be true. If the second argument is a type, issubclass(type2, type) must be true. super() only works for new-style classes.</p>
@@ -299,36 +299,41 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/08/python-usage-super/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/08/python-usage-super/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/08/python-usage-super/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/08/python-usage-super/">
                 <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/08/python-usage-super/">
+                <i class="fa fa-facebook-official"></i>
             </a>
         </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
+                    <i class="fa fa-chevron-up"></i>
             
-                <i class="fa fa-list"></i>
             </a>
         </li>
     </ul>
 </div>
 
 
-        
         
             <section id="comments">
     <!-- 多说评论框 start -->
@@ -392,29 +397,35 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/08/python-usage-super/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=http://libhappy.com/2015/08/python-usage-super/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/08/python-usage-super/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/08/python-usage-super/">
                 <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/08/python-usage-super/">
+                <i class="fa fa-facebook-official"></i>
             </a>
         </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
+                    <i class="fa fa-chevron-up"></i>
             
-                <i class="fa fa-list"></i>
             </a>
         </li>
     </ul>
@@ -426,7 +437,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://libhappy.com/2015/08/python-usage-super/">
-                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -454,7 +465,7 @@
         
             <h4 id="about-card-name">Arthur</h4>
         
-            <h5 id="about-card-bio"><p>Happy coding, Happy life</p>
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
 </h5>
         
         
