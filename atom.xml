@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://libhappy.com/"/>
-  <updated>2015-12-14T09:16:53.064Z</updated>
+  <updated>2015-12-15T09:54:29.776Z</updated>
   <id>http://libhappy.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://libhappy.com/2015/12/vps-protect/"/>
     <id>http://libhappy.com/2015/12/vps-protect/</id>
     <published>2015-12-14T01:59:04.000Z</published>
-    <updated>2015-12-14T09:16:53.064Z</updated>
+    <updated>2015-12-15T09:54:29.776Z</updated>
     <content type="html"><![CDATA[<p>在购买自己的VPS之后，首先要做好的就是安全防护工作，本文将主要介绍以下方式来提高VPS的安全防护能力：</p>
 <ul>
 <li>修改ssh默认端口，开启密钥登陆并关闭简单密码登录</li>
@@ -254,7 +254,7 @@
     <link href="http://libhappy.com/2015/08/python-usage-super/"/>
     <id>http://libhappy.com/2015/08/python-usage-super/</id>
     <published>2015-08-16T01:46:43.000Z</published>
-    <updated>2015-12-14T15:24:20.235Z</updated>
+    <updated>2015-12-15T11:19:14.140Z</updated>
     <content type="html"><![CDATA[<p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure>
 <p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
@@ -320,7 +320,7 @@
     <link href="http://libhappy.com/2015/08/python-class-re-order/"/>
     <id>http://libhappy.com/2015/08/python-class-re-order/</id>
     <published>2015-08-15T08:14:10.000Z</published>
-    <updated>2015-12-14T09:07:27.312Z</updated>
+    <updated>2015-12-15T11:16:30.913Z</updated>
     <content type="html"><![CDATA[<p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="经典类与新式类的区别">经典类与新式类的区别</h1><ol>
 <li><p>经典类是默认没有派生自某个基类的，而新式类默认派生自<code>object</code>基类：</p>
@@ -393,7 +393,7 @@
     <link href="http://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
     <id>http://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
     <published>2015-07-07T09:30:17.000Z</published>
-    <updated>2015-12-14T09:07:16.666Z</updated>
+    <updated>2015-12-15T11:19:10.831Z</updated>
     <content type="html"><![CDATA[<p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="简单示例">简单示例</h1><p>第一个程序显示一个简单的窗口。<br>以下是原始代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:23:31 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">an example for PyQt4 gui program.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui    <span class="comment"># 导入必要的模块</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)   <span class="comment"># 创建一个应用对象，sys.argv为命令行传入的参数</span></span><br><span class="line"></span><br><span class="line">    window = QtGui.QWidget() <span class="comment"># QtGui.Qwidget 是所有界面对象的基础类，没有父类的部件称为窗口</span></span><br><span class="line">    window.resize(<span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 调整部件大小，250px宽150px高</span></span><br><span class="line">    window.move(<span class="number">300</span>, <span class="number">300</span>)  <span class="comment"># 移动部件的位置到屏幕 (x = 300, y = 300)处</span></span><br><span class="line">    window.setWindowTitle(<span class="string">'Simple'</span>) <span class="comment"># 设置窗口标题栏显示的标题</span></span><br><span class="line">    window.show() <span class="comment"># 在内存中创建组件并显示在屏幕上</span></span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_()) <span class="comment"># sys.exit()保证程序完全的退出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
