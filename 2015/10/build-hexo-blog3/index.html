@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
 <meta property="og:image" content="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg">
-<meta property="og:updated_time" content="2015-12-14T09:07:01.490Z">
+<meta property="og:updated_time" content="2015-12-16T05:04:04.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
 <meta name="twitter:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
@@ -221,7 +221,7 @@
 <p>GoDaddy的具体设置可以查看DNSPod上的<a href="https://support.dnspod.cn/Kb/showarticle/?qtype=%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B&amp;tsid=42" target="_blank" rel="external">帮助教程</a>。</p>
 <h1 id="设置CNAME">设置CNAME</h1><h2 id="github设置CNAME">github设置CNAME</h2><p>github的CNAME设置需要在github pages 的根目录下创建CNAME文件并在其中写入自定义域名，但是直接在github pages中创建，下次通过git push提交博客后会被删除。因此需要在Hexo的source目录下的创建CNAME文件，并在其中写入自定义域名。之后每次提交博客时会随之提交CNAME文件。</p>
 <h2 id="gitcafe设置CNAME">gitcafe设置CNAME</h2><p>gitcafe的CNAME更为方便，登陆gitcafe后在<code>项目管理</code>–<code>域名管理</code>下的<code>自定义域名</code>中添加自定义域名即可。</p>
-<h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：<br><img src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" title="DNSPod域名解析记录设置" alt="dnspod-setting"><br>这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
+<h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：<br><div class="figure center"><img class="fig-img" src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" width="" height="" alt="dnspod-setting" title="DNSPod域名解析记录设置"><span class="caption">DNSPod域名解析记录设置</span></div><br>这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
 <p>等待域名解析生效（一般需要几分钟到一天不等）后，就可以用自定义的域名直接访问博客了。</p>
 
             
