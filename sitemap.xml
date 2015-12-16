@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/about/index.html</loc>
+    <lastmod>2015-12-16T05:24:47.186Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/2015/10/build-hexo-blog3/</loc>
     <lastmod>2015-12-16T05:04:04.128Z</lastmod>
   </url>
@@ -34,11 +39,6 @@
   <url>
     <loc>http://libhappy.com/2015/08/python-class-re-order/</loc>
     <lastmod>2015-12-16T04:53:08.125Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://libhappy.com/about/index.html</loc>
-    <lastmod>2015-12-15T06:26:24.448Z</lastmod>
   </url>
   
   <url>
