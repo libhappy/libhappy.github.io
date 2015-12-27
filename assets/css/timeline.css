@@ -36,9 +36,9 @@ Main components
   /* this is the vertical line */
   content: '';
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 18px;
-  height: 100%;
+  bottom: 20px;
   width: 4px;
   background: #e6e7e9;
 }
@@ -78,7 +78,30 @@ Main components
   margin-left: -15.4px;
   margin-top: -12px;
 }
-
+.tl-timeline-break {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  width: 80px;
+  height: 40px;
+  background: #6aa7d6;
+  border-radius: 30%;
+  box-shadow: 0 0 0 4px #d1d2d4, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 3px rgba(0, 0, 0, 0.05);
+}
+.tl-timeline-break p {
+    color: white;
+    font-size: 24px;
+    margin-left: 9px;
+    margin-top: 7px;
+    line-height: 24px
+}
+.tl-timeline-breakcontent {
+    position: relative;
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background: withe;
+}
 .tl-timeline-content {
   position: relative;
   margin-left: 60px;
@@ -150,6 +173,9 @@ colors
 .tl-timeline-icon.tl-green {
   background: #65d1c4;
 }
+.tl-timeline-break.tl-green {
+    background: #65d1c4
+}
 .tl-timeline-content.tl-green {
   border-left: 5px solid #65d1c4;
 }
@@ -157,6 +183,9 @@ colors
 /* -------------- dark green --------------- */
 .tl-timeline-icon.tl-darkgreen {
   background: #12ac2a;
+}
+.tl-timeline-break.tl-darkgreen {
+    background: #12ac2a
 }
 .tl-timeline-content.tl-darkgreen {
   border-left: 5px solid #12ac2a;
@@ -166,6 +195,9 @@ colors
 .tl-timeline-icon.tl-blue {
   background: #6aa7d6;
 }
+.tl-timeline-break.tl-blue {
+    background: #6aa7d6
+}
 .tl-timeline-content.tl-blue {
   border-left: 5px solid #6aa7d6;
 }
@@ -173,6 +205,9 @@ colors
 /* -------------- dark blue  --------------- */
 .tl-timeline-icon.tl-darkblue {
   background: #0074d1;
+}
+.tl-timeline-break.tl-darkblue {
+    background: #0074d1
 }
 .tl-timeline-content.tl-darkblue {
   border-left: 5px solid #0074d1;
@@ -182,6 +217,9 @@ colors
 .tl-timeline-icon.tl-red {
   background: #c03b44;
 }
+.tl-timeline-break.tl-red {
+    background: #c03b44
+}
 .tl-timeline-content.tl-red {
   border-left: 5px solid #c03b44;
 }
@@ -190,6 +228,9 @@ colors
 .tl-timeline-icon.tl-pink {
   background: #f0acdb;
 }
+.tl-timeline-break.tl-pink {
+    background: #f0acdb
+}
 .tl-timeline-content.tl-pink {
   border-left: 5px solid #f0acdb;
 }
@@ -197,6 +238,9 @@ colors
 /* -------------- purple --------------- */
 .tl-timeline-icon.tl-purple {
   background: #8c63bf;
+}
+.tl-timeline-break.tl-purple {
+    background: #8c63bf
 }
 .tl-timeline-content.tl-purple {
   border-left: 5px solid #8c63bf;
