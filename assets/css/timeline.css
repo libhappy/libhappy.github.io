@@ -71,12 +71,12 @@ Main components
 }
 .tl-timeline-icon i {
   display: block;
-  font-size: 2.4rem;
+  font-size: 24px;
   position: relative;
   left: 50%;
   top: 50%;
-  margin-left: -1.55rem;
-  margin-top: -1.2rem;
+  margin-left: -15.4px;
+  margin-top: -12px;
 }
 
 .tl-timeline-content {
@@ -126,18 +126,6 @@ a.tl-read-more:hover{text-decoration:none; background-color: #424242;  }
   padding: .2em 0;
   opacity: .7;
 }
-.tl-timeline-content::before {
-  content: '◂';
-  color: #6aa7d6;
-  font-size: 48px;
-  font-weight: normal;
-  height: 100%;
-  left: -32px;
-  line-height: 48px;
-  position: absolute;
-  top: -5px;
-  width: 100%;
-}
 @media only screen and (min-width: 768px) {
   .tl-timeline-content h2 {
     font-size: 20px;
@@ -165,9 +153,6 @@ colors
 .tl-timeline-content.tl-green {
   border-left: 5px solid #65d1c4;
 }
-.tl-timeline-content.tl-green::before {
-  color: #65d1c4;
-}
 
 /* -------------- dark green --------------- */
 .tl-timeline-icon.tl-darkgreen {
@@ -175,9 +160,6 @@ colors
 }
 .tl-timeline-content.tl-darkgreen {
   border-left: 5px solid #12ac2a;
-}
-.tl-timeline-content.tl-darkgreen::before {
-  color: #12ac2a;
 }
 
 /* -------------- blue default --------------- */
@@ -187,9 +169,6 @@ colors
 .tl-timeline-content.tl-blue {
   border-left: 5px solid #6aa7d6;
 }
-.tl-timeline-content.tl-blue::before {
-  color: #6aa7d6;
-}
 
 /* -------------- dark blue  --------------- */
 .tl-timeline-icon.tl-darkblue {
@@ -197,9 +176,6 @@ colors
 }
 .tl-timeline-content.tl-darkblue {
   border-left: 5px solid #0074d1;
-}
-.tl-timeline-content.tl-darkblue::before {
-  color: #0074d1;
 }
 
 /* -------------- red --------------- */
@@ -209,9 +185,6 @@ colors
 .tl-timeline-content.tl-red {
   border-left: 5px solid #c03b44;
 }
-.tl-timeline-content.tl-red::before {
-  color: #c03b44;
-}
 
 /* -------------- pink --------------- */
 .tl-timeline-icon.tl-pink {
@@ -220,9 +193,6 @@ colors
 .tl-timeline-content.tl-pink {
   border-left: 5px solid #f0acdb;
 }
-.tl-timeline-content.tl-pink::before {
-  color: #f0acdb;
-}
 
 /* -------------- purple --------------- */
 .tl-timeline-icon.tl-purple {
@@ -230,8 +200,5 @@ colors
 }
 .tl-timeline-content.tl-purple {
   border-left: 5px solid #8c63bf;
-}
-.tl-timeline-content.tl-purple::before {
-  color: #8c63bf;
 }
 
