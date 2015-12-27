@@ -1,0 +1,237 @@
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+.tl-container {
+  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+  max-width: 900px;
+  margin: 0 auto;
+}
+.tl-container::after {
+  /* clearfix */
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* --------------------------------
+
+Main components
+
+-------------------------------- */
+
+#tl-timeline {
+  position: relative;
+  padding: 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+#tl-timeline::before {
+  /* this is the vertical line */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 4px;
+  background: #e6e7e9;
+}
+
+.tl-timeline-block {
+  position: relative;
+  margin: 0;
+}
+.tl-timeline-block:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tl-timeline-block:first-child {
+  margin-top: 0;
+}
+.tl-timeline-block:last-child {
+  margin-bottom: 0;
+}
+
+.tl-timeline-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: #6aa7d6;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #d1d2d4, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 3px rgba(0, 0, 0, 0.05);
+}
+.tl-timeline-icon i {
+  display: block;
+  font-size: 2.4rem;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-left: -1.55rem;
+  margin-top: -1.2rem;
+}
+
+.tl-timeline-content {
+  position: relative;
+  margin-left: 60px;
+  background: #f2f2f2;
+  border-left: 5px solid #6aa7d6;
+  border-radius: 0.25em;
+  padding: .8em;
+  box-shadow: 0 3px 0 #d8e4ed;
+}
+.tl-timeline-content:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tl-timeline-content h2 {
+  color: #303e49;
+  font-size: 17px;
+  font-size: 1.7rem;
+  margin: 0 0 0.3em ;
+}
+.tl-timeline-content p, .tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
+  display: inline-block;
+}
+.tl-timeline-content p {
+  margin: 0 0 .8em 0;
+  line-height: 1.6;
+}
+.tl-timeline-content .tl-read-more {
+  float: right;
+  padding: .2em .6em;
+  background: #acb7c0;
+  color: white;
+  border-radius: 0.25em;
+}
+.no-touch .tl-timeline-content .tl-read-more:hover {
+  background-color: #bac4cb;
+}
+a.tl-read-more:hover{text-decoration:none; background-color: #424242;  }
+.tl-timeline-content .tl-date {
+  float: left;
+  padding: .2em 0;
+  opacity: .7;
+}
+.tl-timeline-content::before {
+  content: '◂';
+  color: #6aa7d6;
+  font-size: 48px;
+  font-weight: normal;
+  height: 100%;
+  left: -32px;
+  line-height: 48px;
+  position: absolute;
+  top: -5px;
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .tl-timeline-content h2 {
+    font-size: 20px;
+    font-size: 2.0rem;
+  }
+  .tl-timeline-content p {
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+  .tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+}
+
+/* --------------------------------
+
+colors
+
+-------------------------------- */
+/* -------------- green --------------- */
+.tl-timeline-icon.tl-green {
+  background: #65d1c4;
+}
+.tl-timeline-content.tl-green {
+  border-left: 5px solid #65d1c4;
+}
+.tl-timeline-content.tl-green::before {
+  color: #65d1c4;
+}
+
+/* -------------- dark green --------------- */
+.tl-timeline-icon.tl-darkgreen {
+  background: #12ac2a;
+}
+.tl-timeline-content.tl-darkgreen {
+  border-left: 5px solid #12ac2a;
+}
+.tl-timeline-content.tl-darkgreen::before {
+  color: #12ac2a;
+}
+
+/* -------------- blue default --------------- */
+.tl-timeline-icon.tl-blue {
+  background: #6aa7d6;
+}
+.tl-timeline-content.tl-blue {
+  border-left: 5px solid #6aa7d6;
+}
+.tl-timeline-content.tl-blue::before {
+  color: #6aa7d6;
+}
+
+/* -------------- dark blue  --------------- */
+.tl-timeline-icon.tl-darkblue {
+  background: #0074d1;
+}
+.tl-timeline-content.tl-darkblue {
+  border-left: 5px solid #0074d1;
+}
+.tl-timeline-content.tl-darkblue::before {
+  color: #0074d1;
+}
+
+/* -------------- red --------------- */
+.tl-timeline-icon.tl-red {
+  background: #c03b44;
+}
+.tl-timeline-content.tl-red {
+  border-left: 5px solid #c03b44;
+}
+.tl-timeline-content.tl-red::before {
+  color: #c03b44;
+}
+
+/* -------------- pink --------------- */
+.tl-timeline-icon.tl-pink {
+  background: #f0acdb;
+}
+.tl-timeline-content.tl-pink {
+  border-left: 5px solid #f0acdb;
+}
+.tl-timeline-content.tl-pink::before {
+  color: #f0acdb;
+}
+
+/* -------------- purple --------------- */
+.tl-timeline-icon.tl-purple {
+  background: #8c63bf;
+}
+.tl-timeline-content.tl-purple {
+  border-left: 5px solid #8c63bf;
+}
+.tl-timeline-content.tl-purple::before {
+  color: #8c63bf;
+}
+

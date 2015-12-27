@@ -2,13 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/assets/css/timeline.min.css</loc>
+    <lastmod>2015-12-27T08:17:51.298Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://libhappy.com/assets/css/timeline.css</loc>
+    <lastmod>2015-12-27T08:17:42.008Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/timeline/index.html</loc>
-    <lastmod>2015-12-25T16:11:14.825Z</lastmod>
+    <lastmod>2015-12-27T08:17:20.792Z</lastmod>
   </url>
   
   <url>
     <loc>http://libhappy.com/about/index.html</loc>
-    <lastmod>2015-12-23T13:16:08.278Z</lastmod>
+    <lastmod>2015-12-27T05:56:09.047Z</lastmod>
   </url>
   
   <url>
