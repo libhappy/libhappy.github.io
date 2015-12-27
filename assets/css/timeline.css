@@ -170,47 +170,69 @@ colors
 
 -------------------------------- */
 /* -------------- green --------------- */
-.tl-timeline-icon.tl-green {
+.tl-timeline-icon.tl-lightgreen {
   background: #65d1c4;
 }
+.tl-timeline-break.tl-lightgreen {
+    background: #65d1c4;
+}
+.tl-timeline-content.tl-lightgreen {
+  border-left: 5px solid #65d1c4;
+}
+
+/* -------------- green --------------- */
+.tl-timeline-icon.tl-green {
+  background: #a7d51a;
+}
 .tl-timeline-break.tl-green {
-    background: #65d1c4
+    background: #a7d51a;
 }
 .tl-timeline-content.tl-green {
-  border-left: 5px solid #65d1c4;
+  border-left: 5px solid #a7d51a;
 }
 
 /* -------------- dark green --------------- */
 .tl-timeline-icon.tl-darkgreen {
-  background: #12ac2a;
+  background: #3cc6b6;
 }
 .tl-timeline-break.tl-darkgreen {
-    background: #12ac2a
+    background: #3cc6b6;
 }
 .tl-timeline-content.tl-darkgreen {
-  border-left: 5px solid #12ac2a;
+  border-left: 5px solid #3cc6b6;
 }
 
-/* -------------- blue default --------------- */
-.tl-timeline-icon.tl-blue {
+/* -------------- light blue --------------- */
+.tl-timeline-icon.tl-lightblue {
   background: #6aa7d6;
 }
+.tl-timeline-break.tl-lightblue {
+    background: #6aa7d6;
+}
+.tl-timeline-content.tl-lightblue {
+  border-left: 5px solid #6aa7d6;
+}
+
+/* -------------- blue --------------- */
+.tl-timeline-icon.tl-blue {
+  background: #428fc7;
+}
 .tl-timeline-break.tl-blue {
-    background: #6aa7d6
+    background: #428fc7;
 }
 .tl-timeline-content.tl-blue {
-  border-left: 5px solid #6aa7d6;
+  border-left: 5px solid #428fc7;
 }
 
 /* -------------- dark blue  --------------- */
 .tl-timeline-icon.tl-darkblue {
-  background: #0074d1;
+  background: #0099cc;
 }
 .tl-timeline-break.tl-darkblue {
-    background: #0074d1
+    background: #0099cc;
 }
 .tl-timeline-content.tl-darkblue {
-  border-left: 5px solid #0074d1;
+  border-left: 5px solid #0099cc;
 }
 
 /* -------------- red --------------- */
@@ -218,10 +240,21 @@ colors
   background: #c03b44;
 }
 .tl-timeline-break.tl-red {
-    background: #c03b44
+    background: #c03b44;
 }
 .tl-timeline-content.tl-red {
   border-left: 5px solid #c03b44;
+}
+
+/* -------------- orange --------------- */
+.tl-timeline-icon.tl-orange {
+  background: #f3741f;
+}
+.tl-timeline-break.tl-orange {
+    background: #f3741f;
+}
+.tl-timeline-content.tl-orange {
+  border-left: 5px solid #f3741f;
 }
 
 /* -------------- pink --------------- */
@@ -229,7 +262,7 @@ colors
   background: #f0acdb;
 }
 .tl-timeline-break.tl-pink {
-    background: #f0acdb
+    background: #f0acdb;
 }
 .tl-timeline-content.tl-pink {
   border-left: 5px solid #f0acdb;
@@ -240,7 +273,7 @@ colors
   background: #8c63bf;
 }
 .tl-timeline-break.tl-purple {
-    background: #8c63bf
+    background: #8c63bf;
 }
 .tl-timeline-content.tl-purple {
   border-left: 5px solid #8c63bf;
