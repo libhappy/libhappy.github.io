@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="LibHappy">
-    <title>Category : Python - LibHappy</title>
+    <title>Tag : gogs - LibHappy</title>
     <meta name="author" content="Arthur">
     
         <link rel="icon" href="/assets/images/favicon.ico">
@@ -17,7 +17,7 @@
     <meta name="description">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="LibHappy">
-<meta property="og:url" content="http://libhappy.com/categories/Python/index.html">
+<meta property="og:url" content="http://libhappy.com/tags/gogs/index.html">
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -202,30 +202,26 @@
 <section class="postShorten-group main-content-wrap">
     
         
-            
-                
-            
         
-        
-            <article class="postShorten postShorten--thumbnailimg" itemscope itemType="http://schema.org/BlogPosting">
+                <article class="postShorten" itemscope itemType="http://schema.org/BlogPosting">
         
             <div class="postShorten-wrap">
                 <div class="postShorten-header">
                     <h1 class="postShorten-title" itemprop="headline">
                         
-                                <a class="link-unstyled" href="/2015/08/python-usage-super/">Python中的super使用</a>
+                                <a class="link-unstyled" href="/2016/01/build-gogs-service/">用Gogs搭建自己的Git服务器</a>
                         
                     </h1>
                     <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Sun Aug 16 2015 09:46:43 GMT+0800">
+    <time itemprop="datePublished" content="Sun Jan 03 2016 17:01:51 GMT+0800">
 	
-		    Aug 16, 2015
+		    Jan 03, 2016
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Python/">Python</a>
+    <a class="category-link" href="/categories/Linux/">Linux</a>
 
 
     
@@ -233,76 +229,17 @@
                 </div>
                 <div class="postShorten-excerpt" itemprop="articleBody">
                     
-                        <p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure>
-<p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
-<p>自python2.2开始，python添加了一个关键字<strong>super</strong>来解决这个问题。官方说明如下：<br>
+                        <p>Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务<a href="http://github.com">Github</a>。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。<br>
                     
                     
                         
-                            <a href="/2015/08/python-usage-super/" class="postShorten-excerpt_link link ">Continue reading</a>
+                            <a href="/2016/01/build-gogs-service/" class="postShorten-excerpt_link link ">Continue reading</a>
                             
                         
                     
                     
                 </div>
             </div>
-            
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="/assets/images/thumbnail/python.png"/>
-                </div>
-                
-            
-        </article>
-    
-        
-            
-                
-            
-        
-        
-            <article class="postShorten postShorten--thumbnailimg" itemscope itemType="http://schema.org/BlogPosting">
-        
-            <div class="postShorten-wrap">
-                <div class="postShorten-header">
-                    <h1 class="postShorten-title" itemprop="headline">
-                        
-                                <a class="link-unstyled" href="/2015/08/python-class-re-order/">Python 类的多重继承</a>
-                        
-                    </h1>
-                    <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Sat Aug 15 2015 16:14:10 GMT+0800">
-	
-		    Aug 15, 2015
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Python/">Python</a>
-
-
-    
-</div>
-                </div>
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    
-                        <p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br>
-                    
-                    
-                        
-                            <a href="/2015/08/python-class-re-order/" class="postShorten-excerpt_link link ">Continue reading</a>
-                            
-                        
-                    
-                    
-                </div>
-            </div>
-            
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="/assets/images/thumbnail/python.png"/>
-                </div>
-                
             
         </article>
     
@@ -315,7 +252,6 @@
 </div>
 
 </section>
-
 
 
                 <footer id="footer" class="main-content-wrap">
