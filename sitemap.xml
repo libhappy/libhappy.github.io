@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://libhappy.com/2016/01/build-gogs-service/</loc>
+    <lastmod>2016-01-04T10:51:32.723Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://libhappy.com/assets/css/timeline.min.css</loc>
     <lastmod>2016-01-04T10:16:28.292Z</lastmod>
   </url>
@@ -9,11 +14,6 @@
   <url>
     <loc>http://libhappy.com/assets/css/timeline.css</loc>
     <lastmod>2016-01-04T10:05:08.738Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://libhappy.com/2016/01/build-gogs-service/</loc>
-    <lastmod>2016-01-03T14:54:34.685Z</lastmod>
   </url>
   
   <url>
