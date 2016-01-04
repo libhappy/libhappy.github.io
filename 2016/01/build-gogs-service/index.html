@@ -9,10 +9,11 @@
     <title>用Gogs搭建自己的Git服务器 - LibHappy</title>
     <meta name="author" content="Arthur">
     
-        <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="icon" href="http://libhappy.com/assets/images/favicon.ico">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务Github。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。">
 <meta property="og:type" content="blog">
@@ -20,14 +21,16 @@
 <meta property="og:url" content="http://libhappy.com/2016/01/build-gogs-service/index.html">
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务Github。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。">
-<meta property="og:updated_time" content="2016-01-03T14:42:20.307Z">
+<meta property="og:updated_time" content="2016-01-03T14:54:34.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Gogs搭建自己的Git服务器">
 <meta name="twitter:description" content="Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务Github。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。">
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+        <meta property="og:image" content="http://libhappy.com/assets/images/avatar.jpg"/>
     
     
     
@@ -48,11 +51,15 @@
         })();
     </script>
 
+    
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -62,17 +69,25 @@
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
-                
             </a>
             <span class="sidebar-profile-name">Arthur</span>
         </div>
@@ -268,7 +283,7 @@
 <p>写入环境变量：<br><figure class="highlight cpp"><figcaption><span>.bashrc</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GOROOT=$HOME/go</span><br><span class="line"><span class="keyword">export</span> GOARCH=<span class="number">386</span>   <span class="preprocessor">#系统位数，<span class="number">386</span>表示<span class="number">32</span>位系统，amd64表示<span class="number">64</span>位系统。</span></span><br><span class="line"><span class="keyword">export</span> GOOS=linux   <span class="preprocessor">#系统类型</span></span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$GOROOT/bin</span><br></pre></td></tr></table></figure><br>使环境变量生效：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <h2 id="安装Go">安装Go</h2><p><a href="https://golang.org/dl/" target="_blank" rel="external">Go语言官网</a>可以获取最新的二进制安装包：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//storage.googleapis.com/golang/go1.5.2.linux-386.tar.gz</span></span><br><span class="line">tar xzvf go1.<span class="number">5.2</span><span class="class">.linux-386</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">mv go <span class="variable">$GOROOT</span></span><br></pre></td></tr></table></figure></p>
 <p>Go语言运行环境就安装完成了，测试Golang是否安装成功：<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go <span class="built_ins">env</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="安装Gogs">安装Gogs</h1><p>访问<a href="https://gogs.io/docs/installation/install_from_binary" target="_blank" rel="external">Gogs官网</a>可以获取最新的Gogs二进制安装包。<br><figure class="highlight stylus"><figcaption><span>git@computer:~</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir goapp</span><br><span class="line">cd goapp</span><br><span class="line">wget http:<span class="comment">//7d9nal.com2.z0.glb.qiniucdn.com/gogs_v0.8.10_linux_386.tar.gz</span></span><br><span class="line">tar xzvf gogs_v0.<span class="number">8.10</span>_linux_386<span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure><br>Gogs程序就安装到了<code>~/goapp</code>目录下，可以直接运行gogs。<br><figure class="highlight bash"><figcaption><span>git@computer:~/goapp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> gogs</span><br><span class="line">./gogs web</span><br></pre></td></tr></table></figure><br>Gogs默认监听3000端口，此时用浏览器打开服务器IP的3000端口(服务器IP:3000)，在网页中进行初始配置。<br>需要注意的是，<strong>首次运行时建议设置Gogs的管理员账户</strong>，拖动到网页最下方填写管理员用户及密码即可。</p>
+<h1 id="安装Gogs">安装Gogs</h1><p>访问<a href="https://gogs.io/docs/installation/install_from_binary" target="_blank" rel="external">Gogs官网</a>可以获取最新的Gogs二进制安装包。<br><figure class="highlight stylus"><figcaption><span>git@computer:~</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir goapp</span><br><span class="line">cd goapp</span><br><span class="line">wget http:<span class="comment">//7d9nal.com2.z0.glb.qiniucdn.com/gogs_v0.8.10_linux_386.tar.gz</span></span><br><span class="line">tar xzvf gogs_v0.<span class="number">8.10</span>_linux_386<span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure><br>Gogs程序就安装到了<code>~/goapp</code>目录下，可以直接运行gogs。<br><figure class="highlight bash"><figcaption><span>git@computer:~/goapp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> gogs</span><br><span class="line">./gogs web</span><br></pre></td></tr></table></figure><br>Gogs默认监听3000端口，此时用浏览器打开服务器IP的3000端口(服务器IP:3000)，在网页中进行初始配置。<br>需要注意的是，<em>首次运行时建议设置Gogs的管理员账户</em>，拖动到网页最下方填写管理员用户及密码即可。</p>
 <h1 id="设置Nginx反向代理">设置Nginx反向代理</h1><p>Gogs默认监听3000端口，使用Nginx将80端口的访问代理至3000端口即可直接通过IP访问Gogs，绑定域名后还可以通过域名访问。</p>
 <h2 id="安装Nginx">安装Nginx</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install nginx</span><br></pre></td></tr></table></figure>
 <h2 id="配置Nginx代理">配置Nginx代理</h2><p>为Gogs创建一个Nginx配置文件：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-available/g</span>ogs</span><br></pre></td></tr></table></figure></p>
@@ -296,7 +311,7 @@
 <p>应用创建后就可以获得<code>App key</code>和<code>App sercet</code>，保存这两行字符。</p>
 <h2 id="获取并设置DropBox上传下载脚本">获取并设置DropBox上传下载脚本</h2><p><a href="https://github.com/andreafabrizi/Dropbox-Uploader/" target="_blank" rel="external">Dropbox-Uploader</a>是一个第三方的DropBox上传下载脚本。首先获取该脚本并为其设置可执行权限：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/tennfy/Dropbox-Uploader/master/dropbox_uploader.<span class="keyword">sh</span></span><br><span class="line">chmod <span class="keyword">a</span>+<span class="keyword">x</span> dropbox_uploader.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
 <p>直接运行该脚本，第一次运行时会连接DropBox验证权限。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./dropbox_uploader.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
-<p>按照提示输入上文中保存的<code>App key</code>和<code>App sercet</code>，Permission type选择<code>a</code>。然后在浏览器中打开给出的连接地址，给予权限。以后运行时就不用再次验证了。<br><strong>注意</strong>：这个授权的过程只是针对当前登陆ssh的用户，并非全局，如果切换用户运行脚本，会提示再次进行授权，因此应提前切换到需要运行该脚本的用户进行授权。其实当前用户的授权信息保存在<code>~/.dropbox_uploader</code>文件中，因此切换用户后会提示首次运行需要进行授权。</p>
+<p>按照提示输入上文中保存的<code>App key</code>和<code>App sercet</code>，Permission type选择<code>a</code>。然后在浏览器中打开给出的连接地址，给予权限。以后运行时就不用再次验证了。<br><em>注意</em>：这个授权的过程只是针对当前登陆ssh的用户，并非全局，如果切换用户运行脚本，会提示再次进行授权，因此应提前切换到需要运行该脚本的用户进行授权。其实当前用户的授权信息保存在<code>~/.dropbox_uploader</code>文件中，因此切换用户后会提示首次运行需要进行授权。</p>
 <h2 id="备份脚本">备份脚本</h2><p>参考<a href="http://www.tennfy.com/3343.html" target="_blank" rel="external">定时备份VPS数据至Dropbox教程</a>给出的备份脚本，修改相应参数即可。<br><figure class="highlight perl"><figcaption><span>backup.sh</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 指定dropbox_uploader.sh脚本的保存目录</span></span><br><span class="line">SCRIPT_DIR=<span class="string">"/root/backup"</span></span><br><span class="line"><span class="comment"># 上传到DropBox的文件夹</span></span><br><span class="line">DROPBOX_DIR=<span class="string">"/backup/<span class="variable">$(</span>date +"</span><span class="variable">%Y</span>.<span class="variable">%m</span>.<span class="variable">%d</span><span class="string">")"</span></span><br><span class="line"><span class="comment"># 需要保存的服务器文件夹，可以用空格隔开多个文件夹</span></span><br><span class="line">BACKUP_SRC=<span class="string">"/home/git/gogs-repositories"</span></span><br><span class="line"><span class="comment"># 服务器上临时的备份保存文件夹</span></span><br><span class="line">LOCAL_BAK_DIR=<span class="string">"/root/backup"</span></span><br><span class="line"><span class="comment"># MySQL相应配置</span></span><br><span class="line">MYSQL_SERVER=<span class="string">"localhost"</span></span><br><span class="line">MYSQL_USER=<span class="string">"root"</span></span><br><span class="line">MYSQL_PASS=<span class="string">"1325xlg"</span></span><br><span class="line"><span class="comment"># 数据备份压缩后的文件名称</span></span><br><span class="line">DBBakName=Data<span class="number">_</span><span class="variable">$(</span>date +<span class="string">"<span class="variable">%Y</span><span class="variable">%m</span><span class="variable">%d</span>"</span>).tar.gz</span><br><span class="line">WebBakName=Web<span class="number">_</span><span class="variable">$(</span>date +<span class="string">"<span class="variable">%Y</span><span class="variable">%m</span><span class="variable">%d</span>"</span>).tar.gz</span><br><span class="line"><span class="comment"># 已过期备份数据的名称（3天前的数据会被删除）</span></span><br><span class="line">Old_DROPBOX_DIR=<span class="string">"/backup/<span class="variable">$(</span>date -d -3day +"</span><span class="variable">%Y</span>.<span class="variable">%m</span>.<span class="variable">%d</span><span class="string">")"</span></span><br><span class="line">OldDBBakName=Data<span class="number">_</span><span class="variable">$(</span>date -d -<span class="number">3</span>day +<span class="string">"<span class="variable">%Y</span><span class="variable">%m</span><span class="variable">%d</span>"</span>).tar.gz</span><br><span class="line">OldWebBakName=Web<span class="number">_</span><span class="variable">$(</span>date -d -<span class="number">3</span>day +<span class="string">"<span class="variable">%Y</span><span class="variable">%m</span><span class="variable">%d</span>"</span>).tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出MySQL数据库备份（所有数据库），并压缩为指定文件名</span></span><br><span class="line">mysqldump -u <span class="variable">$MYSQL_USER</span> -h <span class="variable">$MYSQL_SERVER</span> -p<span class="variable">$MYSQL_PASS</span> --events --all-databases &gt; <span class="variable">$LOCAL_BAK_DIR</span>/Database.sql</span><br><span class="line">tar zcvf <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$DBBakName</span> <span class="variable">$LOCAL_BAK_DIR</span>/Database.sql</span><br><span class="line">rm -rf <span class="variable">$LOCAL_BAK_DIR</span>/Database.sql</span><br><span class="line"><span class="comment"># 压缩需要保存的文件夹为指定文件名</span></span><br><span class="line">tar zcvf <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$WebBakName</span> <span class="variable">$BACKUP_SRC</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传压缩后的备份文件到指定的DropBox目录</span></span><br><span class="line"><span class="variable">$SCRIPT_DIR</span>/dropbox_uploader.sh upload <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$DBBakName</span> <span class="variable">$DROPBOX_DIR</span>/<span class="variable">$DBBakName</span></span><br><span class="line"><span class="variable">$SCRIPT_DIR</span>/dropbox_uploader.sh upload <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$WebBakName</span> <span class="variable">$DROPBOX_DIR</span>/<span class="variable">$WebBakName</span></span><br><span class="line">echo -e <span class="string">"upload done!"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传完成后删除服务器上及DropBox中已经过期的备份数据，节省空间</span></span><br><span class="line">rm -rf <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$OldDBBakName</span> <span class="variable">$LOCAL_BAK_DIR</span>/<span class="variable">$OldWebBakName</span></span><br><span class="line"><span class="variable">$SCRIPT_DIR</span>/dropbox_uploader.sh <span class="keyword">delete</span> <span class="variable">$Old_DROPBOX_DIR</span>/</span><br><span class="line">echo -e <span class="string">"delete old backup done"</span></span><br></pre></td></tr></table></figure><br>然后为该脚本增加运行权限：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="keyword">chmod</span> +<span class="keyword">x</span> ./backup.sh</span><br></pre></td></tr></table></figure></p>
 <p>现在可以直接运行该脚本，测试其是否能够成功备份文件并上传至DropBox。</p>
 <h2 id="设置备份脚本定时运行">设置备份脚本定时运行</h2><p>通过cron程序可以设定程序定时运行。需要注意的是cron运行是分用户的，某个用户设定的定时任务运行时会以该用户的权限运行。因此要注意上文中提到的dropbox_uploader运行用户的问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su root <span class="comment"># 切换到合适用户执行定时任务</span></span><br><span class="line">crontab <span class="operator">-e</span></span><br></pre></td></tr></table></figure></p>
@@ -317,7 +332,7 @@
             
         </div>
     </div>
-    <div class="post-footer main-content-wrap">
+    <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
@@ -360,30 +375,27 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2016/01/build-gogs-service/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-
         <li class="post-action hide-xs">
             <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2016/01/build-gogs-service/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2016/01/build-gogs-service/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
-                    <i class="fa fa-chevron-up"></i>
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
             
             </a>
         </li>
@@ -392,24 +404,12 @@
 
 
         
-            <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-build-gogs-service" data-title="用Gogs搭建自己的Git服务器" data-url="http://libhappy.com/2016/01/build-gogs-service/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:'libhappy'};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-      </script>
-    <!-- 多说公共JS代码 end -->
- </section>
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/build-gogs-service/"
+     data-title="用Gogs搭建自己的Git服务器" data-url="http://libhappy.com/2016/01/build-gogs-service/">
+</div>
+
+            
         
     </div>
 </article>
@@ -460,30 +460,27 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2016/01/build-gogs-service/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-
         <li class="post-action hide-xs">
             <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2016/01/build-gogs-service/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2016/01/build-gogs-service/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
-                    <i class="fa fa-chevron-up"></i>
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
             
             </a>
         </li>
@@ -514,7 +511,14 @@
 <div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -545,11 +549,26 @@
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">

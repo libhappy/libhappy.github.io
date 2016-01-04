@@ -9,10 +9,11 @@
     <title>Categories - LibHappy</title>
     <meta name="author" content="Arthur">
     
-        <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="icon" href="http://libhappy.com/assets/images/favicon.ico">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description">
 <meta property="og:type" content="blog">
@@ -26,8 +27,10 @@
 <meta name="twitter:description">
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+        <meta property="og:image" content="http://libhappy.com/assets/images/avatar.jpg"/>
     
     
     
@@ -48,11 +51,15 @@
         })();
     </script>
 
+    
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -62,17 +69,25 @@
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
-                
             </a>
             <span class="sidebar-profile-name">Arthur</span>
         </div>
@@ -198,118 +213,48 @@
                  class="
                         hasCoverMetaIn
                         ">
-                <div id="categories-archives" class="main-content-wrap">
+                
+<div id="categories-archives" class="main-content-wrap">
     <form id="filter-form" action="##">
-        <input name="category" type="text" class="form-control input--xlarge" placeholder="Search category" autofocus="autofocus">
+        <input name="category" type="text" class="form-control input--xlarge"
+               placeholder="Search category" autofocus="autofocus">
     </form>
     <h4 class="archive-result text-color-base text-xlarge"></h4>
-    <section>
+    <section class="boxes">
         
-            <a class="category category--small category--primary" href="#posts-list-Hexo" data-category="hexo">
-                Hexo
-            </a>
+            
+                <div><a href="#posts-list-Hexo" class="category-anchor" data-category="hexo" data-parent-categories="">Hexo</a></div>
+            
         
-            <a class="category category--small category--primary" href="#posts-list-Linux" data-category="linux">
-                Linux
-            </a>
+            
+                <div><a href="#posts-list-Linux" class="category-anchor" data-category="linux" data-parent-categories="">Linux</a></div>
+            
         
-            <a class="category category--small category--primary" href="#posts-list-PyQt4" data-category="pyqt4">
-                PyQt4
-            </a>
+            
+                <div><a href="#posts-list-PyQt4" class="category-anchor" data-category="pyqt4" data-parent-categories="">PyQt4</a></div>
+            
         
-            <a class="category category--small category--primary" href="#posts-list-Python" data-category="python">
-                Python
-            </a>
+            
+                <div><a href="#posts-list-Python" class="category-anchor" data-category="python" data-parent-categories="">Python</a></div>
+            
         
     </section>
     <section class="boxes">
         
             
-                <div id="posts-list-Hexo" class="archive box" data-category="hexo">
-                    <h4 class="archive-title">
-                        <a class="link-unstyled" href="/categories/Hexo">Hexo (3)</a>
-                    </h4>
-                    <ul class="archive-posts">
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/10/bulid-hexo-blog1/">用Hexo搭建静态博客（一）, Hexo的搭建</a>
-                                <span class="archive-post-date"> - oct 26, 2015</span>
-                            </li>
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/10/build-hexo-blog3/">用Hexo搭建静态博客（三）, 设置自定义域名</a>
-                                <span class="archive-post-date"> - oct 30, 2015</span>
-                            </li>
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/10/build-hexo-blog2/">用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证</a>
-                                <span class="archive-post-date"> - oct 27, 2015</span>
-                            </li>
-                        
-                        
-                    </ul>
-                </div>
+                    <div id="posts-list-Hexo" class="archive box" data-category="hexo" data-parent-categories=""><h4 class="archive-title text-xlarge"><a class="link-unstyled" href="/categories/Hexo/">Hexo (3)</a></h4><ul class="archive-posts"><li class="archive-post"><a class="archive-post-title" href="/2015/10/bulid-hexo-blog1/">用Hexo搭建静态博客（一）, Hexo的搭建</a><span class="archive-post-date"> - Oct 26, 2015</span></li><li class="archive-post"><a class="archive-post-title" href="/2015/10/build-hexo-blog3/">用Hexo搭建静态博客（三）, 设置自定义域名</a><span class="archive-post-date"> - Oct 30, 2015</span></li><li class="archive-post"><a class="archive-post-title" href="/2015/10/build-hexo-blog2/">用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证</a><span class="archive-post-date"> - Oct 27, 2015</span></li></ul></div>
             
         
             
-                <div id="posts-list-Linux" class="archive box" data-category="linux">
-                    <h4 class="archive-title">
-                        <a class="link-unstyled" href="/categories/Linux">Linux (2)</a>
-                    </h4>
-                    <ul class="archive-posts">
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/12/vps-protect/">Linux服务器的简单防护</a>
-                                <span class="archive-post-date"> - dec 14, 2015</span>
-                            </li>
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2016/01/build-gogs-service/">用Gogs搭建自己的Git服务器</a>
-                                <span class="archive-post-date"> - jan 03, 2016</span>
-                            </li>
-                        
-                        
-                    </ul>
-                </div>
+                    <div id="posts-list-Linux" class="archive box" data-category="linux" data-parent-categories=""><h4 class="archive-title text-xlarge"><a class="link-unstyled" href="/categories/Linux/">Linux (2)</a></h4><ul class="archive-posts"><li class="archive-post"><a class="archive-post-title" href="/2015/12/vps-protect/">Linux服务器的简单防护</a><span class="archive-post-date"> - Dec 14, 2015</span></li><li class="archive-post"><a class="archive-post-title" href="/2016/01/build-gogs-service/">用Gogs搭建自己的Git服务器</a><span class="archive-post-date"> - Jan 03, 2016</span></li></ul></div>
             
         
             
-                <div id="posts-list-PyQt4" class="archive box" data-category="pyqt4">
-                    <h4 class="archive-title">
-                        <a class="link-unstyled" href="/categories/PyQt4">PyQt4 (1)</a>
-                    </h4>
-                    <ul class="archive-posts">
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/07/pyqt4-tutorial-01/">编写第一个PyQt4程序</a>
-                                <span class="archive-post-date"> - jul 07, 2015</span>
-                            </li>
-                        
-                        
-                    </ul>
-                </div>
+                    <div id="posts-list-PyQt4" class="archive box" data-category="pyqt4" data-parent-categories=""><h4 class="archive-title text-xlarge"><a class="link-unstyled" href="/categories/PyQt4/">PyQt4 (1)</a></h4><ul class="archive-posts"><li class="archive-post"><a class="archive-post-title" href="/2015/07/pyqt4-tutorial-01/">编写第一个PyQt4程序</a><span class="archive-post-date"> - Jul 07, 2015</span></li></ul></div>
             
         
             
-                <div id="posts-list-Python" class="archive box" data-category="python">
-                    <h4 class="archive-title">
-                        <a class="link-unstyled" href="/categories/Python">Python (2)</a>
-                    </h4>
-                    <ul class="archive-posts">
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/08/python-usage-super/">Python中的super使用</a>
-                                <span class="archive-post-date"> - aug 16, 2015</span>
-                            </li>
-                        
-                            <li class="archive-post">
-                                <a class="archive-post-title" href="/2015/08/python-class-re-order/">Python 类的多重继承</a>
-                                <span class="archive-post-date"> - aug 15, 2015</span>
-                            </li>
-                        
-                        
-                    </ul>
-                </div>
+                    <div id="posts-list-Python" class="archive box" data-category="python" data-parent-categories=""><h4 class="archive-title text-xlarge"><a class="link-unstyled" href="/categories/Python/">Python (2)</a></h4><ul class="archive-posts"><li class="archive-post"><a class="archive-post-title" href="/2015/08/python-usage-super/">Python中的super使用</a><span class="archive-post-date"> - Aug 16, 2015</span></li><li class="archive-post"><a class="archive-post-title" href="/2015/08/python-class-re-order/">Python 类的多重继承</a><span class="archive-post-date"> - Aug 15, 2015</span></li></ul></div>
             
         
     </section>
@@ -325,7 +270,14 @@
             </div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -356,10 +308,11 @@
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
 

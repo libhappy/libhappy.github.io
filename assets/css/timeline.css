@@ -36,9 +36,9 @@ Main components
   /* this is the vertical line */
   content: '';
   position: absolute;
-  top: 20px;
+  top: 23px;
   left: 18px;
-  bottom: 20px;
+  bottom: 23px;
   width: 4px;
   background: #e6e7e9;
 }
@@ -90,10 +90,10 @@ Main components
 }
 .tl-timeline-break p {
     color: white;
-    font-size: 24px;
-    margin-left: 9px;
-    margin-top: 7px;
-    line-height: 24px
+    font-size: 24px !important;
+    margin-left: 9px !important;
+    margin-top: 7px !important;
+    line-height: 24px !important;
 }
 .tl-timeline-breakcontent {
     position: relative;

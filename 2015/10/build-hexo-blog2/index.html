@@ -9,10 +9,11 @@
     <title>用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证 - LibHappy</title>
     <meta name="author" content="Arthur">
     
-        <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="icon" href="http://libhappy.com/assets/images/favicon.ico">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="在上一篇文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。">
 <meta property="og:type" content="blog">
@@ -26,8 +27,10 @@
 <meta name="twitter:description" content="在上一篇文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。">
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+        <meta property="og:image" content="http://libhappy.com/assets/images/avatar.jpg"/>
     
     
     
@@ -48,11 +51,15 @@
         })();
     </script>
 
+    
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -62,17 +69,25 @@
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
-                
             </a>
             <span class="sidebar-profile-name">Arthur</span>
         </div>
@@ -260,7 +275,7 @@
             
         </div>
     </div>
-    <div class="post-footer main-content-wrap">
+    <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
@@ -303,30 +318,27 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/build-hexo-blog2/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-
         <li class="post-action hide-xs">
             <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/10/build-hexo-blog2/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/build-hexo-blog2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
-                    <i class="fa fa-chevron-up"></i>
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
             
             </a>
         </li>
@@ -335,24 +347,12 @@
 
 
         
-            <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-build-hexo-blog2" data-title="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证" data-url="http://libhappy.com/2015/10/build-hexo-blog2/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:'libhappy'};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-      </script>
-    <!-- 多说公共JS代码 end -->
- </section>
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2015/10/build-hexo-blog2/"
+     data-title="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证" data-url="http://libhappy.com/2015/10/build-hexo-blog2/">
+</div>
+
+            
         
     </div>
 </article>
@@ -403,30 +403,27 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/build-hexo-blog2/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-
         <li class="post-action hide-xs">
             <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://libhappy.com/2015/10/build-hexo-blog2/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=http://libhappy.com/2015/10/build-hexo-blog2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#comments">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" data-tooltip="Back to top" href="#">
-                    <i class="fa fa-chevron-up"></i>
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
             
             </a>
         </li>
@@ -457,7 +454,14 @@
 <div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -488,11 +492,26 @@
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">
