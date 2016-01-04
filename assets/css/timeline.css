@@ -118,19 +118,19 @@ Main components
 }
 .tl-timeline-content h2 {
   color: #303e49;
-  font-size: 17px;
-  font-size: 1.7rem;
+  font-size: 19px;
+  font-size: 1.9rem;
   margin: 0 0 0.3em ;
 }
 .tl-timeline-content p, .tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
-  font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 16px;
+  font-size: 1.6rem;
 }
 .tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
   display: inline-block;
 }
 .tl-timeline-content p {
-  margin: 0 0 .8em 0;
+  margin: 0 0 .8em 0 !important;
   line-height: 1.6;
 }
 .tl-timeline-content .tl-read-more {
@@ -155,12 +155,12 @@ a.tl-read-more:hover{text-decoration:none; background-color: #424242;  }
     font-size: 2.0rem;
   }
   .tl-timeline-content p {
-    font-size: 15px;
-    font-size: 1.5rem;
+    font-size: 17px;
+    font-size: 1.7rem;
   }
   .tl-timeline-content .tl-read-more, .tl-timeline-content .tl-date {
-    font-size: 15px;
-    font-size: 1.5rem;
+    font-size: 17px;
+    font-size: 1.7rem;
   }
 }
 
