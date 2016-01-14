@@ -4555,9 +4555,9 @@ a.tag--small,
   border-left: 3px solid #ee6e73;
   board-radius: 5px;
   float: right;
-  margin-top: 35px;
-  margin-bottom: 20px;
-  margin-left: 40px;
+  margin-top: 35px !important;
+  margin-bottom: 35px !important;
+  margin-left: 20px !important;
   padding: 10px 20px;
   position: relative;
   z-index: 9;
