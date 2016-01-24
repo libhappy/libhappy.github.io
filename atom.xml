@@ -3,9 +3,9 @@
   <title><![CDATA[LibHappy]]></title>
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://libhappy.com/"/>
+  <link href="https://libhappy.com/"/>
   <updated>2016-01-08T02:45:26.583Z</updated>
-  <id>http://libhappy.com/</id>
+  <id>https://libhappy.com/</id>
   
   <author>
     <name><![CDATA[Arthur]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[用Gogs搭建自己的Git服务器]]></title>
-    <link href="http://libhappy.com/2016/01/build-gogs-service/"/>
-    <id>http://libhappy.com/2016/01/build-gogs-service/</id>
+    <link href="https://libhappy.com/2016/01/build-gogs-service/"/>
+    <id>https://libhappy.com/2016/01/build-gogs-service/</id>
     <published>2016-01-03T09:01:51.000Z</published>
     <updated>2016-01-08T02:45:26.583Z</updated>
     <content type="html"><![CDATA[<p>Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务<a href="http://github.com" target="_blank" rel="external">Github</a>。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。<br><a id="more"></a><br>应用最广泛的Git托管程序要数<a href="http://gitlab.com" target="_blank" rel="external">Gitlab</a>，它采用Ruby on Rails，可以实现一个自托管的Git项目仓库，并可以通过网页对公开的或者私人项目进行访问。其功能与Github相似，但搭建过程稍复杂且对系统的配置要求较高。因此我选用了另一个方案Gogs。<br><!--toc--></p>
@@ -110,22 +110,22 @@
     
     </summary>
     
-      <category term="git" scheme="http://libhappy.com/tags/git/"/>
+      <category term="git" scheme="https://libhappy.com/tags/git/"/>
     
-      <category term="gogs" scheme="http://libhappy.com/tags/gogs/"/>
+      <category term="gogs" scheme="https://libhappy.com/tags/gogs/"/>
     
-      <category term="vps" scheme="http://libhappy.com/tags/vps/"/>
+      <category term="vps" scheme="https://libhappy.com/tags/vps/"/>
     
-      <category term="备份" scheme="http://libhappy.com/tags/%E5%A4%87%E4%BB%BD/"/>
+      <category term="备份" scheme="https://libhappy.com/tags/%E5%A4%87%E4%BB%BD/"/>
     
-      <category term="Linux" scheme="http://libhappy.com/categories/Linux/"/>
+      <category term="Linux" scheme="https://libhappy.com/categories/Linux/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Linux服务器的简单防护]]></title>
-    <link href="http://libhappy.com/2015/12/vps-protect/"/>
-    <id>http://libhappy.com/2015/12/vps-protect/</id>
+    <link href="https://libhappy.com/2015/12/vps-protect/"/>
+    <id>https://libhappy.com/2015/12/vps-protect/</id>
     <published>2015-12-14T01:59:04.000Z</published>
     <updated>2015-12-21T10:01:13.626Z</updated>
     <content type="html"><![CDATA[<p>在购买自己的VPS之后，首先要做好的就是安全防护工作，本文将主要介绍以下方式来提高VPS的安全防护能力：</p>
@@ -204,22 +204,22 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://libhappy.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://libhappy.com/tags/Linux/"/>
     
-      <category term="iptables" scheme="http://libhappy.com/tags/iptables/"/>
+      <category term="iptables" scheme="https://libhappy.com/tags/iptables/"/>
     
-      <category term="ssh" scheme="http://libhappy.com/tags/ssh/"/>
+      <category term="ssh" scheme="https://libhappy.com/tags/ssh/"/>
     
-      <category term="vps" scheme="http://libhappy.com/tags/vps/"/>
+      <category term="vps" scheme="https://libhappy.com/tags/vps/"/>
     
-      <category term="Linux" scheme="http://libhappy.com/categories/Linux/"/>
+      <category term="Linux" scheme="https://libhappy.com/categories/Linux/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[用Hexo搭建静态博客（三）, 设置自定义域名]]></title>
-    <link href="http://libhappy.com/2015/10/build-hexo-blog3/"/>
-    <id>http://libhappy.com/2015/10/build-hexo-blog3/</id>
+    <link href="https://libhappy.com/2015/10/build-hexo-blog3/"/>
+    <id>https://libhappy.com/2015/10/build-hexo-blog3/</id>
     <published>2015-10-30T14:32:02.000Z</published>
     <updated>2016-01-14T06:13:35.312Z</updated>
     <content type="html"><![CDATA[<p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a><br><!--toc--></p>
@@ -237,20 +237,20 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://libhappy.com/tags/hexo/"/>
+      <category term="hexo" scheme="https://libhappy.com/tags/hexo/"/>
     
-      <category term="博客" scheme="http://libhappy.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="https://libhappy.com/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="域名" scheme="http://libhappy.com/tags/%E5%9F%9F%E5%90%8D/"/>
+      <category term="域名" scheme="https://libhappy.com/tags/%E5%9F%9F%E5%90%8D/"/>
     
-      <category term="Hexo" scheme="http://libhappy.com/categories/Hexo/"/>
+      <category term="Hexo" scheme="https://libhappy.com/categories/Hexo/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证]]></title>
-    <link href="http://libhappy.com/2015/10/build-hexo-blog2/"/>
-    <id>http://libhappy.com/2015/10/build-hexo-blog2/</id>
+    <link href="https://libhappy.com/2015/10/build-hexo-blog2/"/>
+    <id>https://libhappy.com/2015/10/build-hexo-blog2/</id>
     <published>2015-10-27T08:31:14.000Z</published>
     <updated>2015-12-16T05:01:39.144Z</updated>
     <content type="html"><![CDATA[<p>在<a href="/2015/10/bulid-hexo-blog1/">上一篇</a>文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。<br><a id="more"></a><br><!--toc--></p>
@@ -286,22 +286,22 @@
     
     </summary>
     
-      <category term="github" scheme="http://libhappy.com/tags/github/"/>
+      <category term="github" scheme="https://libhappy.com/tags/github/"/>
     
-      <category term="hexo" scheme="http://libhappy.com/tags/hexo/"/>
+      <category term="hexo" scheme="https://libhappy.com/tags/hexo/"/>
     
-      <category term="ssh" scheme="http://libhappy.com/tags/ssh/"/>
+      <category term="ssh" scheme="https://libhappy.com/tags/ssh/"/>
     
-      <category term="博客" scheme="http://libhappy.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="https://libhappy.com/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="Hexo" scheme="http://libhappy.com/categories/Hexo/"/>
+      <category term="Hexo" scheme="https://libhappy.com/categories/Hexo/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[用Hexo搭建静态博客（一）, Hexo的搭建]]></title>
-    <link href="http://libhappy.com/2015/10/bulid-hexo-blog1/"/>
-    <id>http://libhappy.com/2015/10/bulid-hexo-blog1/</id>
+    <link href="https://libhappy.com/2015/10/bulid-hexo-blog1/"/>
+    <id>https://libhappy.com/2015/10/bulid-hexo-blog1/</id>
     <published>2015-10-26T02:38:40.000Z</published>
     <updated>2015-12-16T05:00:58.329Z</updated>
     <content type="html"><![CDATA[<p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。<br><a id="more"></a><br><!--toc--></p>
@@ -343,20 +343,20 @@
     
     </summary>
     
-      <category term="blog" scheme="http://libhappy.com/tags/blog/"/>
+      <category term="blog" scheme="https://libhappy.com/tags/blog/"/>
     
-      <category term="hexo" scheme="http://libhappy.com/tags/hexo/"/>
+      <category term="hexo" scheme="https://libhappy.com/tags/hexo/"/>
     
-      <category term="静态博客" scheme="http://libhappy.com/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"/>
+      <category term="静态博客" scheme="https://libhappy.com/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="Hexo" scheme="http://libhappy.com/categories/Hexo/"/>
+      <category term="Hexo" scheme="https://libhappy.com/categories/Hexo/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python中的super使用]]></title>
-    <link href="http://libhappy.com/2015/08/python-usage-super/"/>
-    <id>http://libhappy.com/2015/08/python-usage-super/</id>
+    <link href="https://libhappy.com/2015/08/python-usage-super/"/>
+    <id>https://libhappy.com/2015/08/python-usage-super/</id>
     <published>2015-08-16T01:46:43.000Z</published>
     <updated>2015-12-16T05:00:40.643Z</updated>
     <content type="html"><![CDATA[<p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
@@ -407,18 +407,18 @@
     
     </summary>
     
-      <category term="python" scheme="http://libhappy.com/tags/python/"/>
+      <category term="python" scheme="https://libhappy.com/tags/python/"/>
     
-      <category term="super" scheme="http://libhappy.com/tags/super/"/>
+      <category term="super" scheme="https://libhappy.com/tags/super/"/>
     
-      <category term="Python" scheme="http://libhappy.com/categories/Python/"/>
+      <category term="Python" scheme="https://libhappy.com/categories/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python 类的多重继承]]></title>
-    <link href="http://libhappy.com/2015/08/python-class-re-order/"/>
-    <id>http://libhappy.com/2015/08/python-class-re-order/</id>
+    <link href="https://libhappy.com/2015/08/python-class-re-order/"/>
+    <id>https://libhappy.com/2015/08/python-class-re-order/</id>
     <published>2015-08-15T08:14:10.000Z</published>
     <updated>2016-01-14T06:36:28.090Z</updated>
     <content type="html"><![CDATA[<p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。<br><a id="more"></a><br><!--toc--></p>
@@ -475,20 +475,20 @@
     
     </summary>
     
-      <category term="class" scheme="http://libhappy.com/tags/class/"/>
+      <category term="class" scheme="https://libhappy.com/tags/class/"/>
     
-      <category term="python" scheme="http://libhappy.com/tags/python/"/>
+      <category term="python" scheme="https://libhappy.com/tags/python/"/>
     
-      <category term="继承" scheme="http://libhappy.com/tags/%E7%BB%A7%E6%89%BF/"/>
+      <category term="继承" scheme="https://libhappy.com/tags/%E7%BB%A7%E6%89%BF/"/>
     
-      <category term="Python" scheme="http://libhappy.com/categories/Python/"/>
+      <category term="Python" scheme="https://libhappy.com/categories/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[编写第一个PyQt4程序]]></title>
-    <link href="http://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
-    <id>http://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
+    <link href="https://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
+    <id>https://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
     <published>2015-07-07T09:30:17.000Z</published>
     <updated>2016-01-14T06:26:10.826Z</updated>
     <content type="html"><![CDATA[<p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a><br><!--toc--></p>
@@ -534,13 +534,13 @@
     
     </summary>
     
-      <category term="pyqt4" scheme="http://libhappy.com/tags/pyqt4/"/>
+      <category term="pyqt4" scheme="https://libhappy.com/tags/pyqt4/"/>
     
-      <category term="python" scheme="http://libhappy.com/tags/python/"/>
+      <category term="python" scheme="https://libhappy.com/tags/python/"/>
     
-      <category term="zetcode" scheme="http://libhappy.com/tags/zetcode/"/>
+      <category term="zetcode" scheme="https://libhappy.com/tags/zetcode/"/>
     
-      <category term="PyQt4" scheme="http://libhappy.com/categories/PyQt4/"/>
+      <category term="PyQt4" scheme="https://libhappy.com/categories/PyQt4/"/>
     
   </entry>
   
