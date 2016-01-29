@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://libhappy.com/"/>
-  <updated>2016-01-08T02:45:26.583Z</updated>
+  <updated>2016-01-29T05:38:47.182Z</updated>
   <id>https://libhappy.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="https://libhappy.com/2016/01/build-gogs-service/"/>
     <id>https://libhappy.com/2016/01/build-gogs-service/</id>
     <published>2016-01-03T09:01:51.000Z</published>
-    <updated>2016-01-08T02:45:26.583Z</updated>
+    <updated>2016-01-29T05:38:47.182Z</updated>
     <content type="html"><![CDATA[<p>Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务<a href="http://github.com" target="_blank" rel="external">Github</a>。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。<br><a id="more"></a><br>应用最广泛的Git托管程序要数<a href="http://gitlab.com" target="_blank" rel="external">Gitlab</a>，它采用Ruby on Rails，可以实现一个自托管的Git项目仓库，并可以通过网页对公开的或者私人项目进行访问。其功能与Github相似，但搭建过程稍复杂且对系统的配置要求较高。因此我选用了另一个方案Gogs。<br><!--toc--></p>
 <h1 id="Gogs简介">Gogs简介</h1><p><a href="http://gogs.io" target="_blank" rel="external">Gogs</a>是一款极易搭建的自助Git服务，在官网介绍中它有以下优点：</p>
 <ul>
@@ -127,7 +127,7 @@
     <link href="https://libhappy.com/2015/12/vps-protect/"/>
     <id>https://libhappy.com/2015/12/vps-protect/</id>
     <published>2015-12-14T01:59:04.000Z</published>
-    <updated>2015-12-21T10:01:13.626Z</updated>
+    <updated>2016-01-29T05:27:12.379Z</updated>
     <content type="html"><![CDATA[<p>在购买自己的VPS之后，首先要做好的就是安全防护工作，本文将主要介绍以下方式来提高VPS的安全防护能力：</p>
 <ul>
 <li>修改ssh默认端口，开启密钥登陆并关闭简单密码登录</li>
@@ -221,7 +221,7 @@
     <link href="https://libhappy.com/2015/10/build-hexo-blog3/"/>
     <id>https://libhappy.com/2015/10/build-hexo-blog3/</id>
     <published>2015-10-30T14:32:02.000Z</published>
-    <updated>2016-01-14T06:13:35.312Z</updated>
+    <updated>2016-01-29T05:45:21.798Z</updated>
     <content type="html"><![CDATA[<p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="购买域名">购买域名</h1><p>首先要购买一个域名，推荐比较出名的国外域名服务商，比如<a href="https://www.godaddy.com/" target="_blank" rel="external">GoDaddy</a>。其他的如<a href="https://www.namesilo.com/" target="_blank" rel="external">namesilo</a>、<a href="https://www.name.com/" target="_blank" rel="external">name.com</a>价格比较便宜, 当然国内的域名提供商也是可以的。</p>
 <h1 id="设置域名解析服务">设置域名解析服务</h1><p>购买到心仪的域名后进入域名设置页面设置域名解析服务。由于godaddy的域名解析服务位于国外，速度稍有影响，因此可以使用国内的免费域名解析服务<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>，同时DNSPod还支持根据不同线路解析到不同地址，因此可以利用此功能针对不同地区的访问者分别解析到github及gitcafe以提高访问速度。</p>
@@ -252,7 +252,7 @@
     <link href="https://libhappy.com/2015/10/build-hexo-blog2/"/>
     <id>https://libhappy.com/2015/10/build-hexo-blog2/</id>
     <published>2015-10-27T08:31:14.000Z</published>
-    <updated>2015-12-16T05:01:39.144Z</updated>
+    <updated>2016-01-29T05:45:23.596Z</updated>
     <content type="html"><![CDATA[<p>在<a href="/2015/10/bulid-hexo-blog1/">上一篇</a>文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="注册github及gitcafe账号">注册github及gitcafe账号</h1><p>github及gitcafe都支持pages网页托管服务，首先选择要托管的服务注册账号。当然也可以同时将博客发布至github和gitcafe，对于国内及国外不同用户分别访问不同的服务上的博客。</p>
 <h1 id="将博客发布至github">将博客发布至github</h1><p>创建github pages的详细方法可以参考官方<a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="external">帮助页面</a>。</p>
@@ -303,7 +303,7 @@
     <link href="https://libhappy.com/2015/10/bulid-hexo-blog1/"/>
     <id>https://libhappy.com/2015/10/bulid-hexo-blog1/</id>
     <published>2015-10-26T02:38:40.000Z</published>
-    <updated>2015-12-16T05:00:58.329Z</updated>
+    <updated>2016-01-29T05:44:55.665Z</updated>
     <content type="html"><![CDATA[<p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="依赖程序的安装">依赖程序的安装</h1><p>Hexo 基于Node.js，其部署通过Git进行，以下程序的安装过程仅以Windows平台为例。</p>
 <h2 id="安装_Node-js">安装 Node.js</h2><p>到<a href="https://nodejs.org/" target="_blank" rel="external">Node.js</a> 官网下载安装包，直接双击安装。</p>
@@ -490,7 +490,7 @@
     <link href="https://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
     <id>https://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
     <published>2015-07-07T09:30:17.000Z</published>
-    <updated>2016-01-14T06:26:10.826Z</updated>
+    <updated>2016-01-29T05:14:57.003Z</updated>
     <content type="html"><![CDATA[<p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。<br>本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。<br><a id="more"></a><br><!--toc--></p>
 <h1 id="简单示例">简单示例</h1><p>第一个程序显示一个简单的窗口。<br>以下是原始代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat Jul 04 21:23:31 2015</span><br><span class="line"></span><br><span class="line">@author: Arthur</span><br><span class="line">an example for PyQt4 gui program.</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui    <span class="comment"># 导入必要的模块</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)   <span class="comment"># 创建一个应用对象，sys.argv为命令行传入的参数</span></span><br><span class="line"></span><br><span class="line">    window = QtGui.QWidget() <span class="comment"># QtGui.Qwidget 是所有界面对象的基础类，没有父类的部件称为窗口</span></span><br><span class="line">    window.resize(<span class="number">250</span>, <span class="number">150</span>) <span class="comment"># 调整部件大小，250px宽150px高</span></span><br><span class="line">    window.move(<span class="number">300</span>, <span class="number">300</span>)  <span class="comment"># 移动部件的位置到屏幕 (x = 300, y = 300)处</span></span><br><span class="line">    window.setWindowTitle(<span class="string">'Simple'</span>) <span class="comment"># 设置窗口标题栏显示的标题</span></span><br><span class="line">    window.show() <span class="comment"># 在内存中创建组件并显示在屏幕上</span></span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_()) <span class="comment"># sys.exit()保证程序完全的退出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
