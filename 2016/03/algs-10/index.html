@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-10/index.html" />
+    <script type="text/javascript">
+        var host = "libhappy.com";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="LibHappy">
+    <title>普林斯顿算法（10）背包、队列和栈 - LibHappy</title>
+    <meta name="author" content="Arthur">
+    
+    
+        <link rel="icon" href="https://libhappy.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="许多基础数据类型都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。
+
+本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="普林斯顿算法（10）背包、队列和栈">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-10/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="许多基础数据类型都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。
+
+本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。">
+<meta property="og:image" content="https://farm2.staticflickr.com/1698/25643339695_3e775efcaa_z.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1609/25643647955_bc5a62c337_z.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1572/25643648005_52114b7309_z.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg">
+<meta property="og:updated_time" content="2016-03-09T14:30:55.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="普林斯顿算法（10）背包、队列和栈">
+<meta name="twitter:description" content="许多基础数据类型都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。
+
+本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
+    
+    
+        
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
+        
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-68985881-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">LibHappy</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+            </a>
+            <span class="sidebar-profile-name">Arthur</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/timeline"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-history"></i>
+                    <span class="sidebar-button-desc">Timeline</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-info-circle"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://git.libhappy.com/explore" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-git-square"></i>
+                    <span class="sidebar-button-desc">Git</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            普林斯顿算法（10）背包、队列和栈
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Mon Mar 07 2016 12:59:13 GMT+0800">
+	
+		    Mar 07, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <blockquote>
+<p><strong>许多基础数据类型</strong>都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。</p>
+</blockquote>
+<p>本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。
+<a id="more"></a>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据类型简介"><span class="toc-text">数据类型简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背包"><span class="toc-text">背包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先进先出队列"><span class="toc-text">先进先出队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下压栈"><span class="toc-text">下压栈</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组实现"><span class="toc-text">数组实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定容数组"><span class="toc-text">定容数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调整数组大小"><span class="toc-text">调整数组大小</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算术表达式求值"><span class="toc-text">算术表达式求值</span></a></li></ol></li></ol></div></p>
+<h1 id="数据类型简介">数据类型简介</h1><h2 id="背包">背包</h2><p>背包（Bag）是一种不支持从中删除元素的集合数据类型——它的目的就是帮助用例收集元素并迭代遍历所有收集到的元素。迭代遍历的顺序不确定且与用例无关。背包的概念可以借助以下图示理解。
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1698/25643339695_3e775efcaa_z.jpg" title="背包操作示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1698/25643339695_3e775efcaa_z.jpg" alt="背包操作示例"></a></div></p>
+<h2 id="先进先出队列">先进先出队列</h2><p>先进先出队列（Queue，简称队列）是一种基于先进先出（FIFO: First In First Out）策略的集合类型。队列的一个十分常见的例子就是在排队的人。当用例使用遍历访问队列中的元素时，元素的处理顺序就是它们被添加到队列中的顺序。在应用程序中使用队列的主要原因是在用集合保存元素时同时<strong>保存它们的相对顺序</strong>：使它们入列顺序和出列顺序相同。下图是队列的操作示例。
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1609/25643647955_bc5a62c337_z.jpg" title="队列操作示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1609/25643647955_bc5a62c337_z.jpg" alt="队列操作示例"></a></div></p>
+<h2 id="下压栈">下压栈</h2><p>下压栈（Stack，简称栈）是一种基于后进先出（LIFO: Last In First Out）策略的集合类型。在生活中堆成一叠的文件就可以当作一个下压栈，新文件放到最上面，而取出文件阅读时也从最上面开始阅读。这样处理的好处是总能够得到未被处理的文件中最新的一份，坏处是如果不把栈清空，较早的文件可能永远不会被处理。当用例遍历访问栈中的元素时，元素的处理顺序与它们被压入栈中的顺序正好相反。在应用程序中使用栈的一个典型原因是在用集合保存元素的同时<strong>颠倒</strong>它们的相对顺序。下图是栈的操作示例。
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1572/25643648005_52114b7309_z.jpg" title="栈操作示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1572/25643648005_52114b7309_z.jpg" alt="栈操作示例"></a></div></p>
+<h1 id="数组实现">数组实现</h1><h2 id="定容数组">定容数组</h2><p>一种实现Bag，Queue及Stack的简单而经典的方法就是使用数组来保存集合中的数据。Java中的数组在创建时需要指定大小，之后其大小是无法改变的。以下为用定容数组实现的定容字符串栈。
+<figure class="highlight java"><figcaption><span>泛型定容字符串栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FixedCapacityStack</span>&lt;<span class="title">Item</span>&gt;</span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Item[] a;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FixedCapacityStack</span><span class="params">(<span class="keyword">int</span> cap)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="comment">/*</span><br><span class="line">        在Java中创建泛型数组是不允许的，不能使用 a = new Item[cap]。</span><br><span class="line">        因此使用类型转换来创建一个泛型的数组,但编译器会给出警告。</span><br><span class="line">         */</span></span><br><span class="line">        a = (Item[]) <span class="keyword">new</span> Object[cap];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span><br><span class="line">    </span>&#123; <span class="keyword">return</span> N == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span><br><span class="line">    </span>&#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item item)</span></span><br><span class="line">    </span>&#123; a[N++] = item; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span><br><span class="line">    </span>&#123; <span class="keyword">return</span> a [--N]; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="调整数组大小">调整数组大小</h2><p>由于Java中数组的大小无法动态改变，因此集合使用的空间只能是这个最大容量的一部分。大容量的用例在集合几乎为空时会浪费大量的内存。另一方面，当集合变得比数组更大时用例可能会<strong>溢出（Overflow）</strong>。如果动态的调整数组的大小就可以避免以上的问题，实现的方法就是将集合在需要时移动到一个大小不同的数组中去。
+但是在两个数组中整体的移动集合可能会耗费大量的资源，每次移动集合就需要对集合中的每个元素执行一次读取和写入操作，因此频繁的移动集合是很得不偿失的。同时，如果不经常移动集合，当集合远小于数组大小时，会浪费大量的内存。</p>
+<p>一个较好的策略是：
+<div class="alert success"><p>当集合大小增加至数组大小时，将集合移动到另一个原数组两倍大的数组中；当集合大小减小至小于数组的四分之一时，将集合移动到另一个原数组一半大的数组中。</p>
+</div></p>
+<p>以下是一个动态调整数组大小的栈
+<figure class="highlight cpp"><figcaption><span>动态调整大小的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> ResizingArrayStack&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Item[] a = (Item[]) <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">isEmpty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N == <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> max)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item[] temp = (Item[]) <span class="keyword">new</span> Object[max];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            temp[i] = a[i];</span><br><span class="line">        a = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item item)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N == a.length) resize(<span class="number">2</span> * a.length);</span><br><span class="line">        a[N++] = item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item item = a[--N];</span><br><span class="line">        a[N] = null; <span class="comment">//避免对象游离，提示系统垃圾回收不再使用的对象</span></span><br><span class="line">        <span class="keyword">if</span> (N &gt; <span class="number">0</span> &amp;&amp; N == a.length / <span class="number">4</span>) resize(a.length/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="应用">应用</h1><h2 id="算术表达式求值">算术表达式求值</h2><p>栈的一个经典用例是计算算术表达式的值，例如：
+( 1 + ( ( 2 + 3 ) * ( 4 + 5 ) ) )
+为了简单起见，这里没有省略多余的括号，即只用括号来表示运算的优先级。
+E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算术表达式的值：</p>
+<blockquote>
+<p>表达式由括号、运算符和操作数（数字）组成。用两个栈（一个保存运算符，一个保存操作数）保存数据，并根据以下4中情况从左至右逐个将这些实体送入栈处理：</p>
+<ul>
+<li>将操作数压入操作数栈；</li>
+<li>将运算符压入运算符栈；</li>
+<li>忽略左括号；</li>
+<li>在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
+处理完最后一个右括号后，操作数栈上只会有一个值，即表达式的值。</li>
+</ul>
+</blockquote>
+<p>用图示来解释以上算术表达式的运算过程：
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" title="双栈算术表达式求值运算过程" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" alt="双栈算术表达式求值运算过程"></a></div></p>
+<p>算法示例如下：
+<figure class="highlight armasm"><figcaption><span>Dijkstra 双栈算术表达式求值算法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">import</span> edu.princeton.cs.algs4.StdIn<span class="comment">;</span></span><br><span class="line"><span class="label">import</span> edu.princeton.cs.algs4.StdOut<span class="comment">;</span></span><br><span class="line"><span class="label">import</span> edu.princeton.cs.algs4.Stack<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="label">public</span> class Evaluate</span><br><span class="line">&#123;</span><br><span class="line">    public static void main(<span class="keyword">String[] </span>args)</span><br><span class="line">    &#123;</span><br><span class="line">        Stack&lt;<span class="keyword">String&gt; </span>ops = new Stack&lt;<span class="keyword">String&gt;();</span><br><span class="line"></span>        Stack&lt;Double&gt; vals = new Stack&lt;Double&gt;()<span class="comment">;</span></span><br><span class="line">        <span class="preprocessor">while</span> (!StdIn.isEmpty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">String </span>s = StdIn.readString()<span class="comment">;</span></span><br><span class="line">            <span class="preprocessor">if</span> (s.equals(<span class="string">"("</span>)) <span class="comment">;</span></span><br><span class="line">            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">"+"</span>)) ops.<span class="keyword">push(s);</span><br><span class="line"></span>            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">"-"</span>)) ops.<span class="keyword">push(s);</span><br><span class="line"></span>            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">"*"</span>)) ops.<span class="keyword">push(s);</span><br><span class="line"></span>            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">"/"</span>)) ops.<span class="keyword">push(s);</span><br><span class="line"></span>            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">"sqrt"</span>)) ops.<span class="keyword">push(s);</span><br><span class="line"></span>            <span class="preprocessor">else</span> <span class="preprocessor">if</span> (s.equals(<span class="string">")"</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">String </span>op = ops.<span class="keyword">pop();</span><br><span class="line"></span>                double v = vals.<span class="keyword">pop();</span><br><span class="line"></span>                <span class="preprocessor">if</span> (op.equals(<span class="string">"+"</span>)) v = vals.<span class="keyword">pop() </span>+ v<span class="comment">;</span></span><br><span class="line">                <span class="preprocessor">else</span> <span class="preprocessor">if</span> (op.equals(<span class="string">"-"</span>)) v = vals.<span class="keyword">pop() </span>- v<span class="comment">;</span></span><br><span class="line">                <span class="preprocessor">else</span> <span class="preprocessor">if</span> (op.equals(<span class="string">"*"</span>)) v = vals.<span class="keyword">pop() </span>* v<span class="comment">;</span></span><br><span class="line">                <span class="preprocessor">else</span> <span class="preprocessor">if</span> (op.equals(<span class="string">"/"</span>)) v = vals.<span class="keyword">pop() </span>/ v<span class="comment">;</span></span><br><span class="line">                <span class="preprocessor">else</span> <span class="preprocessor">if</span> (op.equals(<span class="string">"sqrt"</span>)) v = Math.sqrt(v)<span class="comment">;</span></span><br><span class="line">                vals.<span class="keyword">push(v);</span><br><span class="line"></span>            &#125;</span><br><span class="line">            <span class="preprocessor">else</span> vals.<span class="keyword">push(Double.parseDouble(s));</span><br><span class="line"></span>        &#125;</span><br><span class="line">        StdOut.println(vals.<span class="keyword">pop());</span><br><span class="line"></span>    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-00/" data-tooltip="普林斯顿算法（00）简介">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-10/"
+     data-title="普林斯顿算法（10）背包、队列和栈" data-url="https://libhappy.com/2016/03/algs-10/">
+</div>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-00/" data-tooltip="普林斯顿算法（00）简介">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">Arthur</h4>
+        
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Whatever</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','xKFF8yFHuuQLQqpiGZt3','2.0.0');
+    </script>
+
+
+</html>

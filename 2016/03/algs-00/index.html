@@ -4,7 +4,7 @@
     
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <link rel="canonical" href="https://libhappy.com/2015/10/build-hexo-blog3/index.html" />
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-00/index.html" />
     <script type="text/javascript">
         var host = "libhappy.com";
         if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -12,7 +12,7 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="LibHappy">
-    <title>用Hexo搭建静态博客（三）, 设置自定义域名 - LibHappy</title>
+    <title>普林斯顿算法（00）简介 - LibHappy</title>
     <meta name="author" content="Arthur">
     
     
@@ -21,17 +21,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
+    <meta name="description" content="在Coursera上学习了普林斯顿的算法公开课（课程链接， 配套教材网站）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
-<meta property="og:url" content="https://libhappy.com/2015/10/build-hexo-blog3/index.html">
+<meta property="og:title" content="普林斯顿算法（00）简介">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-00/index.html">
 <meta property="og:site_name" content="LibHappy">
-<meta property="og:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
-<meta property="og:image" content="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg">
-<meta property="og:updated_time" content="2016-01-29T05:45:21.798Z">
+<meta property="og:description" content="在Coursera上学习了普林斯顿的算法公开课（课程链接， 配套教材网站）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。">
+<meta property="og:updated_time" content="2016-03-07T04:53:11.467Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用Hexo搭建静态博客（三）, 设置自定义域名">
-<meta name="twitter:description" content="在之前的文章中介绍了如何用hexo来搭建静态博客以及将网页部署至github及gitcafe。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如username.github.io。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。">
+<meta name="twitter:title" content="普林斯顿算法（00）简介">
+<meta name="twitter:description" content="在Coursera上学习了普林斯顿的算法公开课（课程链接， 配套教材网站）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。">
     
     
         
@@ -41,8 +40,8 @@
     
     
         
-            <meta property="og:image" content="https://farm2.staticflickr.com/1619/24564341582_aca396fb96_q.jpg"/>
-            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1619/24564341582_aca396fb96_q.jpg" />
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
         
     
     
@@ -232,19 +231,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            用Hexo搭建静态博客（三）, 设置自定义域名
+            普林斯顿算法（00）简介
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Fri Oct 30 2015 22:32:02 GMT+0800">
+    <time itemprop="datePublished" content="Mon Mar 07 2016 11:46:52 GMT+0800">
 	
-		    Oct 30, 2015
+		    Mar 07, 2016
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
 
 
     
@@ -253,20 +252,52 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。
+            <p>在Coursera上学习了普林斯顿的算法公开课（<a href="https://www.coursera.org/course/algs4partI" target="_blank" rel="external">课程链接</a>， <a href="http://algs4.cs.princeton.edu/home/" target="_blank" rel="external">配套教材网站</a>）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。
 <a id="more"></a>
-<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#购买域名"><span class="toc-text">购买域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置域名解析服务"><span class="toc-text">设置域名解析服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置CNAME"><span class="toc-text">设置CNAME</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#github设置CNAME"><span class="toc-text">github设置CNAME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitcafe设置CNAME"><span class="toc-text">gitcafe设置CNAME</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置DNS解析"><span class="toc-text">设置DNS解析</span></a></li></ol></div></p>
-<h1 id="购买域名">购买域名</h1><p>首先要购买一个域名，推荐比较出名的国外域名服务商，比如<a href="https://www.godaddy.com/" target="_blank" rel="external">GoDaddy</a>。其他的如<a href="https://www.namesilo.com/" target="_blank" rel="external">namesilo</a>、<a href="https://www.name.com/" target="_blank" rel="external">name.com</a>价格比较便宜, 当然国内的域名提供商也是可以的。</p>
-<h1 id="设置域名解析服务">设置域名解析服务</h1><p>购买到心仪的域名后进入域名设置页面设置域名解析服务。由于godaddy的域名解析服务位于国外，速度稍有影响，因此可以使用国内的免费域名解析服务<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>，同时DNSPod还支持根据不同线路解析到不同地址，因此可以利用此功能针对不同地区的访问者分别解析到github及gitcafe以提高访问速度。</p>
-<p>使用DNSPod来进行域名解析首先要将域名解析服务商(nameserver)地址更换为DNSPod提供的地址:
-<figure class="highlight stylus"><figcaption><span>nameserver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F1G1NS1<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br><span class="line">F1G1NS2<span class="class">.DNSPOD</span><span class="class">.NET</span></span><br></pre></td></tr></table></figure></p>
-<p>GoDaddy的具体设置可以查看DNSPod上的<a href="https://support.dnspod.cn/Kb/showarticle/?qtype=%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B&amp;tsid=42" target="_blank" rel="external">帮助教程</a>。</p>
-<h1 id="设置CNAME">设置CNAME</h1><h2 id="github设置CNAME">github设置CNAME</h2><p>github的CNAME设置需要在github pages 的根目录下创建CNAME文件并在其中写入自定义域名，但是直接在github pages中创建，下次通过git push提交博客后会被删除。因此需要在Hexo的source目录下的创建CNAME文件，并在其中写入自定义域名。之后每次提交博客时会随之提交CNAME文件。</p>
-<h2 id="gitcafe设置CNAME">gitcafe设置CNAME</h2><p>gitcafe的CNAME更为方便，登陆gitcafe后在<code>项目管理</code>–<code>域名管理</code>下的<code>自定义域名</code>中添加自定义域名即可。</p>
-<h1 id="设置DNS解析">设置DNS解析</h1><p>最后需要注册DNSPod并设置DNS解析。之前已经在Godaddy中将域名解析服务设置为DNSPod。直接登陆DNSPod，添加自定义域名，在添加的域名中添加如下记录：
-<div class="figure center"><img class="fig-img" src="https://farm1.staticflickr.com/678/22594923969_f316996f4b_z.jpg" alt="DNSPod域名解析记录设置"><span class="caption">DNSPod域名解析记录设置</span></div>
-这样设置可以区分不同的地区分别访问托管在github及gitcafe上的博客，加快博客访问速度。如果只是使用其中一项服务，只需添加对应记录即可。</p>
-<p>等待域名解析生效（一般需要几分钟到一天不等）后，就可以用自定义的域名直接访问博客了。</p>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要内容"><span class="toc-text">主要内容</span></a></li></ol></div></p>
+<h1 id="概要">概要</h1><blockquote>
+<p><strong>算法</strong>是指一种有限、确定、有效的并适合用计算机程序来实现的解决问题的方法。</p>
+</blockquote>
+<p>算法的实现大多数情况下与所使用的编程语言无关，它描述了解决问题的步骤。使用算法的主要原因是它能够节约非常多的资源（时间资源、存储空间资源等），甚至能够让一些本不可能完成的任务变为可能。
+在大多数算法中需要适当的组织数据，而为了组织数据数据就产生了<strong>数据结构</strong>。数据结构是存储、组织数据的方式，它和算法的关系十分密切。</p>
+<blockquote>
+<p>“Algorithms + Data Structures = Programs.” — Niklaus Wirth</p>
+</blockquote>
+<h1 id="主要内容">主要内容</h1><p>在算法这门课程中将主要讨论以下内容：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">主题</th>
+<th style="text-align:center">数据结构与算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据类型</td>
+<td style="text-align:center">stack, queue, bag, union-find, priority queue</td>
+</tr>
+<tr>
+<td style="text-align:center">排序</td>
+<td style="text-align:center">quicksort, mergesort, heapsort, radix sorts</td>
+</tr>
+<tr>
+<td style="text-align:center">查找</td>
+<td style="text-align:center">BST, red-black BST, hash table</td>
+</tr>
+<tr>
+<td style="text-align:center">图</td>
+<td style="text-align:center">BFS, DFS, Prim, Kruskal, Dijkstra</td>
+</tr>
+<tr>
+<td style="text-align:center">字符串</td>
+<td style="text-align:center">KMP, regular expression, tries, data compression</td>
+</tr>
+<tr>
+<td style="text-align:center">高级</td>
+<td style="text-align:center">B-tree, k-d tree, suffix array, maxflow</td>
+</tr>
+</tbody>
+</table>
 
             
                 
@@ -279,7 +310,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/hexo/">hexo</a> <a class="tag tag--primary tag--small t-link" href="/tags/博客/">博客</a> <a class="tag tag--primary tag--small t-link" href="/tags/域名/">域名</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
 
             </div>
         
@@ -289,7 +320,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/vps-protect/"  data-tooltip="Linux服务器的简单防护">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-10/"  data-tooltip="普林斯顿算法（10）背包、队列和栈">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -297,7 +328,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/build-hexo-blog2/" data-tooltip="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/build-gogs-service/" data-tooltip="用Gogs搭建自己的Git服务器">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -313,17 +344,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -347,8 +378,8 @@
 
         
             
-                <div id="ds-thread" class="ds-thread" data-thread-key="2015/10/build-hexo-blog3/"
-     data-title="用Hexo搭建静态博客（三）, 设置自定义域名" data-url="https://libhappy.com/2015/10/build-hexo-blog3/">
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-00/"
+     data-title="普林斯顿算法（00）简介" data-url="https://libhappy.com/2016/03/algs-00/">
 </div>
 
             
@@ -374,7 +405,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/vps-protect/"  data-tooltip="Linux服务器的简单防护">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-10/"  data-tooltip="普林斯顿算法（10）背包、队列和栈">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -382,7 +413,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/build-hexo-blog2/" data-tooltip="用Hexo搭建静态博客（二）, 将网页部署至github与gitcafe并使用SSH认证">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/build-gogs-service/" data-tooltip="用Gogs搭建自己的Git服务器">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -398,17 +429,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -434,17 +465,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="1">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2015/10/build-hexo-blog3/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-00/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
