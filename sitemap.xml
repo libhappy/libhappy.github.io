@@ -2,18 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://libhappy.com/2016/03/algs-10/</loc>
-    <lastmod>2016-03-09T14:30:55.208Z</lastmod>
+    <loc>https://libhappy.com/2016/03/algs-1.1/</loc>
+    <lastmod>2016-03-10T09:59:18.872Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://libhappy.com/assets/css/timeline.min.css</loc>
+    <lastmod>2016-03-10T05:30:18.722Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://libhappy.com/assets/css/timeline.css</loc>
+    <lastmod>2016-03-10T05:30:12.040Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://libhappy.com/2016/03/algs-1.0/</loc>
+    <lastmod>2016-03-10T04:51:35.046Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://libhappy.com/2016/03/algs-0.0/</loc>
+    <lastmod>2016-03-10T04:43:00.241Z</lastmod>
   </url>
   
   <url>
     <loc>https://libhappy.com/timeline/index.html</loc>
     <lastmod>2016-03-09T02:09:44.780Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://libhappy.com/2016/03/algs-00/</loc>
-    <lastmod>2016-03-07T04:53:11.467Z</lastmod>
   </url>
   
   <url>
@@ -54,16 +69,6 @@
   <url>
     <loc>https://libhappy.com/2015/08/python-class-re-order/</loc>
     <lastmod>2016-01-14T06:36:28.090Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://libhappy.com/assets/css/timeline.min.css</loc>
-    <lastmod>2016-01-05T08:19:51.607Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://libhappy.com/assets/css/timeline.css</loc>
-    <lastmod>2016-01-05T08:19:43.666Z</lastmod>
   </url>
   
   <url>

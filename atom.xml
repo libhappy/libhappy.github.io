@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://libhappy.com/"/>
-  <updated>2016-03-09T14:30:55.208Z</updated>
+  <updated>2016-03-10T09:59:18.872Z</updated>
   <id>https://libhappy.com/</id>
   
   <author>
@@ -15,11 +15,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[普林斯顿算法（10）背包、队列和栈]]></title>
-    <link href="https://libhappy.com/2016/03/algs-10/"/>
-    <id>https://libhappy.com/2016/03/algs-10/</id>
+    <title><![CDATA[普林斯顿算法（1.1）链表]]></title>
+    <link href="https://libhappy.com/2016/03/algs-1.1/"/>
+    <id>https://libhappy.com/2016/03/algs-1.1/</id>
+    <published>2016-03-10T08:00:45.000Z</published>
+    <updated>2016-03-10T09:59:18.872Z</updated>
+    <content type="html"><![CDATA[<p>链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：</p>
+<blockquote>
+<p>链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。</p>
+</blockquote>
+<p>在结构化存储数据集时，<strong>链表是数组的一种重要的替代方式</strong>。</p>
+<a id="more"></a>
+<!--toc-->
+<p>链表的简单图示如下：
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" title="链表结构的示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" alt="链表结构的示例"></a></div></p>
+<p>一个简单的节点定义如下：
+<figure class="highlight crmsh"><figcaption><span>链表中节点的定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class <span class="keyword">Node</span><span class="identifier"></span><br><span class="line"></span><span class="title">&#123;</span><br><span class="line">    Item</span> item;</span><br><span class="line">    <span class="keyword">Node</span><span class="identifier"> </span><span class="title">next</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中item为某种需要存储的数据，而next代表指向下一个节点的引用。</p>
+<p>和数组结构相比，链表更为灵活，可以轻松的向其中插入删除元素而只用更改少量的节点引用，可以任意的增减大小而不用占据多余的内存空间。但是，在获得链表上特定节点的数据时可能会比数组更为耗时。一般情况下外部只会保留对链表中少量节点（一般为第1个节点）的引用，因此为了获得某个节点上的数据需要由一个节点开始不断的遍历下一个节点直到找到所需的节点数据，如果所需的数据在最后一个节点上，那么就需要遍历整个链表。快速的实现获取（插入、删除）任意节点的标准解决方案是使用<strong>双向链表</strong>，即在每个节点上都保存有指向下一个节点及上一个节点的引用。</p>
+<h1 id="栈的链表实现">栈的链表实现</h1><p>下压栈的入栈及出栈操作都是在栈的顶部进行的，因此使用链表能够十分方便的实现栈。栈的顶部即为链表的表头，外部引用指向表头节点。当元素入栈时直接在表头添加一个新的节点，并将外部引用指向新的表头；当元素出栈时，取出表头的元素，并修改外部引用为下一个节点。</p>
+<p>以下为用链表实现的栈：
+<figure class="highlight gradle"><figcaption><span>链表实现的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> Stack&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Node first;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> Node</span><br><span class="line">    &#123;</span><br><span class="line">        Item item;</span><br><span class="line">        Node <span class="keyword">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isEmpty() &#123; <span class="keyword">return</span> first == <span class="keyword">null</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">size</span>() &#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="keyword">push</span>(Item item)</span><br><span class="line">    &#123;</span><br><span class="line">        Node oldFirst = first;</span><br><span class="line">        first = <span class="keyword">new</span> Node();</span><br><span class="line">        first.item = item;</span><br><span class="line">        first.<span class="keyword">next</span> = oldFirst;</span><br><span class="line">        N++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Item <span class="keyword">pop</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        Item item = first.item;</span><br><span class="line">        first = first.<span class="keyword">next</span>;</span><br><span class="line">        N--;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用链表实现的栈达到了以下目标：</p>
+<ul>
+<li>可以处理任意的数据类型；</li>
+<li>所需的空间总是和集合的大小成正比；</li>
+<li>操作所需的时间和集合的大小无关。</li>
+</ul>
+<h1 id="队列的链表实现">队列的链表实现</h1><p>使用链表来实现队列也十分简单。同时保留指向链表表头及表尾的引用，元素入列时将其添加到表尾，同时修改指向表尾的引用；出列时删除表头的节点，同时修改指向表头的应用。需要注意的是，当链表为空添加一个节点或只有一个节点删除节点时要同时修改指向表头和表尾的引用。</p>
+<p>以下为用链表实现的队列：
+<figure class="highlight applescript"><figcaption><span>链表实现的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public <span class="type">class</span> Queue&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    private Node <span class="keyword">first</span>;</span><br><span class="line">    private Node <span class="keyword">last</span>;</span><br><span class="line">    private int N;</span><br><span class="line">    private <span class="type">class</span> Node</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span>;</span><br><span class="line">        Node next;</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="type">boolean</span> isEmpty() &#123; <span class="constant">return</span> <span class="keyword">first</span> == null; &#125;</span><br><span class="line">    public int size() &#123; <span class="constant">return</span> N; &#125;</span><br><span class="line">    public void enqueue(Item <span class="property">item</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Node oldLast = <span class="keyword">last</span>;</span><br><span class="line">        <span class="keyword">last</span> = new Node();</span><br><span class="line">        <span class="keyword">last</span>.<span class="property">item</span> = <span class="property">item</span>;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">first</span> = <span class="keyword">last</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            oldLast.next = <span class="keyword">last</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        N++;</span><br><span class="line">    &#125;</span><br><span class="line">    public Item dequeue()</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span> = <span class="keyword">first</span>.<span class="property">item</span>;</span><br><span class="line">        <span class="keyword">first</span> = <span class="keyword">first</span>.next;</span><br><span class="line">        <span class="keyword">if</span> (size() == <span class="number">1</span>) &#123; <span class="keyword">last</span> = null; &#125;</span><br><span class="line">        N<span class="comment">--;</span></span><br><span class="line"><span class="command">        return</span> <span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="背包的链表实现">背包的链表实现</h1><p>用链表实现背包只需要将栈的实现中push()改名为add()并删除pop()方法。在为背包实现遍历时，由于背包的遍历输出顺序并不重要，也可以直接使用栈的遍历输出。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：</p>
+<blockquote>
+<p>链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。</p>
+</blockquote>
+<p>在结构化存储数据集时，<strong>链表是数组的一种重要的替代方式</strong>。</p>]]>
+    
+    </summary>
+    
+      <category term="Algorithms" scheme="https://libhappy.com/tags/Algorithms/"/>
+    
+      <category term="Princeton" scheme="https://libhappy.com/tags/Princeton/"/>
+    
+      <category term="algs" scheme="https://libhappy.com/tags/algs/"/>
+    
+      <category term="算法" scheme="https://libhappy.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="Algorithms" scheme="https://libhappy.com/categories/Algorithms/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[普林斯顿算法（1.0）背包、队列和栈]]></title>
+    <link href="https://libhappy.com/2016/03/algs-1.0/"/>
+    <id>https://libhappy.com/2016/03/algs-1.0/</id>
     <published>2016-03-07T04:59:13.000Z</published>
-    <updated>2016-03-09T14:30:55.208Z</updated>
+    <updated>2016-03-10T04:51:35.046Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>许多基础数据类型</strong>都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。</p>
 </blockquote>
@@ -41,9 +95,9 @@
 </div></p>
 <p>以下是一个动态调整数组大小的栈
 <figure class="highlight cpp"><figcaption><span>动态调整大小的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> ResizingArrayStack&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Item[] a = (Item[]) <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">isEmpty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N == <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> max)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item[] temp = (Item[]) <span class="keyword">new</span> Object[max];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            temp[i] = a[i];</span><br><span class="line">        a = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item item)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N == a.length) resize(<span class="number">2</span> * a.length);</span><br><span class="line">        a[N++] = item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item item = a[--N];</span><br><span class="line">        a[N] = null; <span class="comment">//避免对象游离，提示系统垃圾回收不再使用的对象</span></span><br><span class="line">        <span class="keyword">if</span> (N &gt; <span class="number">0</span> &amp;&amp; N == a.length / <span class="number">4</span>) resize(a.length/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="应用">应用</h1><h2 id="算术表达式求值">算术表达式求值</h2><p>栈的一个经典用例是计算算术表达式的值，例如：
-( 1 + ( ( 2 + 3 ) * ( 4 + 5 ) ) )
-为了简单起见，这里没有省略多余的括号，即只用括号来表示运算的优先级。
+<h1 id="应用">应用</h1><h2 id="算术表达式求值">算术表达式求值</h2><p>栈的一个经典用例是计算算术表达式的值，例如：</p>
+<p>( 1 + ( ( 2 + 3 ) * ( 4 + 5 ) ) )</p>
+<p>为了简单起见，这里没有省略多余的括号，即只用括号来表示运算的优先级。
 E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算术表达式的值：</p>
 <blockquote>
 <p>表达式由括号、运算符和操作数（数字）组成。用两个栈（一个保存运算符，一个保存操作数）保存数据，并根据以下4中情况从左至右逐个将这些实体送入栈处理：</p>
@@ -51,9 +105,9 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
 <li>将操作数压入操作数栈；</li>
 <li>将运算符压入运算符栈；</li>
 <li>忽略左括号；</li>
-<li>在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
-处理完最后一个右括号后，操作数栈上只会有一个值，即表达式的值。</li>
+<li>在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。</li>
 </ul>
+<p>处理完最后一个右括号后，操作数栈上只会有一个值，即表达式的值。</p>
 </blockquote>
 <p>用图示来解释以上算术表达式的运算过程：
 <div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" title="双栈算术表达式求值运算过程" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" alt="双栈算术表达式求值运算过程"></a></div></p>
@@ -81,11 +135,11 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
   </entry>
   
   <entry>
-    <title><![CDATA[普林斯顿算法（00）简介]]></title>
-    <link href="https://libhappy.com/2016/03/algs-00/"/>
-    <id>https://libhappy.com/2016/03/algs-00/</id>
+    <title><![CDATA[普林斯顿算法（0.0）简介]]></title>
+    <link href="https://libhappy.com/2016/03/algs-0.0/"/>
+    <id>https://libhappy.com/2016/03/algs-0.0/</id>
     <published>2016-03-07T03:46:52.000Z</published>
-    <updated>2016-03-07T04:53:11.467Z</updated>
+    <updated>2016-03-10T04:43:00.241Z</updated>
     <content type="html"><![CDATA[<p>在Coursera上学习了普林斯顿的算法公开课（<a href="https://www.coursera.org/course/algs4partI" target="_blank" rel="external">课程链接</a>， <a href="http://algs4.cs.princeton.edu/home/" target="_blank" rel="external">配套教材网站</a>）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。
 <a id="more"></a>
 <!--toc--></p>

@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-1.1/index.html" />
+    <script type="text/javascript">
+        var host = "libhappy.com";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="LibHappy">
+    <title>普林斯顿算法（1.1）链表 - LibHappy</title>
+    <meta name="author" content="Arthur">
+    
+    
+        <link rel="icon" href="https://libhappy.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：
+
+链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。
+
+在结构化存储数据集时，链表是数组的一种重要的替代方式。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="普林斯顿算法（1.1）链表">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-1.1/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：
+
+链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。
+
+在结构化存储数据集时，链表是数组的一种重要的替代方式。">
+<meta property="og:image" content="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg">
+<meta property="og:updated_time" content="2016-03-10T09:59:18.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="普林斯顿算法（1.1）链表">
+<meta name="twitter:description" content="链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：
+
+链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。
+
+在结构化存储数据集时，链表是数组的一种重要的替代方式。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
+    
+    
+        
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
+        
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-68985881-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">LibHappy</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+            </a>
+            <span class="sidebar-profile-name">Arthur</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/timeline"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-history"></i>
+                    <span class="sidebar-button-desc">Timeline</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-info-circle"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://git.libhappy.com/explore" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-git-square"></i>
+                    <span class="sidebar-button-desc">Git</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            普林斯顿算法（1.1）链表
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Thu Mar 10 2016 16:00:45 GMT+0800">
+	
+		    Mar 10, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：</p>
+<blockquote>
+<p>链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。</p>
+</blockquote>
+<p>在结构化存储数据集时，<strong>链表是数组的一种重要的替代方式</strong>。</p>
+<a id="more"></a>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#栈的链表实现"><span class="toc-text">栈的链表实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#队列的链表实现"><span class="toc-text">队列的链表实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#背包的链表实现"><span class="toc-text">背包的链表实现</span></a></li></ol></div>
+<p>链表的简单图示如下：
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" title="链表结构的示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" alt="链表结构的示例"></a></div></p>
+<p>一个简单的节点定义如下：
+<figure class="highlight crmsh"><figcaption><span>链表中节点的定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class <span class="keyword">Node</span><span class="identifier"></span><br><span class="line"></span><span class="title">&#123;</span><br><span class="line">    Item</span> item;</span><br><span class="line">    <span class="keyword">Node</span><span class="identifier"> </span><span class="title">next</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中item为某种需要存储的数据，而next代表指向下一个节点的引用。</p>
+<p>和数组结构相比，链表更为灵活，可以轻松的向其中插入删除元素而只用更改少量的节点引用，可以任意的增减大小而不用占据多余的内存空间。但是，在获得链表上特定节点的数据时可能会比数组更为耗时。一般情况下外部只会保留对链表中少量节点（一般为第1个节点）的引用，因此为了获得某个节点上的数据需要由一个节点开始不断的遍历下一个节点直到找到所需的节点数据，如果所需的数据在最后一个节点上，那么就需要遍历整个链表。快速的实现获取（插入、删除）任意节点的标准解决方案是使用<strong>双向链表</strong>，即在每个节点上都保存有指向下一个节点及上一个节点的引用。</p>
+<h1 id="栈的链表实现">栈的链表实现</h1><p>下压栈的入栈及出栈操作都是在栈的顶部进行的，因此使用链表能够十分方便的实现栈。栈的顶部即为链表的表头，外部引用指向表头节点。当元素入栈时直接在表头添加一个新的节点，并将外部引用指向新的表头；当元素出栈时，取出表头的元素，并修改外部引用为下一个节点。</p>
+<p>以下为用链表实现的栈：
+<figure class="highlight gradle"><figcaption><span>链表实现的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> Stack&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Node first;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> Node</span><br><span class="line">    &#123;</span><br><span class="line">        Item item;</span><br><span class="line">        Node <span class="keyword">next</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isEmpty() &#123; <span class="keyword">return</span> first == <span class="keyword">null</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">size</span>() &#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="keyword">push</span>(Item item)</span><br><span class="line">    &#123;</span><br><span class="line">        Node oldFirst = first;</span><br><span class="line">        first = <span class="keyword">new</span> Node();</span><br><span class="line">        first.item = item;</span><br><span class="line">        first.<span class="keyword">next</span> = oldFirst;</span><br><span class="line">        N++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Item <span class="keyword">pop</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        Item item = first.item;</span><br><span class="line">        first = first.<span class="keyword">next</span>;</span><br><span class="line">        N--;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用链表实现的栈达到了以下目标：</p>
+<ul>
+<li>可以处理任意的数据类型；</li>
+<li>所需的空间总是和集合的大小成正比；</li>
+<li>操作所需的时间和集合的大小无关。</li>
+</ul>
+<h1 id="队列的链表实现">队列的链表实现</h1><p>使用链表来实现队列也十分简单。同时保留指向链表表头及表尾的引用，元素入列时将其添加到表尾，同时修改指向表尾的引用；出列时删除表头的节点，同时修改指向表头的应用。需要注意的是，当链表为空添加一个节点或只有一个节点删除节点时要同时修改指向表头和表尾的引用。</p>
+<p>以下为用链表实现的队列：
+<figure class="highlight applescript"><figcaption><span>链表实现的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public <span class="type">class</span> Queue&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    private Node <span class="keyword">first</span>;</span><br><span class="line">    private Node <span class="keyword">last</span>;</span><br><span class="line">    private int N;</span><br><span class="line">    private <span class="type">class</span> Node</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span>;</span><br><span class="line">        Node next;</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="type">boolean</span> isEmpty() &#123; <span class="constant">return</span> <span class="keyword">first</span> == null; &#125;</span><br><span class="line">    public int size() &#123; <span class="constant">return</span> N; &#125;</span><br><span class="line">    public void enqueue(Item <span class="property">item</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Node oldLast = <span class="keyword">last</span>;</span><br><span class="line">        <span class="keyword">last</span> = new Node();</span><br><span class="line">        <span class="keyword">last</span>.<span class="property">item</span> = <span class="property">item</span>;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">first</span> = <span class="keyword">last</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            oldLast.next = <span class="keyword">last</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        N++;</span><br><span class="line">    &#125;</span><br><span class="line">    public Item dequeue()</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span> = <span class="keyword">first</span>.<span class="property">item</span>;</span><br><span class="line">        <span class="keyword">first</span> = <span class="keyword">first</span>.next;</span><br><span class="line">        <span class="keyword">if</span> (size() == <span class="number">1</span>) &#123; <span class="keyword">last</span> = null; &#125;</span><br><span class="line">        N<span class="comment">--;</span></span><br><span class="line"><span class="command">        return</span> <span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="背包的链表实现">背包的链表实现</h1><p>用链表实现背包只需要将栈的实现中push()改名为add()并删除pop()方法。在为背包实现遍历时，由于背包的遍历输出顺序并不重要，也可以直接使用栈的遍历输出。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.0/" data-tooltip="普林斯顿算法（1.0）背包、队列和栈">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-1.1/"
+     data-title="普林斯顿算法（1.1）链表" data-url="https://libhappy.com/2016/03/algs-1.1/">
+</div>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.0/" data-tooltip="普林斯顿算法（1.0）背包、队列和栈">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.1/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">Arthur</h4>
+        
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Whatever</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','xKFF8yFHuuQLQqpiGZt3','2.0.0');
+    </script>
+
+
+</html>

@@ -4,7 +4,7 @@
     
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <link rel="canonical" href="https://libhappy.com/2016/03/algs-10/index.html" />
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-1.0/index.html" />
     <script type="text/javascript">
         var host = "libhappy.com";
         if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -12,7 +12,7 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="LibHappy">
-    <title>普林斯顿算法（10）背包、队列和栈 - LibHappy</title>
+    <title>普林斯顿算法（1.0）背包、队列和栈 - LibHappy</title>
     <meta name="author" content="Arthur">
     
     
@@ -25,8 +25,8 @@
 
 本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="普林斯顿算法（10）背包、队列和栈">
-<meta property="og:url" content="https://libhappy.com/2016/03/algs-10/index.html">
+<meta property="og:title" content="普林斯顿算法（1.0）背包、队列和栈">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-1.0/index.html">
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="许多基础数据类型都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。
 
@@ -35,9 +35,9 @@
 <meta property="og:image" content="https://farm2.staticflickr.com/1609/25643647955_bc5a62c337_z.jpg">
 <meta property="og:image" content="https://farm2.staticflickr.com/1572/25643648005_52114b7309_z.jpg">
 <meta property="og:image" content="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg">
-<meta property="og:updated_time" content="2016-03-09T14:30:55.208Z">
+<meta property="og:updated_time" content="2016-03-10T04:51:35.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普林斯顿算法（10）背包、队列和栈">
+<meta name="twitter:title" content="普林斯顿算法（1.0）背包、队列和栈">
 <meta name="twitter:description" content="许多基础数据类型都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。
 
 本节介绍三种数据类型：背包（Bag）、队列（Queue）和栈（Stack），它们的不同之处在于删除或访问对象的顺序不同。同时还介绍了三种数据类型的数组实现及简单应用，在下一篇中介绍链表及这三种数据类型的链表实现。">
@@ -241,7 +241,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            普林斯顿算法（10）背包、队列和栈
+            普林斯顿算法（1.0）背包、队列和栈
         </h1>
     
     <div class="post-meta">
@@ -283,9 +283,9 @@
 </div></p>
 <p>以下是一个动态调整数组大小的栈
 <figure class="highlight cpp"><figcaption><span>动态调整大小的栈</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> ResizingArrayStack&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Item[] a = (Item[]) <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">isEmpty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N == <span class="number">0</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> N; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> max)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item[] temp = (Item[]) <span class="keyword">new</span> Object[max];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            temp[i] = a[i];</span><br><span class="line">        a = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item item)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N == a.length) resize(<span class="number">2</span> * a.length);</span><br><span class="line">        a[N++] = item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Item item = a[--N];</span><br><span class="line">        a[N] = null; <span class="comment">//避免对象游离，提示系统垃圾回收不再使用的对象</span></span><br><span class="line">        <span class="keyword">if</span> (N &gt; <span class="number">0</span> &amp;&amp; N == a.length / <span class="number">4</span>) resize(a.length/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="应用">应用</h1><h2 id="算术表达式求值">算术表达式求值</h2><p>栈的一个经典用例是计算算术表达式的值，例如：
-( 1 + ( ( 2 + 3 ) * ( 4 + 5 ) ) )
-为了简单起见，这里没有省略多余的括号，即只用括号来表示运算的优先级。
+<h1 id="应用">应用</h1><h2 id="算术表达式求值">算术表达式求值</h2><p>栈的一个经典用例是计算算术表达式的值，例如：</p>
+<p>( 1 + ( ( 2 + 3 ) * ( 4 + 5 ) ) )</p>
+<p>为了简单起见，这里没有省略多余的括号，即只用括号来表示运算的优先级。
 E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算术表达式的值：</p>
 <blockquote>
 <p>表达式由括号、运算符和操作数（数字）组成。用两个栈（一个保存运算符，一个保存操作数）保存数据，并根据以下4中情况从左至右逐个将这些实体送入栈处理：</p>
@@ -293,9 +293,9 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
 <li>将操作数压入操作数栈；</li>
 <li>将运算符压入运算符栈；</li>
 <li>忽略左括号；</li>
-<li>在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
-处理完最后一个右括号后，操作数栈上只会有一个值，即表达式的值。</li>
+<li>在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。</li>
 </ul>
+<p>处理完最后一个右括号后，操作数栈上只会有一个值，即表达式的值。</p>
 </blockquote>
 <p>用图示来解释以上算术表达式的运算过程：
 <div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" title="双栈算术表达式求值运算过程" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1641/25643648075_b7e7b776e9_z.jpg" alt="双栈算术表达式求值运算过程"></a></div></p>
@@ -323,7 +323,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.1/"  data-tooltip="普林斯顿算法（1.1）链表">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -331,7 +331,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-00/" data-tooltip="普林斯顿算法（00）简介">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-0.0/" data-tooltip="普林斯顿算法（0.0）简介">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -347,17 +347,17 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -381,8 +381,8 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
 
         
             
-                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-10/"
-     data-title="普林斯顿算法（10）背包、队列和栈" data-url="https://libhappy.com/2016/03/algs-10/">
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-1.0/"
+     data-title="普林斯顿算法（1.0）背包、队列和栈" data-url="https://libhappy.com/2016/03/algs-1.0/">
 </div>
 
             
@@ -408,7 +408,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.1/"  data-tooltip="普林斯顿算法（1.1）链表">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -416,7 +416,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-00/" data-tooltip="普林斯顿算法（00）简介">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-0.0/" data-tooltip="普林斯顿算法（0.0）简介">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -432,17 +432,17 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -468,17 +468,17 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
                 <div id="share-options-bar" class="share-options-bar" data-behavior="1">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-10/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-10/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-10/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.0/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
