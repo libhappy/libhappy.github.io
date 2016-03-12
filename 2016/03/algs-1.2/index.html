@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-1.2/index.html" />
+    <script type="text/javascript">
+        var host = "libhappy.com";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="LibHappy">
+    <title>普林斯顿算法（1.2）算法分析 - LibHappy</title>
+    <meta name="author" content="Arthur">
+    
+    
+        <link rel="icon" href="https://libhappy.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="随着计算机处理数据量的增大，程序运行时消耗的时间与内存空间也逐步增加。对于同一个问题，不同的算法解决方案所耗费的代价不尽相同，对算法的性能进行合理、准确的分析可以为算法的选择、改进提供可靠的依据。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="普林斯顿算法（1.2）算法分析">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-1.2/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="随着计算机处理数据量的增大，程序运行时消耗的时间与内存空间也逐步增加。对于同一个问题，不同的算法解决方案所耗费的代价不尽相同，对算法的性能进行合理、准确的分析可以为算法的选择、改进提供可靠的依据。">
+<meta property="og:updated_time" content="2016-03-12T14:04:59.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="普林斯顿算法（1.2）算法分析">
+<meta name="twitter:description" content="随着计算机处理数据量的增大，程序运行时消耗的时间与内存空间也逐步增加。对于同一个问题，不同的算法解决方案所耗费的代价不尽相同，对算法的性能进行合理、准确的分析可以为算法的选择、改进提供可靠的依据。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
+    
+    
+        
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
+        
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-68985881-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">LibHappy</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+            </a>
+            <span class="sidebar-profile-name">Arthur</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/timeline"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-history"></i>
+                    <span class="sidebar-button-desc">Timeline</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-info-circle"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://git.libhappy.com/explore" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-git-square"></i>
+                    <span class="sidebar-button-desc">Git</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            普林斯顿算法（1.2）算法分析
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Mar 11 2016 13:01:25 GMT+0800">
+	
+		    Mar 11, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>随着计算机处理数据量的增大，程序运行时消耗的时间与内存空间也逐步增加。对于同一个问题，不同的算法解决方案所耗费的代价不尽相同，对算法的性能进行合理、准确的分析可以为算法的选择、改进提供可靠的依据。
+<a id="more"></a>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法分析方法"><span class="toc-text">算法分析方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数学模型"><span class="toc-text">数学模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作耗时"><span class="toc-text">基本操作耗时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行次数统计"><span class="toc-text">执行次数统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#近似"><span class="toc-text">近似</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般方法"><span class="toc-text">一般方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增长数量级的分类"><span class="toc-text">增长数量级的分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算法分析"><span class="toc-text">算法分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析的分类"><span class="toc-text">算法分析的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下限"><span class="toc-text">上下限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析中常用符号"><span class="toc-text">算法分析中常用符号</span></a></li></ol></li></ol></div></p>
+<h1 id="算法分析方法">算法分析方法</h1><p>算法分析的基础是科学的研究方法，即：<em>使用<strong>数学分析</strong>为算法成本建立简洁的模型并使用<strong>实验数据</strong>验证这些模型</em>。其基本步骤如下：</p>
+<ul>
+<li>细致的观察真实世界的特点，通常还要有精确的测量；</li>
+<li>根据观察结果提出加收模型；</li>
+<li>根据模型预测未来的事件；</li>
+<li>继续观察并核实预测的准确性；</li>
+<li>如此反复直到确认预测和观察一致。</li>
+</ul>
+<p>科学的研究方法有两个重要原则：</p>
+<ol>
+<li>所设计的实验必须是<strong>可重现</strong>的；</li>
+<li>所有的假设也必须是<strong>可证伪</strong>的。</li>
+</ol>
+<h1 id="数学模型">数学模型</h1><p>一个程序的运行总时间主要和两点有关：</p>
+<ul>
+<li>执行每条语句的耗时</li>
+<li>执行每条语句的次数</li>
+</ul>
+<p>其中前者取决于计算机、程序编译器及操作系统等因素；后者取决于程序本身及输入的数据。</p>
+<h2 id="基本操作耗时">基本操作耗时</h2><p>下表为Java中一些基本操作耗时</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">举例</th>
+<th style="text-align:center">耗时（纳秒）*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">整数加法</td>
+<td style="text-align:center">a + b</td>
+<td style="text-align:center">2.1</td>
+</tr>
+<tr>
+<td style="text-align:center">整数乘法</td>
+<td style="text-align:center">a * b</td>
+<td style="text-align:center">2.4</td>
+</tr>
+<tr>
+<td style="text-align:center">整数除法</td>
+<td style="text-align:center">a / b</td>
+<td style="text-align:center">5.4</td>
+</tr>
+<tr>
+<td style="text-align:center">浮点数加法</td>
+<td style="text-align:center">a + b</td>
+<td style="text-align:center">4.6</td>
+</tr>
+<tr>
+<td style="text-align:center">浮点数乘法</td>
+<td style="text-align:center">a * b</td>
+<td style="text-align:center">4.2</td>
+</tr>
+<tr>
+<td style="text-align:center">浮点数除法</td>
+<td style="text-align:center">a / b</td>
+<td style="text-align:center">13.5</td>
+</tr>
+<tr>
+<td style="text-align:center">正弦</td>
+<td style="text-align:center">Math.sin(theta)</td>
+<td style="text-align:center">91.3</td>
+</tr>
+<tr>
+<td style="text-align:center">反正切</td>
+<td style="text-align:center">Math.atan2(y, x)</td>
+<td style="text-align:center">129.0</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<p>*不同编译器、计算机及操作系统结果可能有差异</p>
+<p>可以看出，不同的基本操作一般耗时不同。一般在进行算法分析时会假定每个不同指令所需的执行时间是固定不变的。需要注意的是，在指令执行中，非基本操作（Non-primitive operation）的耗时一般要比基本操作耗时多。</p>
+<h2 id="执行次数统计">执行次数统计</h2><p>对于以下代码片段，当输入大小为N时，其每个操作的执行次数是多少：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a[i] == <span class="number">0</span>) &#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">变量定义</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">赋值操作</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">小于比较</td>
+<td style="text-align:center">N + 1</td>
+</tr>
+<tr>
+<td style="text-align:center">等于比较</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">数组访问</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">自增操作</td>
+<td style="text-align:center">N ~ 2N</td>
+</tr>
+</tbody>
+</table>
+<p>观察上述代码片段可以发现，执行最频繁的指令决定了程序执行的总时间，具体来说就是for循环内的if语句块。一般将这些指令称为程序的<em>内循环</em>。</p>
+<h2 id="近似">近似</h2><p>根据程序运算时间的计算方法，假设以上代码块中各项操作的耗时如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">耗时</th>
+<th style="text-align:center">次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">变量定义</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">赋值操作</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">小于比较</td>
+<td style="text-align:center">c</td>
+<td style="text-align:center">N + 1</td>
+</tr>
+<tr>
+<td style="text-align:center">等于比较</td>
+<td style="text-align:center">d</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">数组访问</td>
+<td style="text-align:center">e</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">自增操作</td>
+<td style="text-align:center">f</td>
+<td style="text-align:center">N + x *</td>
+</tr>
+</tbody>
+</table>
+<p>*假设输入的N个数据中有x个为0。</p>
+<p>则操作的总耗时为：
+(c + d + e + f)N + (2a + 2b + c + xf)</p>
+<p>这样的表达较为复杂冗长。一般在这种表达式中，首相（幂数最高项）之后的项之和相对较小。那么操作的总耗时可以近似表达为：
+~ (c + d + e + f)N</p>
+<p>由于我们假设每个操作的耗时是固定不变的，那么在分析比较算法时可以省略这些相同的参数，简化为：
+~ N</p>
+<p>同时更应该关注的是耗时随输入增长的数量级。对于上述例子来说就是<code>N</code>即，该代码片段的运行耗时随输入的增长是<strong>线性级别</strong>的。</p>
+<h2 id="一般方法">一般方法</h2><p>对于大多数程序，得到其运行时间的数学模型所需的步骤如下：</p>
+<ul>
+<li>确定输入模型，定义问题的规模</li>
+<li>识别内循环</li>
+<li>根据内循环中的操作确定成本模型</li>
+<li>对于给定的输入，判断这些操作的执行频率</li>
+</ul>
+<p>如果一个程序含有多个方法，分别讨论它们。</p>
+<h1 id="增长数量级的分类">增长数量级的分类</h1><p>算法运行成本增长的数量级一般都是问题规模N的若干函数之一，下表给出了常见的增长数量级：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">增长数量级</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">常数级别</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">普通语句</td>
+<td style="text-align:center">将两个数相加</td>
+</tr>
+<tr>
+<td style="text-align:center">对数级别</td>
+<td style="text-align:center">logN</td>
+<td style="text-align:center">二分策略</td>
+<td style="text-align:center">二分查找</td>
+</tr>
+<tr>
+<td style="text-align:center">线性级别</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">循环</td>
+<td style="text-align:center">找出最大数</td>
+</tr>
+<tr>
+<td style="text-align:center">线性对数级别</td>
+<td style="text-align:center">NlogN</td>
+<td style="text-align:center">分治</td>
+<td style="text-align:center">归并排序</td>
+</tr>
+<tr>
+<td style="text-align:center">平方级别</td>
+<td style="text-align:center">N^2</td>
+<td style="text-align:center">双层循环</td>
+<td style="text-align:center">检查所有元素对</td>
+</tr>
+<tr>
+<td style="text-align:center">立方级别</td>
+<td style="text-align:center">N^3</td>
+<td style="text-align:center">三层循环</td>
+<td style="text-align:center">检查所有三元组</td>
+</tr>
+<tr>
+<td style="text-align:center">指数级别</td>
+<td style="text-align:center">2^N</td>
+<td style="text-align:center">穷举查找</td>
+<td style="text-align:center">检查所有子集</td>
+</tr>
+</tbody>
+</table>
+<h1 id="算法分析">算法分析</h1><h2 id="算法分析的分类">算法分析的分类</h2><p>算法的性能分析中，随着输入的不同可能的性能表现也不同。</p>
+<p>以二分查找为例：输入的数组顺序会影响查找的效率，在最好的情况下，第一次查找就可以找到所需的元素，此时的算法性能为<code>~1</code>即常数级别，但是在最坏的情况下，还是需要<code>~lgN</code>次查找才能找到所需元素。</p>
+<p>对应的有三种不同情况下的算法性能：</p>
+<ul>
+<li>最好情况：算法开销的下限<ul>
+<li>“最有利”的输入</li>
+<li>为所有的输入提供了一个最小开销的目标</li>
+</ul>
+</li>
+<li>最差情况：算法性能的上限<ul>
+<li>“最不利”的输入</li>
+<li>为所有输入提供了一个最大开销的保证</li>
+</ul>
+</li>
+<li>平均情况：随机输入下的期望开销<ul>
+<li>需要“随机的输入”</li>
+<li>提供了算法的预期表现</li>
+</ul>
+</li>
+</ul>
+<h2 id="上下限">上下限</h2><p>算法分析可以确定问题的“复杂程度”，同时为开发“最理想”的算法提供依据。在算法分析中，通过分析不变因素下的算法性能可以减少算法分析的细节；同时，关注最差情况下的算法性能可以消除输入数据的差异对算法性能的影响。</p>
+<p>通过算法分析能够获得算法复杂度的上限与下限：</p>
+<ul>
+<li>理论上限：算法性能的最低保证，实际使用中算法的复杂度不高于理论上限。</li>
+<li>理论下限：算法性能的最好情况，实际使用中算法复杂度不可能低于其理论下限。</li>
+</ul>
+<p>当一个算法的理论上限与理论下限相同时，称其为最佳算法（Optimal algorithm），该算法的性能不受输入情况的影响，在任何情况下都能保证运行时间在理论范围内。</p>
+<h2 id="算法分析中常用符号">算法分析中常用符号</h2><p>下表列出了算法分析中常用的表示算法复杂度的符号及其意义：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:left">代表意义</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:left">可表示表达式</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">波浪号</td>
+<td style="text-align:left">算法复杂度首相</td>
+<td style="text-align:center">~10N^2</td>
+<td style="text-align:left">10N^2 + 22NlogN</td>
+<td style="text-align:center">近似的数学模型</td>
+</tr>
+<tr>
+<td style="text-align:center">大写Theta</td>
+<td style="text-align:left">算法复杂度增长情况</td>
+<td style="text-align:center">Θ(N^2)</td>
+<td style="text-align:left">5N^2 + 22NlogN</td>
+<td style="text-align:center">算法分类</td>
+</tr>
+<tr>
+<td style="text-align:center">大写O</td>
+<td style="text-align:left">可能的最大算法复杂度（为Θ(N^2)或更小）</td>
+<td style="text-align:center">O(N^2)</td>
+<td style="text-align:left">5N^2 + 22NlogN 或 3N</td>
+<td style="text-align:center">算法复杂度的理论上限</td>
+</tr>
+<tr>
+<td style="text-align:center">大写Omega</td>
+<td style="text-align:left">可能的最小算法复杂度（为Θ(N^2)或更大）</td>
+<td style="text-align:center">Ω(N^2)</td>
+<td style="text-align:left">5N^2 或 N^3 + 22Nlog N + 3N</td>
+<td style="text-align:center">算法复杂度的理论下限</td>
+</tr>
+</tbody>
+</table>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.1/" data-tooltip="普林斯顿算法（1.1）链表">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-1.2/"
+     data-title="普林斯顿算法（1.2）算法分析" data-url="https://libhappy.com/2016/03/algs-1.2/">
+</div>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.1/" data-tooltip="普林斯顿算法（1.1）链表">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.2/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">Arthur</h4>
+        
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Whatever</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','xKFF8yFHuuQLQqpiGZt3','2.0.0');
+    </script>
+
+
+</html>
