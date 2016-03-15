@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <link rel="canonical" href="https://libhappy.com/2016/03/algs-1.3/index.html" />
+    <script type="text/javascript">
+        var host = "libhappy.com";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="LibHappy">
+    <title>普林斯顿算法（1.3）并查集（union-find算法） - LibHappy</title>
+    <meta name="author" content="Arthur">
+    
+    
+        <link rel="icon" href="https://libhappy.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来以确定是否需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="普林斯顿算法（1.3）并查集（union-find算法）">
+<meta property="og:url" content="https://libhappy.com/2016/03/algs-1.3/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来以确定是否需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。">
+<meta property="og:image" content="https://farm2.staticflickr.com/1532/25760901136_9e84ce6bf4.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1593/25176100634_abf63e651b.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1664/25780508646_20a98f07fd_b.jpg">
+<meta property="og:image" content="https://farm2.staticflickr.com/1642/25711574351_abe5a691b8.jpg">
+<meta property="og:updated_time" content="2016-03-15T10:18:56.202Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="普林斯顿算法（1.3）并查集（union-find算法）">
+<meta name="twitter:description" content="假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来以确定是否需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
+    
+    
+        
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
+        
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-68985881-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">LibHappy</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+            </a>
+            <span class="sidebar-profile-name">Arthur</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/timeline"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-history"></i>
+                    <span class="sidebar-button-desc">Timeline</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-info-circle"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://git.libhappy.com/explore" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-git-square"></i>
+                    <span class="sidebar-button-desc">Git</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            普林斯顿算法（1.3）并查集（union-find算法）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sat Mar 12 2016 12:15:03 GMT+0800">
+	
+		    Mar 12, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来以确定是否需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。</p>
+<a id="more"></a>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态连通性问题"><span class="toc-text">动态连通性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计算法"><span class="toc-text">设计算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速查找"><span class="toc-text">快速查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-text">算法分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速合并"><span class="toc-text">快速合并</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析-1"><span class="toc-text">算法分析</span></a></li></ol></li></ol></div>
+<h1 id="动态连通性问题">动态连通性问题</h1><h2 id="概念">概念</h2><p>给出一系列的对象时，让其支持以下的两个操作：</p>
+<ul>
+<li>判断两个对象是否相连</li>
+<li>使两个对象相连</li>
+</ul>
+<p>这里以整数代表对象，有0-9共十个整数，当给出一个整数对（a, b）时表示将整数a和b相连（如果a、b不相连）。如下图所示：
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1532/25760901136_9e84ce6bf4.jpg" title="动态连通性问题" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1532/25760901136_9e84ce6bf4.jpg" alt="动态连通性问题"></a></div></p>
+<p>随着整数对的输入，十个整数的连通性会发生变化，这就是<strong>动态连通性问题</strong>。</p>
+<p>在动态连通性问题中，我们假设“相连”是一种等价关系，也就意味着它具有：</p>
+<ul>
+<li>自反性：p和p是相连的</li>
+<li>对称性：如果p和q是相连的，那么q和p也是相连的</li>
+<li>传递性：如果p和q是相连的且q和r是相连的，那么p和r是相连的。</li>
+</ul>
+<p>在所有给出的对象中，所有相连的一组对象称为<strong>连通分量（Connected component）</strong>。如上图中最后一行的（0, 1, 2, 5, 6, 7）和（3, 4, 8, 9）分别为两个连通分量。</p>
+<h2 id="应用">应用</h2><ul>
+<li>计算机网络：判断网络中的计算机是否可以通过已存在的连接直接通信；</li>
+<li>社交网络中的朋友关系：将朋友关系当作相连，判断两个人之间的朋友关系；</li>
+<li>计算机芯片中晶体管的连接问题：判断芯片中晶体管是否相连；</li>
+<li>变量名的等价性：某些编程语言（如FORTRAN）中允许声明两个等价的变量名，判断两个给定的变量名是否等价；</li>
+<li>数学集合中的元素：元素可能属于不同的集合，将元素“相连”表示将两个元素所属的集合合并成一个集合。</li>
+</ul>
+<p>如在下图所示的所有连接中判断p和q点之间是否相连。
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1593/25176100634_abf63e651b.jpg" title="动态连通性问题示例-寻找两点之间的连接" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1593/25176100634_abf63e651b.jpg" alt="动态连通性问题示例-寻找两点之间的连接"></a></div></p>
+<h1 id="设计算法">设计算法</h1><p>在为动态连通性问题设计算法之前要精确的定义问题，动态连通性问题只要求给出两个点是否相连，并不要求给出具体的连接路径，至于得到连接路径的问题，可以通过<em>深度优先搜索（DFS）</em>算法来解决。</p>
+<p>在该算法中，要实现以下操作：</p>
+<ul>
+<li>Find：给出的对象p属于哪个分量；</li>
+<li>Connected：对象p和q是否相连；</li>
+<li>Union：连接对象p和q并将它们所属的分量合并为一个分量。</li>
+</ul>
+<p>那么判断两个对象是否相连的最直观简答的方法就是判断它们所属的分量是否相同。所对应的union-find算法API如下：</p>
+<p>[union-find算法API]
+| public class UF |  |  |
+|—-:|:—-|:—-|
+|  | UF(int N) | 以整数标识(0到N-1)初始化N个触点 |
+| void | union(int p, int q) | 在p和q之间添加一条连接 |
+| int | find(int p) | 返回p所在分量的标识符 |
+| boolean | connected(int p , int q) | 判断p和q是否相连 |
+| int | count() | 所有连通分量的数量 |</p>
+<p>在这份API中，用整数表示一个对象（借用网络中的术语，将对象称为<em>触点</em>），那么N个触点就用0到N-1的整数标识。用一个以触点为索引的数组作为基本的数据结构来表示所有的分量，使用分量中的某个触点的名称作为分量的标识符。初始化时触点之间都不相连，因此有N个分量，每个触点构成一个只含有自己的分量。一份初始的代码实现如下：</p>
+<figure class="highlight gradle"><figcaption><span>union-find的实现</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> UF</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;      <span class="comment">//分量id（以触点作为索引）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> <span class="keyword">count</span>;     <span class="comment">//分量的数量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UF(<span class="keyword">int</span> N)</span><br><span class="line">    &#123; <span class="comment">//初始化分量id数组</span></span><br><span class="line">        <span class="keyword">count</span> = N;</span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            id[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">count</span>() &#123; <span class="keyword">return</span> <span class="keyword">count</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> connected(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span><br><span class="line">    &#123; <span class="keyword">return</span> <span class="keyword">find</span>(p) == <span class="keyword">find</span>(q); &#125;</span><br><span class="line">    <span class="comment">// find 及 union方法在之后实现</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">find</span>(<span class="keyword">int</span> p) &#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> union(<span class="keyword">int</span> p, <span class="keyword">int</span> q) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面将分别介绍不同的find()和union()方法的实现。</p>
+<h1 id="快速查找">快速查找</h1><p>既然用分量标识符代表一个分量，那么直接使同一分量中的所有触点的分量标识符相同即可，在判断两个触点的连通情况时只需比较其对应的分量标识符是否相同，即 id[p] == id[q]。那么在实现union()方法时，首先判断p和q是否同属一个分量，如果不是，则需要合并两者所代表的分量。根据同一分量中所有触点的分量标识符相同的原则，遍历整个数组，将所有与id[p]相等的元素值变为id[q]。这样的实现称为<strong>quick-find（快速查找）算法</strong>。</p>
+<h2 id="实现">实现</h2><figure class="highlight objectivec"><figcaption><span>quick-find算法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">int</span> find(<span class="keyword">int</span> p) &#123; <span class="keyword">return</span> <span class="keyword">id</span>[p]; &#125;</span><br><span class="line">public <span class="keyword">void</span> <span class="keyword">union</span>(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 判断p和q是否相连，connected操作</span></span><br><span class="line">    <span class="keyword">int</span> pID = <span class="keyword">id</span>[p];</span><br><span class="line">    <span class="keyword">int</span> qID = <span class="keyword">id</span>[q];</span><br><span class="line">    <span class="keyword">if</span> (pID != qID)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">id</span><span class="variable">.length</span>; i++)</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">id</span>[i] == pID) <span class="keyword">id</span>[i] = qID;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="算法分析">算法分析</h2><p>在quick-find算法中，find()操作的速度很快，但是在union()操作中，每一对处于不同分量的输入都需要遍历整个id[]数组。每个方法执行中访问数组的次数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">内部调用</th>
+<th style="text-align:center">访问数组次数</th>
+<th style="text-align:center">合计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">find()</td>
+<td style="text-align:left"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">union()*</td>
+<td style="text-align:left">判断是否相连</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">N+3 ~ 2N+1</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">检查所有元素</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">改变元素</td>
+<td style="text-align:center">1 ~ N-1</td>
+</tr>
+</tbody>
+</table>
+<p>*假设两个分量需合并</p>
+<p>那么假设使用quick-find算法来解决动态连通性问题并且最后只得到一个连通分量时，至少需要调用N-1次union()方法，即至少要<code>(N+3)(N-1) ~ N^2</code>次访问数组。quick-find算法的复杂度是平方级别的，当数组较大时，运行的效率就较低了。</p>
+<h1 id="快速合并">快速合并</h1><p>在quick-find算法中，find()操作速度很快，而union()操作当需要合并分量时要遍历整个数组因而效率较低。在合并分量时，需要关注的并不是所有的触点，只是与元素p同属一个分量的触点才需要被访问，因此，将同一分量中的触点组织结合起来，当需要修改时直接访问该分量中的触点可以减少无关触点的访问。</p>
+<p>同样是以触点为索引的id[]数组，但其中保存的值不再是相同的分量标识符，而是同一分量中另一个触点（可能为自己）的名称。当实现find()方法时，从给定的触点开始，再由这个触点链接到第三个触点，直到<strong>根触点</strong>——链接指向自己的触点，那么这个根触点就代表了这个分量。当判断两个触点是否相连时，沿着各自的链接得到根触点后比较根触点是否相同即可。</p>
+<p>在实现union()方法时，为了保证合并后的两个分量中的所有触点的根触点相同，直接将其中一个分量的根触点链接到另一个分量的根触点上就可以快速的合并两个分量。因此这个算法叫做quick-union（快速合并）算法。</p>
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1664/25780508646_20a98f07fd_b.jpg" title="quick-union算法示意图" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1664/25780508646_20a98f07fd_b.jpg" alt="quick-union算法示意图"></a></div>
+<p>从上图的quick-union算法示意图可以看出，quick-union算法中采用了树结构来取代quick-find中使用的数组来组织元素，实现高效的元素查找与修改。</p>
+<h2 id="实现-1">实现</h2><figure class="highlight gradle"><figcaption><span>quick-union算法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">find</span>(<span class="keyword">int</span> p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (p != id[p]) p = id[p];</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> union(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> pRoot = <span class="keyword">find</span>(p);</span><br><span class="line">    <span class="keyword">int</span> qRoot = <span class="keyword">find</span>(q);</span><br><span class="line">    <span class="keyword">if</span> (pRoot != qRoot)</span><br><span class="line">    &#123;</span><br><span class="line">        id[pRoot] = qRoot;</span><br><span class="line">        <span class="keyword">count</span>--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="算法分析-1">算法分析</h2><p>quick-union算法看起来比quick-union算法更快，因为它不需要在每次合并分量时遍历整个数组。但是quick-union算法的性能依赖输入的特点。在最好的情况下，find()方法只需要访问数组一次就可以得到根触点，此时的算法复杂度是线性级别的。但是想象一下这种情况：输入的整数对是完全有序的0-1，0-2，0-3等，N-1对之后N个触点将全部处相同的分量之中（如下图所示）。此时find()操作仍然需要2N+1次数组访问，此时的算法复杂度为平方级别。</p>
+<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1642/25711574351_abe5a691b8.jpg" title="quick-union算法最坏情况示意图" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1642/25711574351_abe5a691b8.jpg" alt="quick-union算法最坏情况示意图"></a></div>
+<p>因此，quick-union算法可以看做是对quick-find算法的一种改良，它解决了quick-find算法中union()操作总是线性级别的问题。但quick-union算法仍然存在问题，它不是在所有输入情况下都比quick-find算法快。在下一篇文章中将介绍对quick-union算法的优化，以达到更好的性能。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/union-find/">union-find</a> <a class="tag tag--primary tag--small t-link" href="/tags/并查集/">并查集</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.2/" data-tooltip="普林斯顿算法（1.2）算法分析">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/algs-1.3/"
+     data-title="普林斯顿算法（1.3）并查集（union-find算法）" data-url="https://libhappy.com/2016/03/algs-1.3/">
+</div>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.2/" data-tooltip="普林斯顿算法（1.2）算法分析">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/03/algs-1.3/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">Arthur</h4>
+        
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Whatever</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','xKFF8yFHuuQLQqpiGZt3','2.0.0');
+    </script>
+
+
+</html>
