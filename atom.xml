@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://libhappy.com/"/>
-  <updated>2016-03-15T10:18:56.202Z</updated>
+  <updated>2016-03-15T10:21:38.305Z</updated>
   <id>https://libhappy.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="https://libhappy.com/2016/03/algs-1.3/"/>
     <id>https://libhappy.com/2016/03/algs-1.3/</id>
     <published>2016-03-12T04:15:03.000Z</published>
-    <updated>2016-03-15T10:18:56.202Z</updated>
+    <updated>2016-03-15T10:21:38.305Z</updated>
     <content type="html"><![CDATA[<p>假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来以确定是否需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。</p>
 <a id="more"></a>
 <!--toc-->
@@ -55,14 +55,42 @@
 <li>Union：连接对象p和q并将它们所属的分量合并为一个分量。</li>
 </ul>
 <p>那么判断两个对象是否相连的最直观简答的方法就是判断它们所属的分量是否相同。所对应的union-find算法API如下：</p>
-<p>[union-find算法API]
-| public class UF |  |  |
-|—-:|:—-|:—-|
-|  | UF(int N) | 以整数标识(0到N-1)初始化N个触点 |
-| void | union(int p, int q) | 在p和q之间添加一条连接 |
-| int | find(int p) | 返回p所在分量的标识符 |
-| boolean | connected(int p , int q) | 判断p和q是否相连 |
-| int | count() | 所有连通分量的数量 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">public class UF</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">UF(int N)</td>
+<td style="text-align:left">以整数标识(0到N-1)初始化N个触点</td>
+</tr>
+<tr>
+<td style="text-align:right">void</td>
+<td style="text-align:left">union(int p, int q)</td>
+<td style="text-align:left">在p和q之间添加一条连接</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">find(int p)</td>
+<td style="text-align:left">返回p所在分量的标识符</td>
+</tr>
+<tr>
+<td style="text-align:right">boolean</td>
+<td style="text-align:left">connected(int p , int q)</td>
+<td style="text-align:left">判断p和q是否相连</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">count()</td>
+<td style="text-align:left">所有连通分量的数量</td>
+</tr>
+</tbody>
+</table>
 <p>在这份API中，用整数表示一个对象（借用网络中的术语，将对象称为<em>触点</em>），那么N个触点就用0到N-1的整数标识。用一个以触点为索引的数组作为基本的数据结构来表示所有的分量，使用分量中的某个触点的名称作为分量的标识符。初始化时触点之间都不相连，因此有N个分量，每个触点构成一个只含有自己的分量。一份初始的代码实现如下：</p>
 <figure class="highlight gradle"><figcaption><span>union-find的实现</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> UF</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;      <span class="comment">//分量id（以触点作为索引）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> <span class="keyword">count</span>;     <span class="comment">//分量的数量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UF(<span class="keyword">int</span> N)</span><br><span class="line">    &#123; <span class="comment">//初始化分量id数组</span></span><br><span class="line">        <span class="keyword">count</span> = N;</span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            id[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">count</span>() &#123; <span class="keyword">return</span> <span class="keyword">count</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> connected(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span><br><span class="line">    &#123; <span class="keyword">return</span> <span class="keyword">find</span>(p) == <span class="keyword">find</span>(q); &#125;</span><br><span class="line">    <span class="comment">// find 及 union方法在之后实现</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">find</span>(<span class="keyword">int</span> p) &#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> union(<span class="keyword">int</span> p, <span class="keyword">int</span> q) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面将分别介绍不同的find()和union()方法的实现。</p>
