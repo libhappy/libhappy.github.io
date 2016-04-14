@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Happy Life, Happy Coding.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://libhappy.com/"/>
-  <updated>2016-03-16T11:36:38.031Z</updated>
+  <updated>2016-04-14T09:27:05.171Z</updated>
   <id>https://libhappy.com/</id>
   
   <author>
@@ -15,11 +15,193 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化]]></title>
+    <link href="https://libhappy.com/2016/04/algs-4.5/"/>
+    <id>https://libhappy.com/2016/04/algs-4.5/</id>
+    <published>2016-04-14T05:18:29.000Z</published>
+    <updated>2016-04-14T09:27:05.171Z</updated>
+    <content type="html"><![CDATA[<p>在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及其对应的路径。</p>
+<a id="more"></a>
+<!--toc-->
+<p>SAP 算法在许多领域都有应用，比如在生物进化学中，所有生物的进化历程可以概括为一个无环有向图（参见 <a href="https://en.wikipedia.org/wiki/Tree_of_life_%28biology%29" target="_blank" rel="external">维基百科:Tree of life(biology)</a>），那么 SAP 算法可以在该有向图中找出两种生物的最近共同祖先。
+<div class="figure center nocaption"><a class="fancybox" href="https://c2.staticflickr.com/2/1622/26328018862_a7ab383659_o.png" title="Tree of Life" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg" alt="Tree of Life"></a></div></p>
+<h1 id="算法简介及API">算法简介及API</h1><h2 id="辅助类">辅助类</h2><p>以下为提供的辅助类：</p>
+<ul>
+<li>Digraph (有向图类)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">public class Digraph</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">Digraph(int V)</td>
+<td style="text-align:left">初始化有 V 个节点的 Digraph</td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">Digraph(In in)</td>
+<td style="text-align:left">从输入初始化 Digraph</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">V()</td>
+<td style="text-align:left">返回 Digraph 的节点个数 V</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">E()</td>
+<td style="text-align:left">返回 Digraph 的边个数 E</td>
+</tr>
+<tr>
+<td style="text-align:right">void</td>
+<td style="text-align:left">addEdge(int v, int w)</td>
+<td style="text-align:left">添加一条从 v 指向 w 的边</td>
+</tr>
+<tr>
+<td style="text-align:right">Iterable<integer></integer></td>
+<td style="text-align:left">adj(int v)</td>
+<td style="text-align:left">返回节点 v 的所有指出节点（此例中即为父节点）</td>
+</tr>
+<tr>
+<td style="text-align:right">Digraph</td>
+<td style="text-align:left">reverse()</td>
+<td style="text-align:left">返回反转所有边后的 Digraph</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>BreadthFirstSearchPath (利用广度搜索的最短路径类)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">public class BreadthFirstSearchPath</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">BreadthFirstSearchPath(Digraph G, int s)</td>
+<td style="text-align:left">初始化类</td>
+</tr>
+<tr>
+<td style="text-align:right">boolean</td>
+<td style="text-align:left">hasPathTo(int v)</td>
+<td style="text-align:left">从起点 s 是否能够到达 v</td>
+</tr>
+<tr>
+<td style="text-align:right">Iterable<integer></integer></td>
+<td style="text-align:left">pathTo(int v)</td>
+<td style="text-align:left">返回从起点 s 到节点 v 的路径</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">disTo(int v)</td>
+<td style="text-align:left">返回从起点 s 到节点 v 的路径长度*</td>
+</tr>
+</tbody>
+</table>
+<p>*以下使用 <code>distance(v -&gt; s)</code> 代表方法 <code>BreadthFirstSearchPath(G, v).disTo(s)</code></p>
+<h2 id="SAP">SAP</h2><table>
+<thead>
+<tr>
+<th style="text-align:right">public class SAP</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">SAP(Digraph G)</td>
+<td style="text-align:left">初始化类</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">length(int v, int w)</td>
+<td style="text-align:left">v 与 w 之间的 SAP 路径长度（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">ancestor(int v, int w)</td>
+<td style="text-align:left">v 与 w 之间的 SAP 祖先节点（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">length(Iterable<integer> v, Iterable<integer> w)</integer></integer></td>
+<td style="text-align:left">节点集v 与 节点集w 之间的 SAP 路径长度（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">ancestor(Iterable<integer> v, Iterable<integer> w)</integer></integer></td>
+<td style="text-align:left">节点集v 与 节点集w 之间的 SAP 祖先节点（不存在返回 -1）</td>
+</tr>
+</tbody>
+</table>
+<p>SAP 类需要在初始化时接受一个Digraph类的实例，length() 及 ancestor() 方法分别接收两个参数（节点或节点集）并返回找到的 SAP 最短路径长度及节点，当不存在该 common ancestor 时返回 -1。当接收的参数为节点集时，返回值为节点集 v 中任一节点与节点集 w 中任一节点的所有 SAP 中长度最小的一个。</p>
+<h1 id="全局遍历">全局遍历</h1><p>在 Digraph 中寻找两个节点 v， w 之间的 SAP 最简单的粗暴的方式就是直接遍历。
+类 <code>BreadthFirstSearchPath(Digraph G, int v)</code> 初始化后，通过方法 <code>hasPathTo(int s)</code> 能够判断是否有从 v 到 s 的路径，方法 <code>disTo(int s)</code> 能够得到从 v 到 s 的路径长度。
+当某个节点同时存在从 v 与 w 出发的路径时，则该节点为 common ancestor，遍历 Digraph 中所有节点找出所有的 common ancestor，并找出其中到 v 与 w 路径之和最短的即可。</p>
+<p>该方法能够找出所需的 SAP ，但遍历 Digraph 中的所有节点运行效率极低。</p>
+<h1 id="镜面法">镜面法</h1><p>参考物理中寻找通过镜面反射的最短光路问题。将 SAP 节点称为 a ，那么在 <code>Digraph</code> 中 <code>distance(v -&gt; a) + distance(w -&gt; a)</code> 最小等价于 <code>Digraph</code> 中 <code>distance(v -&gt; a)</code> 与 <code>Digraph.reverse</code> 中 <code>distance(a&#39; -&gt; w&#39;)</code> 之和最小。</p>
+<p>建立一个大小为 2*V 的 <code>NewDigraph</code>，其中 V 个节点代表 <code>Digraph</code> 中的节点（s），并按照 <code>Digraph</code> 中的边连接；另外 V 个节点代表 <code>Digraph.reverse</code> 中的节点（s’），并按照 <code>Digraph.reverse</code> 中的边连接（镜子中的虚像，边的连接方向相反）。然后将代表 <code>Digraph</code> 中每个节点 s 与代表 <code>Digraph.reverse</code> 中的对应节点 s’ 连接起来 <code>NewDigraph.addEdge(s -&gt; s&#39;)</code> (将实像与虚像相连)。这样，当寻找 v 与 w 的 SAP 时，在 <code>NewDigraph</code> 中寻找 v -&gt; w’ 的最短路径即可（Breadth First Search），而该最短路径比 SAP 路径长 1 （多 a -&gt; a’ 一步），SAP 路径的 common ancestor 即为穿过镜子的点 a (在路径中表现为 a 与 a’ 相连，且区分实像与虚像点)。</p>
+<p>该方法实现起来简单，但弊端十分明显。其将有向图节点数增加了一倍（V -&gt; 2*V） 边数增加了 V+E （E -&gt; E+E+V）,那么程序所占用的内存也要增加不止一倍。更为重要的是，虽然在这个扩大的有向图中能够通过 BFS 找到 SAP 但需要遍历的节点与边数大大增加，程序的运行效率依旧很低。</p>
+<h1 id="从起点遍历">从起点遍历</h1><p>既然要寻找以 v 和 w 为起点的路径，那么直接从 v 和 w 开始遍历会更为有利。搜索的执行步骤如下：</p>
+<ol>
+<li>将起点 v 和 w 加入 Queue 中，v 和 w 与遍历起点的距离 distanceToStart 为0；</li>
+<li>从 Queue 中取出一个节点 s ，如果其父节点（<code>Digraph.adj()</code>）未被遍历，将其加入队列，对应的与遍历起点的距离为 distanceToStart(s) + 1，标记为已遍历；</li>
+<li>测试起点 v, w 是否都有路径到达 s，如果有，则 s 为 common ancestor，记录该节点，并将该节点到 v， w 的距离之和( <code>distance(v -&gt; s) + distance(w -&gt; s)</code> )设置为当前找到的 SAP 路径长度；</li>
+<li>重复步骤 2-4 直到 Queue 为空。</li>
+</ol>
+<p>该方法与 Breadth First Search 的思想相似。但仍可以继续优化，设置提前结束条件。在 Queue 中读出的节点与遍历起点的距离是递增的，而且 s 到 起点 v， w 的距离之和一定不小于 s 与遍历起点的距离（v， w 中的一个就是遍历起点，到另一个的距离一定 &gt;= 0）。当 s 与遍历起点的距离大于当前找到的最短路径长度时，则可以提前结束遍历，因为之后找到的所有顶点到 v， w 的距离之和一定更大。</p>
+<p>该方法只会遍历有限的节点，当找到的 SAP 路径长度足够小时会提前结束遍历，能够快速找出 SAP。</p>
+<h1 id="自定义_BreadthFirstSearchPath">自定义 BreadthFirstSearchPath</h1><p>如果分析上节<code>从起点遍历</code>中的方法会发现，执行效率进一步提高的瓶颈来自于类 <code>BreadthFirstSearchPath</code> 的初始化。</p>
+<p>使用方法 <code>disTo(s)</code> 得到 <code>distance(v -&gt; s)</code> 之前需要向 <code>BreadthFirstSearchPath</code> 传入 <code>Digraph</code> 与路径起点 <code>v</code> 进行初始化。 在该类的实现中，初始化过程会使用 Breadth First Search 遍历起点 <code>v</code> 的所有 ancestor 节点并记录到起点的距离，之后在调用方法 <code>disTo(s)</code> 时直接返回保存的距离值。</p>
+<p>换言之，在寻找 v 与 w 的 SAP 之前，要预先计算 v 与 w 的所有 ancestor 节点的距离，再根据得到的距离寻找 SAP。但是不是每次寻找都会用到所有的 ancestor 节点，特别是 SAP 节点距离起点较近时，大部分 ancestor 节点的距离计算是“毫无意义”的。因此，为了进一步提高算法效率，可以实现自己的 BreadthFirstSearchPath 方法，将距离的计算与 common ancestor 的寻找结合到一次 Breadth First Search 中，在找到所需 SAP 时停止寻找。基本执行步骤与上节中的搜索执行步骤十分相似，只是需要保存的数据不同：</p>
+<ol>
+<li>将起点 v 和 w 加入 Queue 中同时区分标记节点的来源，v 和 w 与各自遍历起点的距离 distanceToV (或 distanceToW) 为0；</li>
+<li>从 Queue 中取出一个节点 s ，如果 s 到其来源起点的距离大于当前已知的 SAP 路径长度，停止遍历；
+3.如果 s 的父节点（<code>Digraph.adj()</code>）未被 s 的来源方向遍历，将其加入队列，其与来源遍历起点的距离为 distanceToV(s) + 1（或 distanceToW(s) + 1），同时标记为已从来源方向遍历；</li>
+<li>测试 s 是否已被 v， w 两个方向遍历，如果是，则 s 为 common ancestor，记录该节点，并将该节点到 v， w 的距离之和( <code>distanceToV(s) + distanceTow(s)</code> )设置为当前找到的最短路径长度；</li>
+<li>重复步骤 2-5 直到 Queue 为空。</li>
+</ol>
+<h2 id="顶点集输入">顶点集输入</h2><p>前文讨论了单顶点输入下的算法，对于顶点集（多顶点）输入的情况处理与单顶点相同，只是将每个方向的起点由一个增加为多个，由于 Breadth First Search 的特性，在遍历过程中找到的顶点与起点的距离一定是与所有的来源方向起点距离中最小的一个。最后得到的结果也会符合 节点集 v 中任一节点与节点集 w 中任一节点的所有 SAP 中长度最小的一个的要求。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及其对应的路径。</p>]]>
+    
+    </summary>
+    
+      <category term="Algorithms" scheme="https://libhappy.com/tags/Algorithms/"/>
+    
+      <category term="Princeton" scheme="https://libhappy.com/tags/Princeton/"/>
+    
+      <category term="algs" scheme="https://libhappy.com/tags/algs/"/>
+    
+      <category term="union-find" scheme="https://libhappy.com/tags/union-find/"/>
+    
+      <category term="并查集" scheme="https://libhappy.com/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    
+      <category term="算法" scheme="https://libhappy.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="Algorithms" scheme="https://libhappy.com/categories/Algorithms/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[普林斯顿算法（1.4）quick-union算法的优化]]></title>
     <link href="https://libhappy.com/2016/03/algs-1.4/"/>
     <id>https://libhappy.com/2016/03/algs-1.4/</id>
     <published>2016-03-13T05:14:36.000Z</published>
-    <updated>2016-03-16T11:36:38.031Z</updated>
+    <updated>2016-03-16T11:36:38.000Z</updated>
     <content type="html"><![CDATA[<p>在动态连通性问题中，quick-union算法改进了quick-find算法中union()方法的执行速度，但是并不能在所有输入情况下都提升执行速度。以下来介绍对于quick-union算法的一些优化。</p>
 <a id="more"></a>
 <!--toc-->
@@ -108,7 +290,7 @@
     <link href="https://libhappy.com/2016/03/algs-1.3/"/>
     <id>https://libhappy.com/2016/03/algs-1.3/</id>
     <published>2016-03-12T04:15:03.000Z</published>
-    <updated>2016-03-16T09:20:50.736Z</updated>
+    <updated>2016-03-16T09:20:50.000Z</updated>
     <content type="html"><![CDATA[<p>假设在互联网中有两台计算机需要互相通信，那么该怎么确定它们之间是否已经连接起来还是需要架设新的线路连接这两台计算机。这就是动态连通性问题。动态连通性问题在日常生活中十分常见，比如上文所说的通信网络中的连通性问题，比如物理化学中的渗流问题。通过并查集这种数据结构及union-find算法可以解决动态连通性问题。</p>
 <a id="more"></a>
 <!--toc-->
@@ -259,7 +441,7 @@
     <link href="https://libhappy.com/2016/03/algs-1.2/"/>
     <id>https://libhappy.com/2016/03/algs-1.2/</id>
     <published>2016-03-11T05:01:25.000Z</published>
-    <updated>2016-03-12T14:04:59.873Z</updated>
+    <updated>2016-03-12T14:04:59.000Z</updated>
     <content type="html"><![CDATA[<p>随着计算机处理数据量的增大，程序运行时消耗的时间与内存空间也逐步增加。对于同一个问题，不同的算法解决方案所耗费的代价不尽相同，对算法的性能进行合理、准确的分析可以为算法的选择、改进提供可靠的依据。
 <a id="more"></a>
 <!--toc--></p>
@@ -583,7 +765,7 @@
     <link href="https://libhappy.com/2016/03/algs-1.1/"/>
     <id>https://libhappy.com/2016/03/algs-1.1/</id>
     <published>2016-03-10T08:00:45.000Z</published>
-    <updated>2016-03-10T12:38:32.855Z</updated>
+    <updated>2016-03-10T12:38:32.000Z</updated>
     <content type="html"><![CDATA[<p>链表是一种基础的数据结构，在某些情况下链表比数组更适合用来表示集合类的抽象数据类型。链表的定义如下：</p>
 <blockquote>
 <p>链表是一种递归的数据结构，它或者为空（null），或者是指向一个节点（node）的引用，该节点含有一个泛型的元素和一个指向另一条链表的引用。</p>
@@ -637,7 +819,7 @@
     <link href="https://libhappy.com/2016/03/algs-1.0/"/>
     <id>https://libhappy.com/2016/03/algs-1.0/</id>
     <published>2016-03-07T04:59:13.000Z</published>
-    <updated>2016-03-16T09:23:01.781Z</updated>
+    <updated>2016-03-16T09:23:01.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>许多基础数据类型</strong>都和对象的集合有关。具体来说，数据类型的值就是一组对象的集合，所有的操作都是关于添加、删除或是访问集合中的对象。</p>
 </blockquote>
@@ -703,7 +885,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
     <link href="https://libhappy.com/2016/03/algs-0.0/"/>
     <id>https://libhappy.com/2016/03/algs-0.0/</id>
     <published>2016-03-07T03:46:52.000Z</published>
-    <updated>2016-03-10T04:43:00.241Z</updated>
+    <updated>2016-03-10T04:43:00.000Z</updated>
     <content type="html"><![CDATA[<p>在Coursera上学习了普林斯顿的算法公开课（<a href="https://www.coursera.org/course/algs4partI" target="_blank" rel="external">课程链接</a>， <a href="http://algs4.cs.princeton.edu/home/" target="_blank" rel="external">配套教材网站</a>）。收获很多，对基本的排序，查找算法也有了一些了解，但是时间一久就全忘记了。在接下来的文章中按照课程及配套教材对重要的知识点做一个总结，当作复习与备忘。
 <a id="more"></a>
 <!--toc--></p>
@@ -773,7 +955,7 @@ E.W.Dijkstra在20世纪60年代发明了一个非常简单的算法来计算算�
     <link href="https://libhappy.com/2016/01/build-gogs-service/"/>
     <id>https://libhappy.com/2016/01/build-gogs-service/</id>
     <published>2016-01-03T09:01:51.000Z</published>
-    <updated>2016-03-16T09:40:52.353Z</updated>
+    <updated>2016-03-16T09:40:52.000Z</updated>
     <content type="html"><![CDATA[<p>Git是非常流行的版本管理系统，很多的网站也提供了免费的Git服务，如全球知名的最大源代码托管服务<a href="http://github.com" target="_blank" rel="external">Github</a>。但是大部分的Git源代码托管服务都只对开放的代码托管免费，对私有的代码托管需要收取一定费用。同时，个人的一些代码有时由于各种原因可能并不适合开放，比如：练习用代码，对Git服务提供商的隐私性及安全性有所担忧，包含一些商业机密等等。此时可以搭建自己的Git服务器来托管代码。
 <a id="more"></a>
 应用最广泛的Git托管程序要数<a href="http://gitlab.com" target="_blank" rel="external">Gitlab</a>，它采用Ruby on Rails，可以实现一个自托管的Git项目仓库，并可以通过网页对公开的或者私人项目进行访问。其功能与Github相似，但搭建过程稍复杂且对系统的配置要求较高。因此我选用了另一个方案Gogs。
@@ -920,7 +1102,7 @@ Gogs默认监听3000端口，此时用浏览器打开服务器IP的3000端口(�
     <link href="https://libhappy.com/2015/12/vps-protect/"/>
     <id>https://libhappy.com/2015/12/vps-protect/</id>
     <published>2015-12-14T01:59:04.000Z</published>
-    <updated>2016-01-29T05:27:12.379Z</updated>
+    <updated>2016-01-29T05:27:12.000Z</updated>
     <content type="html"><![CDATA[<p>在购买自己的VPS之后，首先要做好的就是安全防护工作，本文将主要介绍以下方式来提高VPS的安全防护能力：</p>
 <ul>
 <li>修改ssh默认端口，开启密钥登陆并关闭简单密码登录</li>
@@ -1060,7 +1242,7 @@ Gogs默认监听3000端口，此时用浏览器打开服务器IP的3000端口(�
     <link href="https://libhappy.com/2015/10/build-hexo-blog3/"/>
     <id>https://libhappy.com/2015/10/build-hexo-blog3/</id>
     <published>2015-10-30T14:32:02.000Z</published>
-    <updated>2016-03-16T09:51:57.510Z</updated>
+    <updated>2016-03-16T09:51:57.000Z</updated>
     <content type="html"><![CDATA[<p>在之前的文章中介绍了如何<a href="/2015/10/bulid-hexo-blog1/">用hexo来搭建静态博客</a>以及<a href="/2015/10/bulid-hexo-blog2/">将网页部署至github及gitcafe</a>。完成部署之后，可以通过github及gitcafe分配的pages二级域名来访问博客，比如<code>username.github.io</code>。通过将自己的博客绑定至自己购买的域名可以更加方便的访问，下面将介绍如何购买一个域名及将自定义域名绑定至github及gitcafe。
 <a id="more"></a>
 <!--toc--></p>
@@ -1096,7 +1278,7 @@ Gogs默认监听3000端口，此时用浏览器打开服务器IP的3000端口(�
     <link href="https://libhappy.com/2015/10/build-hexo-blog2/"/>
     <id>https://libhappy.com/2015/10/build-hexo-blog2/</id>
     <published>2015-10-27T08:31:14.000Z</published>
-    <updated>2016-03-16T09:51:18.153Z</updated>
+    <updated>2016-03-16T09:51:18.000Z</updated>
     <content type="html"><![CDATA[<p>在<a href="/2015/10/bulid-hexo-blog1/">上一篇</a>文章中介绍了如何在本地搭建Hexo以及用Hexo书写博客的基本操作。在这篇文章中将介绍如何将创建的博客发布至github及gitcafe的静态页面。通过为github及gitcafe添加ssh验证来跳过推送页面时输入用户名及密码。
 <a id="more"></a>
 <!--toc--></p>
@@ -1169,7 +1351,7 @@ gitcafe 中的设置完全相同，只是其SSH key管理的设置在<code>账�
     <link href="https://libhappy.com/2015/10/bulid-hexo-blog1/"/>
     <id>https://libhappy.com/2015/10/bulid-hexo-blog1/</id>
     <published>2015-10-26T02:38:40.000Z</published>
-    <updated>2016-03-16T09:54:11.144Z</updated>
+    <updated>2016-03-16T09:54:11.000Z</updated>
     <content type="html"><![CDATA[<p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 是一个基于Node.js的开源静态博客程序，通过markdown书写文章，生成的静态网页可以托管在github及gitcafe上。通过<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>可以方便的创建自己的博客，本博客即使用Hexo创建并托管在github及gitcafe上。
 <a id="more"></a>
 <!--toc--></p>
@@ -1248,7 +1430,7 @@ gitcafe 中的设置完全相同，只是其SSH key管理的设置在<code>账�
     <link href="https://libhappy.com/2015/08/python-usage-super/"/>
     <id>https://libhappy.com/2015/08/python-usage-super/</id>
     <published>2015-08-16T01:46:43.000Z</published>
-    <updated>2016-03-16T09:56:36.385Z</updated>
+    <updated>2016-03-16T09:56:36.000Z</updated>
     <content type="html"><![CDATA[<p>Python中子类要调用父类的方法（method），在python2.2之前通常的写法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__inti__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter A"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave A"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"enter B"</span></span><br><span class="line">        A.__init__(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"leave B"</span></span><br></pre></td></tr></table></figure>
 <p>即使用非绑定的类方法（用类名来引用），并在参数列表中引入待绑定的对象（self），从而达到调用父类的目的。这样做的缺点是，当一个子类的父类发生变化时（如类B的父类由A变为C时），必须遍历整个类定义，把所有的通过非绑定的方法的类名全部替换过来。</p>
@@ -1312,7 +1494,7 @@ gitcafe 中的设置完全相同，只是其SSH key管理的设置在<code>账�
     <link href="https://libhappy.com/2015/08/python-class-re-order/"/>
     <id>https://libhappy.com/2015/08/python-class-re-order/</id>
     <published>2015-08-15T08:14:10.000Z</published>
-    <updated>2016-01-14T06:36:28.090Z</updated>
+    <updated>2016-01-14T06:36:28.000Z</updated>
     <content type="html"><![CDATA[<p>Python 的类分为经典类与新式类。Python2.7之前的版本中可以采用经典类，经典类继承父类的顺序采用深度优先算法，但在Python3之后的版本就只承认新式类了。新式类在python2.2之后的版本中都可以使用，新式类的继承顺序采用C3算法，其继承顺序可以通过查看MRO列表获取。
 <a id="more"></a>
 <!--toc--></p>
@@ -1392,7 +1574,7 @@ gitcafe 中的设置完全相同，只是其SSH key管理的设置在<code>账�
     <link href="https://libhappy.com/2015/07/pyqt4-tutorial-01/"/>
     <id>https://libhappy.com/2015/07/pyqt4-tutorial-01/</id>
     <published>2015-07-07T09:30:17.000Z</published>
-    <updated>2016-01-29T05:14:57.003Z</updated>
+    <updated>2016-01-29T05:14:57.000Z</updated>
     <content type="html"><![CDATA[<p>PyQt是Qt库的Python版本，该教程是 <a href="http://zetcode.com/gui/pyqt4/" target="_blank" rel="external">zetcode</a> PyQt4教程的中文翻译。
 本文主要介绍了PyQt4的基本使用方法及基本窗口的绘制。
 <a id="more"></a>

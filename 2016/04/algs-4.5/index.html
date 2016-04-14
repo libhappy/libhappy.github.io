@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <link rel="canonical" href="https://libhappy.com/2016/04/algs-4.5/index.html" />
+    <script type="text/javascript">
+        var host = "libhappy.com";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="LibHappy">
+    <title>普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化 - LibHappy</title>
+    <meta name="author" content="Arthur">
+    
+    
+        <link rel="icon" href="https://libhappy.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化">
+<meta property="og:url" content="https://libhappy.com/2016/04/algs-4.5/index.html">
+<meta property="og:site_name" content="LibHappy">
+<meta property="og:description" content="在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及">
+<meta property="og:image" content="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg">
+<meta property="og:updated_time" content="2016-04-14T09:27:05.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化">
+<meta name="twitter:description" content="在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
+    
+    
+        
+            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
+        
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-68985881-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">LibHappy</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+            </a>
+            <span class="sidebar-profile-name">Arthur</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/timeline"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-history"></i>
+                    <span class="sidebar-button-desc">Timeline</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-info-circle"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://git.libhappy.com/explore" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-git-square"></i>
+                    <span class="sidebar-button-desc">Git</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Thu Apr 14 2016 13:18:29 GMT+0800">
+	
+		    Apr 14, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Algorithms/">Algorithms</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及其对应的路径。</p>
+<a id="more"></a>
+<div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法简介及API"><span class="toc-text">算法简介及API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#辅助类"><span class="toc-text">辅助类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAP"><span class="toc-text">SAP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局遍历"><span class="toc-text">全局遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#镜面法"><span class="toc-text">镜面法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从起点遍历"><span class="toc-text">从起点遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义_BreadthFirstSearchPath"><span class="toc-text">自定义 BreadthFirstSearchPath</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#顶点集输入"><span class="toc-text">顶点集输入</span></a></li></ol></li></ol></div>
+<p>SAP 算法在许多领域都有应用，比如在生物进化学中，所有生物的进化历程可以概括为一个无环有向图（参见 <a href="https://en.wikipedia.org/wiki/Tree_of_life_%28biology%29" target="_blank" rel="external">维基百科:Tree of life(biology)</a>），那么 SAP 算法可以在该有向图中找出两种生物的最近共同祖先。
+<div class="figure center nocaption"><a class="fancybox" href="https://c2.staticflickr.com/2/1622/26328018862_a7ab383659_o.png" title="Tree of Life" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg" alt="Tree of Life"></a></div></p>
+<h1 id="算法简介及API">算法简介及API</h1><h2 id="辅助类">辅助类</h2><p>以下为提供的辅助类：</p>
+<ul>
+<li>Digraph (有向图类)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">public class Digraph</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">Digraph(int V)</td>
+<td style="text-align:left">初始化有 V 个节点的 Digraph</td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">Digraph(In in)</td>
+<td style="text-align:left">从输入初始化 Digraph</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">V()</td>
+<td style="text-align:left">返回 Digraph 的节点个数 V</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">E()</td>
+<td style="text-align:left">返回 Digraph 的边个数 E</td>
+</tr>
+<tr>
+<td style="text-align:right">void</td>
+<td style="text-align:left">addEdge(int v, int w)</td>
+<td style="text-align:left">添加一条从 v 指向 w 的边</td>
+</tr>
+<tr>
+<td style="text-align:right">Iterable<integer></integer></td>
+<td style="text-align:left">adj(int v)</td>
+<td style="text-align:left">返回节点 v 的所有指出节点（此例中即为父节点）</td>
+</tr>
+<tr>
+<td style="text-align:right">Digraph</td>
+<td style="text-align:left">reverse()</td>
+<td style="text-align:left">返回反转所有边后的 Digraph</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>BreadthFirstSearchPath (利用广度搜索的最短路径类)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">public class BreadthFirstSearchPath</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">BreadthFirstSearchPath(Digraph G, int s)</td>
+<td style="text-align:left">初始化类</td>
+</tr>
+<tr>
+<td style="text-align:right">boolean</td>
+<td style="text-align:left">hasPathTo(int v)</td>
+<td style="text-align:left">从起点 s 是否能够到达 v</td>
+</tr>
+<tr>
+<td style="text-align:right">Iterable<integer></integer></td>
+<td style="text-align:left">pathTo(int v)</td>
+<td style="text-align:left">返回从起点 s 到节点 v 的路径</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">disTo(int v)</td>
+<td style="text-align:left">返回从起点 s 到节点 v 的路径长度*</td>
+</tr>
+</tbody>
+</table>
+<p>*以下使用 <code>distance(v -&gt; s)</code> 代表方法 <code>BreadthFirstSearchPath(G, v).disTo(s)</code></p>
+<h2 id="SAP">SAP</h2><table>
+<thead>
+<tr>
+<th style="text-align:right">public class SAP</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:left">SAP(Digraph G)</td>
+<td style="text-align:left">初始化类</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">length(int v, int w)</td>
+<td style="text-align:left">v 与 w 之间的 SAP 路径长度（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">ancestor(int v, int w)</td>
+<td style="text-align:left">v 与 w 之间的 SAP 祖先节点（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">length(Iterable<integer> v, Iterable<integer> w)</integer></integer></td>
+<td style="text-align:left">节点集v 与 节点集w 之间的 SAP 路径长度（不存在返回 -1）</td>
+</tr>
+<tr>
+<td style="text-align:right">int</td>
+<td style="text-align:left">ancestor(Iterable<integer> v, Iterable<integer> w)</integer></integer></td>
+<td style="text-align:left">节点集v 与 节点集w 之间的 SAP 祖先节点（不存在返回 -1）</td>
+</tr>
+</tbody>
+</table>
+<p>SAP 类需要在初始化时接受一个Digraph类的实例，length() 及 ancestor() 方法分别接收两个参数（节点或节点集）并返回找到的 SAP 最短路径长度及节点，当不存在该 common ancestor 时返回 -1。当接收的参数为节点集时，返回值为节点集 v 中任一节点与节点集 w 中任一节点的所有 SAP 中长度最小的一个。</p>
+<h1 id="全局遍历">全局遍历</h1><p>在 Digraph 中寻找两个节点 v， w 之间的 SAP 最简单的粗暴的方式就是直接遍历。
+类 <code>BreadthFirstSearchPath(Digraph G, int v)</code> 初始化后，通过方法 <code>hasPathTo(int s)</code> 能够判断是否有从 v 到 s 的路径，方法 <code>disTo(int s)</code> 能够得到从 v 到 s 的路径长度。
+当某个节点同时存在从 v 与 w 出发的路径时，则该节点为 common ancestor，遍历 Digraph 中所有节点找出所有的 common ancestor，并找出其中到 v 与 w 路径之和最短的即可。</p>
+<p>该方法能够找出所需的 SAP ，但遍历 Digraph 中的所有节点运行效率极低。</p>
+<h1 id="镜面法">镜面法</h1><p>参考物理中寻找通过镜面反射的最短光路问题。将 SAP 节点称为 a ，那么在 <code>Digraph</code> 中 <code>distance(v -&gt; a) + distance(w -&gt; a)</code> 最小等价于 <code>Digraph</code> 中 <code>distance(v -&gt; a)</code> 与 <code>Digraph.reverse</code> 中 <code>distance(a&#39; -&gt; w&#39;)</code> 之和最小。</p>
+<p>建立一个大小为 2*V 的 <code>NewDigraph</code>，其中 V 个节点代表 <code>Digraph</code> 中的节点（s），并按照 <code>Digraph</code> 中的边连接；另外 V 个节点代表 <code>Digraph.reverse</code> 中的节点（s’），并按照 <code>Digraph.reverse</code> 中的边连接（镜子中的虚像，边的连接方向相反）。然后将代表 <code>Digraph</code> 中每个节点 s 与代表 <code>Digraph.reverse</code> 中的对应节点 s’ 连接起来 <code>NewDigraph.addEdge(s -&gt; s&#39;)</code> (将实像与虚像相连)。这样，当寻找 v 与 w 的 SAP 时，在 <code>NewDigraph</code> 中寻找 v -&gt; w’ 的最短路径即可（Breadth First Search），而该最短路径比 SAP 路径长 1 （多 a -&gt; a’ 一步），SAP 路径的 common ancestor 即为穿过镜子的点 a (在路径中表现为 a 与 a’ 相连，且区分实像与虚像点)。</p>
+<p>该方法实现起来简单，但弊端十分明显。其将有向图节点数增加了一倍（V -&gt; 2*V） 边数增加了 V+E （E -&gt; E+E+V）,那么程序所占用的内存也要增加不止一倍。更为重要的是，虽然在这个扩大的有向图中能够通过 BFS 找到 SAP 但需要遍历的节点与边数大大增加，程序的运行效率依旧很低。</p>
+<h1 id="从起点遍历">从起点遍历</h1><p>既然要寻找以 v 和 w 为起点的路径，那么直接从 v 和 w 开始遍历会更为有利。搜索的执行步骤如下：</p>
+<ol>
+<li>将起点 v 和 w 加入 Queue 中，v 和 w 与遍历起点的距离 distanceToStart 为0；</li>
+<li>从 Queue 中取出一个节点 s ，如果其父节点（<code>Digraph.adj()</code>）未被遍历，将其加入队列，对应的与遍历起点的距离为 distanceToStart(s) + 1，标记为已遍历；</li>
+<li>测试起点 v, w 是否都有路径到达 s，如果有，则 s 为 common ancestor，记录该节点，并将该节点到 v， w 的距离之和( <code>distance(v -&gt; s) + distance(w -&gt; s)</code> )设置为当前找到的 SAP 路径长度；</li>
+<li>重复步骤 2-4 直到 Queue 为空。</li>
+</ol>
+<p>该方法与 Breadth First Search 的思想相似。但仍可以继续优化，设置提前结束条件。在 Queue 中读出的节点与遍历起点的距离是递增的，而且 s 到 起点 v， w 的距离之和一定不小于 s 与遍历起点的距离（v， w 中的一个就是遍历起点，到另一个的距离一定 &gt;= 0）。当 s 与遍历起点的距离大于当前找到的最短路径长度时，则可以提前结束遍历，因为之后找到的所有顶点到 v， w 的距离之和一定更大。</p>
+<p>该方法只会遍历有限的节点，当找到的 SAP 路径长度足够小时会提前结束遍历，能够快速找出 SAP。</p>
+<h1 id="自定义_BreadthFirstSearchPath">自定义 BreadthFirstSearchPath</h1><p>如果分析上节<code>从起点遍历</code>中的方法会发现，执行效率进一步提高的瓶颈来自于类 <code>BreadthFirstSearchPath</code> 的初始化。</p>
+<p>使用方法 <code>disTo(s)</code> 得到 <code>distance(v -&gt; s)</code> 之前需要向 <code>BreadthFirstSearchPath</code> 传入 <code>Digraph</code> 与路径起点 <code>v</code> 进行初始化。 在该类的实现中，初始化过程会使用 Breadth First Search 遍历起点 <code>v</code> 的所有 ancestor 节点并记录到起点的距离，之后在调用方法 <code>disTo(s)</code> 时直接返回保存的距离值。</p>
+<p>换言之，在寻找 v 与 w 的 SAP 之前，要预先计算 v 与 w 的所有 ancestor 节点的距离，再根据得到的距离寻找 SAP。但是不是每次寻找都会用到所有的 ancestor 节点，特别是 SAP 节点距离起点较近时，大部分 ancestor 节点的距离计算是“毫无意义”的。因此，为了进一步提高算法效率，可以实现自己的 BreadthFirstSearchPath 方法，将距离的计算与 common ancestor 的寻找结合到一次 Breadth First Search 中，在找到所需 SAP 时停止寻找。基本执行步骤与上节中的搜索执行步骤十分相似，只是需要保存的数据不同：</p>
+<ol>
+<li>将起点 v 和 w 加入 Queue 中同时区分标记节点的来源，v 和 w 与各自遍历起点的距离 distanceToV (或 distanceToW) 为0；</li>
+<li>从 Queue 中取出一个节点 s ，如果 s 到其来源起点的距离大于当前已知的 SAP 路径长度，停止遍历；
+3.如果 s 的父节点（<code>Digraph.adj()</code>）未被 s 的来源方向遍历，将其加入队列，其与来源遍历起点的距离为 distanceToV(s) + 1（或 distanceToW(s) + 1），同时标记为已从来源方向遍历；</li>
+<li>测试 s 是否已被 v， w 两个方向遍历，如果是，则 s 为 common ancestor，记录该节点，并将该节点到 v， w 的距离之和( <code>distanceToV(s) + distanceTow(s)</code> )设置为当前找到的最短路径长度；</li>
+<li>重复步骤 2-5 直到 Queue 为空。</li>
+</ol>
+<h2 id="顶点集输入">顶点集输入</h2><p>前文讨论了单顶点输入下的算法，对于顶点集（多顶点）输入的情况处理与单顶点相同，只是将每个方向的起点由一个增加为多个，由于 Breadth First Search 的特性，在遍历过程中找到的顶点与起点的距离一定是与所有的来源方向起点距离中最小的一个。最后得到的结果也会符合 节点集 v 中任一节点与节点集 w 中任一节点的所有 SAP 中长度最小的一个的要求。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Algorithms/">Algorithms</a> <a class="tag tag--primary tag--small t-link" href="/tags/Princeton/">Princeton</a> <a class="tag tag--primary tag--small t-link" href="/tags/algs/">algs</a> <a class="tag tag--primary tag--small t-link" href="/tags/union-find/">union-find</a> <a class="tag tag--primary tag--small t-link" href="/tags/并查集/">并查集</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.4/" data-tooltip="普林斯顿算法（1.4）quick-union算法的优化">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/04/algs-4.5/"
+     data-title="普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化" data-url="https://libhappy.com/2016/04/algs-4.5/">
+</div>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
+        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/algs-1.4/" data-tooltip="普林斯顿算法（1.4）quick-union算法的优化">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Twitter" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" data-tooltip="View comments" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" data-tooltip="Back to Index" href="#table-of-contents">
+                    <i class="fa fa-list-ul"></i>
+            
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://libhappy.com/2016/04/algs-4.5/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">Arthur</h4>
+        
+            <h5 id="about-card-bio"><p>Happy coding, Happy life.</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Whatever</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'libhappy'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','xKFF8yFHuuQLQqpiGZt3','2.0.0');
+    </script>
+
+
+</html>
