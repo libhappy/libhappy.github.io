@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="LibHappy">
 <meta property="og:description" content="在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及">
 <meta property="og:image" content="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg">
-<meta property="og:updated_time" content="2016-04-14T09:27:05.171Z">
+<meta property="og:updated_time" content="2016-04-14T09:31:09.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="普林斯顿算法（4.5）最短祖先路径（SAP）算法及优化">
 <meta name="twitter:description" content="在有向图（Digraph）中，由一个节点（Vertex）沿着边（Edge）可以到达的节点称为其 ancestor（祖先）。当两个不同节点拥有一个共同 ancestor 时，该 ancestor 称这两个节点的 Common Ancestor （共同祖先），Shortest Ancestral Path （SAP，最短祖先路径）即所有 common ancestor 中到两个节点路径之和最短的一个及">
@@ -401,8 +401,8 @@
 <p>换言之，在寻找 v 与 w 的 SAP 之前，要预先计算 v 与 w 的所有 ancestor 节点的距离，再根据得到的距离寻找 SAP。但是不是每次寻找都会用到所有的 ancestor 节点，特别是 SAP 节点距离起点较近时，大部分 ancestor 节点的距离计算是“毫无意义”的。因此，为了进一步提高算法效率，可以实现自己的 BreadthFirstSearchPath 方法，将距离的计算与 common ancestor 的寻找结合到一次 Breadth First Search 中，在找到所需 SAP 时停止寻找。基本执行步骤与上节中的搜索执行步骤十分相似，只是需要保存的数据不同：</p>
 <ol>
 <li>将起点 v 和 w 加入 Queue 中同时区分标记节点的来源，v 和 w 与各自遍历起点的距离 distanceToV (或 distanceToW) 为0；</li>
-<li>从 Queue 中取出一个节点 s ，如果 s 到其来源起点的距离大于当前已知的 SAP 路径长度，停止遍历；
-3.如果 s 的父节点（<code>Digraph.adj()</code>）未被 s 的来源方向遍历，将其加入队列，其与来源遍历起点的距离为 distanceToV(s) + 1（或 distanceToW(s) + 1），同时标记为已从来源方向遍历；</li>
+<li>从 Queue 中取出一个节点 s ，如果 s 到其来源起点的距离大于当前已知的 SAP 路径长度，停止遍历；</li>
+<li>如果 s 的父节点（<code>Digraph.adj()</code>）未被 s 的来源方向遍历，将其加入队列，其与来源遍历起点的距离为 distanceToV(s) + 1（或 distanceToW(s) + 1），同时标记为已从来源方向遍历；</li>
 <li>测试 s 是否已被 v， w 两个方向遍历，如果是，则 s 为 common ancestor，记录该节点，并将该节点到 v， w 的距离之和( <code>distanceToV(s) + distanceTow(s)</code> )设置为当前找到的最短路径长度；</li>
 <li>重复步骤 2-5 直到 Queue 为空。</li>
 </ol>
