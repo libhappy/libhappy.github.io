@@ -41,10 +41,8 @@
         <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
     
     
-        
-            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
-            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
-        
+        <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
     
     
     
@@ -72,7 +70,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="2">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -96,7 +94,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="2">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -151,7 +149,7 @@
                         
                     >
                 
-                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
@@ -222,7 +220,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="2"
                  class="
                         hasCoverMetaIn
                         ">
@@ -260,10 +258,10 @@
 <h1 id="加权quick-union算法">加权quick-union算法</h1><p>在quick-union算法中，使用了树这种数据结构来组织数据，但是在某些输入情况下，树的高度会变得太高，导致从某些触点链接到根触点的中间过程（find()方法执行过程）太多。查看quick-union算法的实现，树高度的增长来自于union()方法中合并两个分量的过程，即以下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id[pRoot] = qRoot;</span><br></pre></td></tr></table></figure>
 <p>可以看到这行代码直接将p触点所在的分量链接到了q触点所在分量的根触点上，并没有进行任何的比较判断（可以说这个链接的过程中选择链接方向是随意的）。这样当每次的输入都是p触点所在分量（树）较高时，会导致树的高度快速增加。那么解决方案就较为简单了，在链接两个分量之前，对两个分量进行比较，保证将较小的树链接到较大的树上。这样，树会倾向于横向的长大，而不是长高。</p>
-<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1683/25736804541_8bed7e414e_z.jpg" title="加权quick-union算法示意" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1683/25736804541_8bed7e414e_z.jpg" alt="加权quick-union算法示意"></a></div>
+<div class="figure center nocaption" style="width:;"><a class="fancybox" href="https://farm2.staticflickr.com/1683/25736804541_8bed7e414e_z.jpg" title="加权quick-union算法示意" data-fancybox-group="" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1683/25736804541_8bed7e414e_z.jpg" alt="加权quick-union算法示意"></a></div>
 <p>为了随时获得每个分量所在树的大小，需要添加一个数组（sz）来记录每个分量树中触点的个数。初始化时，每个触点都是独立的一个分量，每个分量的大小都是1，当合并两个分量时，首先获得分量根触点及根触点所代表的分量大小，比较之后将较小的分量链接到较大的分量，最后更新合成后分量（较大分量）根触点所代表的分量大小。</p>
 <h2 id="实现">实现</h2><figure class="highlight java"><figcaption><span>加权quick-union算法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeightedQuickUnionUF</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] sz;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] count;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeightedQuickUnionUF</span><span class="params">(<span class="keyword">int</span> N)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        count = N;</span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        sz = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            id[i] = i;</span><br><span class="line">            sz[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123; <span class="keyword">return</span> find(p) == find(q); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> count; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (p != id[p]) p = id[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pRoot = find(p);</span><br><span class="line">        <span class="keyword">int</span> qRoot = find(q);</span><br><span class="line">        <span class="keyword">if</span> (pRoot == qRoot) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (sz[pRoot] &gt; sz[qRoot]) &#123; id[qRoot] = pRoot; sz[pRoot] += sz(qRoot); &#125;</span><br><span class="line">        <span class="keyword">else</span>                       &#123; id[pRoot] = qRoot; sz[qRoot] += sz(pRoot); &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="算法分析">算法分析</h2><div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1643/25805847416_4f078530bf_c.jpg" title="quick-union与加权quick-union算法对比" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1643/25805847416_4f078530bf_c.jpg" alt="quick-union与加权quick-union算法对比"></a></div>
+<h2 id="算法分析">算法分析</h2><div class="figure center nocaption" style="width:;"><a class="fancybox" href="https://farm2.staticflickr.com/1643/25805847416_4f078530bf_c.jpg" title="quick-union与加权quick-union算法对比" data-fancybox-group="" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1643/25805847416_4f078530bf_c.jpg" alt="quick-union与加权quick-union算法对比"></a></div>
 <p>通过两种算法对比图可以看出，加权quick-union算法最后得到的树要“扁平”的多，树的高度大幅减小，在执行find()方法时也更有效率。<strong>加权quick-union算法构造的森林中的任意节点的深度最多为lgN</strong>，比quick-union算法中的最大深度N要小得多。在处理有N个触点M条连接时加权quick-union算法最多访问数组cMlgN次，其中c为常数；而quick-find算法需要访问数组MN次。加权quick-union算法能够保证在合理的时间范围内解决实际中的大规模动态连通性问题。</p>
 <h1 id="最优算法">最优算法</h1><p>通过上面加权quick-union算法的分析，很容易发现，对于最优化的quick-union算法而言，得到的应该是一颗十分扁平的树，最为极端的情况就是在分量中所有的触点都直接链接到根触点上，即进行<strong>路径压缩</strong>。实现路径压缩很简单，在加权quick-union算法的find*()方法中，将在寻找根触点过程中遇到的所有触点都直接链接到根触点上。</p>
 <h2 id="实现-1">实现</h2><figure class="highlight java"><figcaption><span>路径压缩的加权quick-union算法(仅find()方法)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> orgp = p;</span><br><span class="line">        <span class="keyword">while</span>(p != id[p]) p = id[p];</span><br><span class="line">        <span class="comment">//将从orgp到根节点上的每个触点都连接到根节点</span></span><br><span class="line">        <span class="keyword">while</span>(orgp != id[orgp])</span><br><span class="line">        &#123;</span><br><span class="line">            orgp = id[orgp];</span><br><span class="line">            id[orgp] = p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -317,9 +315,6 @@
 <p>*存在N个触点时成本的增长数量级（最坏情况下）</p>
 
             
-                
-
-            
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
@@ -361,7 +356,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.4/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.4/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -408,14 +403,13 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
-        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.
     </span>
 </footer>
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
                     <div class="post-actions-wrap">
     
     <nav>
@@ -446,7 +440,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.4/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.4/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -479,11 +473,11 @@
 
 
                 </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.4/">
-                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
@@ -543,7 +537,7 @@
 <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
     

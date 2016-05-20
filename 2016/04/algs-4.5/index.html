@@ -40,10 +40,8 @@
         <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
     
     
-        
-            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
-            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
-        
+        <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
     
     
     
@@ -71,7 +69,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="2">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -95,7 +93,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="2">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -150,7 +148,7 @@
                         
                     >
                 
-                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
@@ -221,7 +219,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="2"
                  class="
                         hasCoverMetaIn
                         ">
@@ -257,7 +255,7 @@
 <a id="more"></a>
 <div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法简介及API"><span class="toc-text">算法简介及API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#辅助类"><span class="toc-text">辅助类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAP"><span class="toc-text">SAP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局遍历"><span class="toc-text">全局遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#镜面法"><span class="toc-text">镜面法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从起点遍历"><span class="toc-text">从起点遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义_BreadthFirstSearchPath"><span class="toc-text">自定义 BreadthFirstSearchPath</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#顶点集输入"><span class="toc-text">顶点集输入</span></a></li></ol></li></ol></div>
 <p>SAP 算法在许多领域都有应用，比如在生物进化学中，所有生物的进化历程可以概括为一个无环有向图（参见 <a href="https://en.wikipedia.org/wiki/Tree_of_life_%28biology%29" target="_blank" rel="external">维基百科:Tree of life(biology)</a>），那么 SAP 算法可以在该有向图中找出两种生物的最近共同祖先。
-<div class="figure center nocaption"><a class="fancybox" href="https://c2.staticflickr.com/2/1622/26328018862_a7ab383659_o.png" title="Tree of Life" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg" alt="Tree of Life"></a></div></p>
+<div class="figure center nocaption" style="width:;"><a class="fancybox" href="https://c2.staticflickr.com/2/1622/26328018862_a7ab383659_o.png" title="Tree of Life" data-fancybox-group="" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1622/26328018862_e0b5c90c56_z.jpg" alt="Tree of Life"></a></div></p>
 <h1 id="算法简介及API">算法简介及API</h1><h2 id="辅助类">辅助类</h2><p>以下为提供的辅助类：</p>
 <ul>
 <li>Digraph (有向图类)</li>
@@ -409,9 +407,6 @@
 <h2 id="顶点集输入">顶点集输入</h2><p>前文讨论了单顶点输入下的算法，对于顶点集（多顶点）输入的情况处理与单顶点相同，只是将每个方向的起点由一个增加为多个，由于 Breadth First Search 的特性，在遍历过程中找到的顶点与起点的距离一定是与所有的来源方向起点距离中最小的一个。最后得到的结果也会符合 节点集 v 中任一节点与节点集 w 中任一节点的所有 SAP 中长度最小的一个的要求。</p>
 
             
-                
-
-            
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
@@ -453,7 +448,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -500,14 +495,13 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
-        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.
     </span>
 </footer>
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
                     <div class="post-actions-wrap">
     
     <nav>
@@ -538,7 +532,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -571,11 +565,11 @@
 
 
                 </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/04/algs-4.5/">
-                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
@@ -635,7 +629,7 @@
 <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
     

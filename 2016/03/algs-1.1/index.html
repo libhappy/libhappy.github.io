@@ -52,10 +52,8 @@
         <meta property="og:image" content="https://libhappy.com/assets/images/avatar.png"/>
     
     
-        
-            <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
-            <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
-        
+        <meta property="og:image" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://farm2.staticflickr.com/1599/24948631423_5ee8653a8e_q.jpg" />
     
     
     
@@ -83,7 +81,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="2">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">LibHappy</a>
@@ -107,7 +105,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="2">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -162,7 +160,7 @@
                         
                     >
                 
-                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
@@ -233,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="2"
                  class="
                         hasCoverMetaIn
                         ">
@@ -273,7 +271,7 @@
 <a id="more"></a>
 <div class="toc-class" id="table-of-contents"><h1>Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#栈的链表实现"><span class="toc-text">栈的链表实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#队列的链表实现"><span class="toc-text">队列的链表实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#背包的链表实现"><span class="toc-text">背包的链表实现</span></a></li></ol></div>
 <p>链表的简单图示如下：
-<div class="figure center nocaption"><a class="fancybox" href="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" title="链表结构的示例" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" alt="链表结构的示例"></a></div></p>
+<div class="figure center nocaption" style="width:;"><a class="fancybox" href="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" title="链表结构的示例" data-fancybox-group="" target="_blank" rel="external"><img class="fig-img" src="https://farm2.staticflickr.com/1542/25667290295_892be31c0c_z.jpg" alt="链表结构的示例"></a></div></p>
 <p>一个简单的节点定义如下：
 <figure class="highlight crmsh"><figcaption><span>链表中节点的定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class <span class="keyword">Node</span><span class="identifier"></span><br><span class="line"></span><span class="title">&#123;</span><br><span class="line">    Item</span> item;</span><br><span class="line">    <span class="keyword">Node</span><span class="identifier"> </span><span class="title">next</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 其中item为某种需要存储的数据，而next代表指向下一个节点的引用。</p>
@@ -291,9 +289,6 @@
 <p>以下为用链表实现的队列：
 <figure class="highlight applescript"><figcaption><span>链表实现的队列</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public <span class="type">class</span> Queue&lt;Item&gt;</span><br><span class="line">&#123;</span><br><span class="line">    private Node <span class="keyword">first</span>;</span><br><span class="line">    private Node <span class="keyword">last</span>;</span><br><span class="line">    private int N;</span><br><span class="line">    private <span class="type">class</span> Node</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span>;</span><br><span class="line">        Node next;</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="type">boolean</span> isEmpty() &#123; <span class="constant">return</span> <span class="keyword">first</span> == null; &#125;</span><br><span class="line">    public int size() &#123; <span class="constant">return</span> N; &#125;</span><br><span class="line">    public void enqueue(Item <span class="property">item</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Node oldLast = <span class="keyword">last</span>;</span><br><span class="line">        <span class="keyword">last</span> = new Node();</span><br><span class="line">        <span class="keyword">last</span>.<span class="property">item</span> = <span class="property">item</span>;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">first</span> = <span class="keyword">last</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            oldLast.next = <span class="keyword">last</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        N++;</span><br><span class="line">    &#125;</span><br><span class="line">    public Item dequeue()</span><br><span class="line">    &#123;</span><br><span class="line">        Item <span class="property">item</span> = <span class="keyword">first</span>.<span class="property">item</span>;</span><br><span class="line">        <span class="keyword">first</span> = <span class="keyword">first</span>.next;</span><br><span class="line">        <span class="keyword">if</span> (size() == <span class="number">1</span>) &#123; <span class="keyword">last</span> = null; &#125;</span><br><span class="line">        N<span class="comment">--;</span></span><br><span class="line"><span class="command">        return</span> <span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="背包的链表实现">背包的链表实现</h1><p>用链表实现背包只需要将栈的实现中push()改名为add()并删除pop()方法。在为背包实现遍历时，由于背包的遍历输出顺序并不重要，也可以直接使用栈的遍历输出。</p>
-
-            
-                
 
             
         </div>
@@ -337,7 +332,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -384,14 +379,13 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2016 Arthur. All Rights Reserved.<br>
-        Static pages hosted in <a class="theme-link" href="https://github.com/" rel="external nofollow">Github</a>, Pictures hosted in <a class="theme-link" href="https://www.flickr.com/photos/walktodream/albums/72157659807930798" rel="external nofollow">Flickr</a>
+        Copyrights &copy; 2016 Arthur. All Rights Reserved.
     </span>
 </footer>
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
                     <div class="post-actions-wrap">
     
     <nav>
@@ -422,7 +416,7 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google+" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="Share on Google Plus" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
@@ -455,11 +449,11 @@
 
 
                 </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://libhappy.com/2016/03/algs-1.1/">
-                <i class="fa fa-google-plus"></i><span class="">Share on Google+</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
@@ -519,7 +513,7 @@
 <div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/scrip.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
     
