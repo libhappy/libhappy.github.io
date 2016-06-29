@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://libhappy.com/about/index.html</loc>
+    <lastmod>2016-06-29T13:23:46.935Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://libhappy.com/timeline/index.html</loc>
     <lastmod>2016-06-07T04:23:35.371Z</lastmod>
   </url>
@@ -9,11 +14,6 @@
   <url>
     <loc>https://libhappy.com/2016/04/algs-4.5/</loc>
     <lastmod>2016-04-14T09:31:09.594Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://libhappy.com/about/index.html</loc>
-    <lastmod>2016-03-17T05:57:17.000Z</lastmod>
   </url>
   
   <url>
